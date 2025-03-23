@@ -42,13 +42,12 @@
 
 /* Fix image size */
 .navbar .logo img {
-    .navbar .logo img {
-    width: 50px; /* Set a fixed size */
-    height: auto;
-    max-height: 50px; 
+    width: 50px; /* Ensure a fixed width */
+    height: 50px; /* Ensure a fixed height */
+    object-fit: cover; /* Prevents distortion and ensures it fills the area */
+    border-radius: 10px; /* Adjust for more or less rounding */
     margin-right: 10px;
-    border-radius: 10px; /* Adjust this value for more or less rounding */
-    }
+}
 
 /* Nav links alignment */
 .navbar .nav-links {
