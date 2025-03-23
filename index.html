@@ -221,7 +221,6 @@
             border: 1px solid #ff3399;
             border-radius: 5px;
             padding: 10px;
-            transition: all 0.3s ease-in-out; /* Add transition for animation */
             overflow: hidden; /* Ensure content doesn't overflow */
         }
 
@@ -233,7 +232,6 @@
             color: black;
             border-radius: 5px;
             text-align: center;
-            transition: all 0.3s ease-in-out; /* Add transition for animation */
         }
 
         summary::marker {
@@ -255,12 +253,7 @@
             border: 2px solid pink; /* Ensures the table itself has a pink border */
             opacity: 0; /* Start with hidden table */
             max-height: 0; /* Start with hidden table */
-            transition: all 0.3s ease-in-out; /* Add transition for animation */
-        }
-
-        details[open] table {
-            opacity: 1; /* Show table when details is open */
-            max-height: 1000px; /* Show table when details is open */
+            overflow: hidden; /* Ensure content doesn't overflow */
         }
 
         th, td {
@@ -280,7 +273,6 @@
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
-            transition: background-color 0.3s ease-in-out; /* Add transition for hover effect */
         }
 
         .btn:hover {
@@ -420,6 +412,61 @@ document.addEventListener("DOMContentLoaded", function () {
     // Scroll the nav-links container to the left when the page loads
     let navLinksContainer = document.querySelector(".nav-links");
     navLinksContainer.scrollLeft = 0;
+
+    // Animate details element
+    const animateDetails = (details) => {
+        const summary = details.querySelector('summary');
+        const content = details.querySelector('table');
+
+        if (!content) return;
+
+        const openDetails = () => {
+            const startHeight = `${summary.offsetHeight}px`;
+            const endHeight = `${summary.offsetHeight + content.scrollHeight}px`;
+
+            content.style.opacity = 0;
+            content.style.maxHeight = "0px";
+            content.style.overflow = "hidden";
+            details.style.height = startHeight;
+
+            requestAnimationFrame(() => {
+                details.style.height = endHeight;
+                content.style.opacity = 1;
+                content.style.maxHeight = `${content.scrollHeight}px`;
+            });
+        };
+
+        const closeDetails = () => {
+            const startHeight = `${details.offsetHeight}px`;
+            const endHeight = `${summary.offsetHeight}px`;
+
+            content.style.opacity = 1;
+            content.style.maxHeight = `${content.scrollHeight}px`;
+            details.style.height = startHeight;
+
+            requestAnimationFrame(() => {
+                details.style.height = endHeight;
+                content.style.opacity = 0;
+                content.style.maxHeight = "0px";
+            });
+        };
+
+        details.addEventListener('toggle', () => {
+            if (details.open) {
+                openDetails();
+            } else {
+                closeDetails();
+            }
+        });
+
+        if (details.open) {
+            openDetails();
+        } else {
+            closeDetails();
+        }
+    };
+
+    document.querySelectorAll('details').forEach(animateDetails);
 });
 </script>
 
