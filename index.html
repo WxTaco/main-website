@@ -29,11 +29,19 @@
         }
 
         .navbar .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff4af3;
-            font-family: "Saira", sans-serif;
-        }
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4af3;
+    font-family: "Saira", sans-serif;
+}
+
+.navbar .logo img {
+    width: 40px; /* Adjust size as needed */
+    height: 40px; /* Adjust size as needed */
+    margin-right: 10px; /* Space between icon and text */
+}
 
         .navbar .nav-links a {
             color: white;
@@ -164,17 +172,18 @@
 <body>
 
     <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">
-            <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/7d9ad7ec-1006-4982-4b5f-4c1d0c0f7e00/public" alt="icon of wrapped mascot">
-            Wrapped Bot</div>
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Features</a>
-            <a href="#">Support</a>
-            <a href="#">Contact</a>
-        </div>
+ <div class="navbar">
+    <div class="logo">
+        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/7d9ad7ec-1006-4982-4b5f-4c1d0c0f7e00/public" alt="icon of wrapped mascot">
+        Wrapped Bot
     </div>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Features</a>
+        <a href="#">Support</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
 
     <!-- Banner with Overlay -->
     <div class="banner-container">
