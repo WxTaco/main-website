@@ -215,9 +215,15 @@ body {
     margin-top: 20px;
 }
 
+.centered-dropdown details {
+    max-width: 800px; /* Ensure it fits within the container */
+    width: 100%; /* Ensure consistent width */
+    margin: 0 auto; /* Center the drop-down element */
+}
+
 details {
     width: 100%;
-    max-width: 100%; /* Ensure it fits within the container */
+    max-width: 800px; /* Adjust the maximum width as needed */
     margin: 0 auto; /* Center the drop-down element */
     background-color: #222;
     border: 1px solid #ff3399;
