@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="icon of wrapped mascot">
+            <span>Wrapped V2</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="utility.html" class="active">Utility</a>
+            <a href="about.html">About Us</a>
+        </div>
+    </div>
+
+    <!-- Banner with Overlay -->
+    <div class="banner-container">
+        <div class="banner"></div>
+        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/aaa87b2f-0404-4338-81b1-4311ea48fb00/public" class="overlay-image" alt="Overlay Image">
+    </div>
+
+    <h1 class="modules-header">Utility Features</h1>
+
+    <div class="dropdown-row">
+        <details>
+            <summary>Reaction Roles</summary>
+            <table>
+                <tr>
+                    <td>Manage roles based on reactions.</td>
+                    <td><a href="https://www.wrappedbot.com/utility/reaction-roles" class="btn">Go to Feature</a></td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Welcomer</summary>
+            <table>
+                <tr>
+                    <td>Automate welcoming messages for new members.</td>
+                    <td><a href="https://www.wrappedbot.com/utility/welcomer" class="btn">Go to Feature</a></td>
+                </tr>
+            </table>
+        </details>
+    </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPage = window.location.pathname.split("/").pop() || "index.html"; // Default to index.html if empty
+    let navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+        let linkPath = link.getAttribute("href");
+        if (linkPath === currentPage || (linkPath === "index.html" && currentPage === "")) {
+            link.classList.add("active"); // Add 'active' class to the matching link
+        }
+    });
+
+    // Scroll the nav-links container to the left when the page loads
+    let navLinksContainer = document.querySelector(".nav-links");
+    navLinksContainer.scrollLeft = 0;
+
+    // Animate details element
+    const animateDetails = (details) => {
+        const summary = details.querySelector('summary');
+        const content = details.querySelector('table');
+
+        if (!content) return;
+
+        const openDetails = () => {
+            const startHeight = `${summary.offsetHeight}px`;
+            const endHeight = `${summary.offsetHeight + content.scrollHeight}px`;
+
+            content.style.opacity = 0;
+            content.style.maxHeight = "0px";
+            content.style.overflow = "hidden";
+            details.style.height = startHeight;
+
+            requestAnimationFrame(() => {
+                details.style.height = endHeight;
+                content.style.opacity = 1;
+                content.style.maxHeight = `${content.scrollHeight}px`;
+            });
+        };
+
+        const closeDetails = () => {
+            const startHeight = `${details.offsetHeight}px`;
+            const endHeight = `${summary.offsetHeight}px`;
+
+            content.style.opacity = 1;
+            content.style.maxHeight = `${content.scrollHeight}px`;
+            details.style.height = startHeight;
+
+            requestAnimationFrame(() => {
+                details.style.height = endHeight;
+                content.style.opacity = 0;
+                content.style.maxHeight = "0px";
+            });
+        };
+
+        details.addEventListener('toggle', () => {
+            if (details.open) {
+                openDetails();
+            } else {
+                closeDetails();
+            }
+        });
+
+        if (details.open) {
+            openDetails();
+        } else {
+            closeDetails();
+        }
+    };
+
+    document.querySelectorAll('details').forEach(animateDetails);
+});
+</script>
+
+</body>
+</html>
