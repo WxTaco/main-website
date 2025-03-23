@@ -30,17 +30,19 @@
 }
         @media (max-width: 768px) {
     .navbar {
-        flex-direction: column; /* Stack items vertically */
-        align-items: center; /* Center items */
-        padding: 10px 20px; /* Reduce padding */
+        flex-wrap: nowrap; /* Prevents wrapping */
+        padding: 10px 15px; /* Reduce padding */
     }
 
     .navbar .logo {
-        margin-bottom: 10px; /* Add space between logo and nav links */
+        flex-shrink: 0; /* Prevent logo from resizing */
     }
 
     .navbar .nav-links {
-        flex-direction: column; /* Stack links vertically */
+        display: flex;
+        flex-wrap: nowrap; /* Prevents links from stacking */
+        overflow: hidden; /* Prevents overflow */
+        white-space: nowrap; /* Keep links in one line */
         gap: 10px; /* Reduce spacing */
     }
         }
