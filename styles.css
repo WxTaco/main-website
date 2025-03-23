@@ -1,11 +1,3 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
 body {
     background-color: black;
     color: white;
@@ -215,22 +207,14 @@ body {
     margin-top: 20px;
 }
 
-.centered-dropdown details, .dropdown-row details {
-    max-width: 800px; /* Ensure it fits within the container */
-    width: 100%; /* Ensure consistent width */
-    margin: 0 auto; /* Center the drop-down element */
-}
-
 details {
-    width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
-    margin: 0 auto; /* Center the drop-down element */
+    width: 30%;
     background-color: #222;
     border: 1px solid #ff3399;
     border-radius: 5px;
     padding: 10px;
     overflow: hidden; /* Ensure content doesn't overflow */
-    transition: height 0.6s ease, opacity 0.6s ease; /* Increase duration for animation */
+    transition: height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
 }
 
 summary {
@@ -252,7 +236,7 @@ details[open] summary::before {
 }
 
 details summary::before {
-    content: "▶ "; /* Custom closed marker */
+    content: "► "; /* Custom closed marker */
 }
 
 table {
@@ -263,7 +247,7 @@ table {
     opacity: 0; /* Start with hidden table */
     max-height: 0; /* Start with hidden table */
     overflow: hidden; /* Ensure content doesn't overflow */
-    transition: max-height 0.6s ease, opacity 0.6s ease; /* Increase duration for animation */
+    transition: max-height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
 }
 
 details[open] table {
@@ -309,10 +293,10 @@ th {
         align-items: center;
     }
     details {
-        width: 90%; /* Adjusted width to fit smaller screens */
+        width: 80%;
     }
     .centered-dropdown details {
-        width: 90%; /* Adjusted width to fit smaller screens */
+        width: 80%;
     }
     .developer-pfp-large {
         width: 100px; /* Adjust size for smaller screens */
