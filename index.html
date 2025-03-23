@@ -16,18 +16,20 @@
 
         /* Navbar */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            background-color: #111;
-            position: fixed;
-            max-width: 100%;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
+    display: flex;
+    justify-content: space-between; /* Keeps logo on left, links on right */
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #111;
+    position: fixed;
+    width: 100%; /* Ensures navbar spans full width */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
 
+/* Fix logo alignment */
 .navbar .logo {
     display: flex;
     align-items: center;
@@ -35,27 +37,52 @@
     font-weight: bold;
     color: #ff4af3;
     font-family: "Saira", sans-serif;
+    white-space: nowrap; /* Prevents text wrapping */
 }
 
+/* Fix image size */
 .navbar .logo img {
-    max-width: 50px; /* Adjust this size as needed */
-    height: auto; /* Keeps aspect ratio */
-    max-height: 50px; /* Ensures it fits within the navbar */
-    margin-right: 10px; /* Space between icon and text */
+    width: 50px; /* Set a fixed size */
+    height: auto;
+    max-height: 50px; 
+    margin-right: 10px;
 }
 
-        .navbar .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 18px;
-            font-weight: 500;
-        }
+/* Nav links alignment */
+.navbar .nav-links {
+    display: flex;
+    gap: 15px; /* Adds spacing between links */
+}
 
-        .navbar .nav-links a:hover {
-            color: #ff4af3;
-        }
+.navbar .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    white-space: nowrap; /* Prevents wrapping on smaller screens */
+}
 
+.navbar .nav-links a:hover {
+    color: #ff4af3;
+}
+
+/* Fix navbar responsiveness */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 10px 0;
+    }
+
+    .navbar .logo {
+        margin-bottom: 10px;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
         /* Banner */
         .banner-container {
             position: relative;
