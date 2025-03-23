@@ -75,25 +75,27 @@
             scrollbar-width: none;  /* Firefox */
         }
 
-        /* Gradient fade effect */
-        .nav-links::before,
-        .nav-links::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 30px; /* Width of the fade */
-            pointer-events: none; /* Allow clicks through the gradient */
-        }
+        /* Gradient fade effect for smaller screens */
+        @media (max-width: 768px) {
+            .nav-links::before,
+            .nav-links::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 30px; /* Width of the fade */
+                pointer-events: none; /* Allow clicks through the gradient */
+            }
 
-        .nav-links::before {
-            left: 0;
-            background: linear-gradient(to right, #111, transparent);
-        }
+            .nav-links::before {
+                left: 0;
+                background: linear-gradient(to right, #111, transparent);
+            }
 
-        .nav-links::after {
-            right: 0;
-            background: linear-gradient(to left, #111, transparent);
+            .nav-links::after {
+                right: 0;
+                background: linear-gradient(to left, #111, transparent);
+            }
         }
 
         .navbar .nav-links a {
