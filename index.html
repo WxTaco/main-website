@@ -1,11 +1,249 @@
-<!DOCTYPE html><html lang="en-US" itemscope itemtype="http://schema.org/WebPage"><head><script nonce="VuJTutz9RuTYuSAyP8sYew">window['ppConfig'] = {productName: '6b8ce7c01e3dacd3d2c7a8cd322ff979', deleteIsEnforced:  false , sealIsEnforced:  false , heartbeatRate:  0.5 , periodicReportingRateMillis:  60000.0 , disableAllReporting:  false };(function(){'use strict';function k(a){var b=0;return function(){return b<a.length?{done:!1,value:a[b++]}:{done:!0}}}var l=typeof Object.defineProperties=="function"?Object.defineProperty:function(a,b,c){if(a==Array.prototype||a==Object.prototype)return a;a[b]=c.value;return a};
-function m(a){a=["object"==typeof globalThis&&globalThis,a,"object"==typeof window&&window,"object"==typeof self&&self,"object"==typeof global&&global];for(var b=0;b<a.length;++b){var c=a[b];if(c&&c.Math==Math)return c}throw Error("Cannot find global object");}var n=m(this);function p(a,b){if(b)a:{var c=n;a=a.split(".");for(var d=0;d<a.length-1;d++){var e=a[d];if(!(e in c))break a;c=c[e]}a=a[a.length-1];d=c[a];b=b(d);b!=d&&b!=null&&l(c,a,{configurable:!0,writable:!0,value:b})}}
-function q(a){var b=typeof Symbol!="undefined"&&Symbol.iterator&&a[Symbol.iterator];if(b)return b.call(a);if(typeof a.length=="number")return{next:k(a)};throw Error(String(a)+" is not an iterable or ArrayLike");}p("Object.is",function(a){return a?a:function(b,c){return b===c?b!==0||1/b===1/c:b!==b&&c!==c}});
-p("Array.prototype.includes",function(a){return a?a:function(b,c){var d=this;d instanceof String&&(d=String(d));var e=d.length;c=c||0;for(c<0&&(c=Math.max(c+e,0));c<e;c++){var f=d[c];if(f===b||Object.is(f,b))return!0}return!1}});
-p("String.prototype.includes",function(a){return a?a:function(b,c){if(this==null)throw new TypeError("The 'this' value for String.prototype.includes must not be null or undefined");if(b instanceof RegExp)throw new TypeError("First argument to String.prototype.includes must not be a regular expression");return this.indexOf(b,c||0)!==-1}});function r(a,b,c){a("https://csp.withgoogle.com/csp/proto/"+encodeURIComponent(b),JSON.stringify(c))}function t(){var a;if((a=window.ppConfig)==null?0:a.disableAllReporting)return function(){};var b,c,d,e;return(e=(b=window)==null?void 0:(c=b.navigator)==null?void 0:(d=c.sendBeacon)==null?void 0:d.bind(navigator))!=null?e:u}function u(a,b){var c=new XMLHttpRequest;c.open("POST",a);c.send(b)}
-function v(){var a=(w=Object.prototype)==null?void 0:w.__lookupGetter__("__proto__"),b=x,c=y;return function(){var d=a.call(this),e,f,g,h;r(c,b,{type:"ACCESS_GET",origin:(f=window.location.origin)!=null?f:"unknown",report:{className:(g=d==null?void 0:(e=d.constructor)==null?void 0:e.name)!=null?g:"unknown",stackTrace:(h=Error().stack)!=null?h:"unknown"}});return d}}
-function z(){var a=(A=Object.prototype)==null?void 0:A.__lookupSetter__("__proto__"),b=x,c=y;return function(d){d=a.call(this,d);var e,f,g,h;r(c,b,{type:"ACCESS_SET",origin:(f=window.location.origin)!=null?f:"unknown",report:{className:(g=d==null?void 0:(e=d.constructor)==null?void 0:e.name)!=null?g:"unknown",stackTrace:(h=Error().stack)!=null?h:"unknown"}});return d}}function B(a,b){C(a.productName,b);setInterval(function(){C(a.productName,b)},a.periodicReportingRateMillis)}
-var D="constructor __defineGetter__ __defineSetter__ hasOwnProperty __lookupGetter__ __lookupSetter__ isPrototypeOf propertyIsEnumerable toString valueOf __proto__ toLocaleString x_ngfn_x".split(" "),E=D.concat,F=navigator.userAgent.match(/Firefox\/([0-9]+)\./),G=(!F||F.length<2?0:Number(F[1])<75)?["toSource"]:[],H;if(G instanceof Array)H=G;else{for(var I=q(G),J,K=[];!(J=I.next()).done;)K.push(J.value);H=K}var L=E.call(D,H),M=[];
-function C(a,b){for(var c=[],d=q(Object.getOwnPropertyNames(Object.prototype)),e=d.next();!e.done;e=d.next())e=e.value,L.includes(e)||M.includes(e)||c.push(e);e=Object.prototype;d=[];for(var f=0;f<c.length;f++){var g=c[f];d[f]={name:g,descriptor:Object.getOwnPropertyDescriptor(Object.prototype,g),type:typeof e[g]}}if(d.length!==0){c=q(d);for(e=c.next();!e.done;e=c.next())M.push(e.value.name);var h;r(b,a,{type:"SEAL",origin:(h=window.location.origin)!=null?h:"unknown",report:{blockers:d}})}};var N=Math.random(),O=t(),P=window.ppConfig;P&&(P.disableAllReporting||P.deleteIsEnforced&&P.sealIsEnforced||N<P.heartbeatRate&&r(O,P.productName,{origin:window.location.origin,type:"HEARTBEAT"}));var y=t(),Q=window.ppConfig;if(Q)if(Q.deleteIsEnforced)delete Object.prototype.__proto__;else if(!Q.disableAllReporting){var x=Q.productName;try{var w,A;Object.defineProperty(Object.prototype,"__proto__",{enumerable:!1,get:v(),set:z()})}catch(a){}}
-(function(){var a=t(),b=window.ppConfig;b&&(b.sealIsEnforced?Object.seal(Object.prototype):b.disableAllReporting||(document.readyState!=="loading"?B(b,a):document.addEventListener("DOMContentLoaded",function(){B(b,a)})))})();}).call(this);
-</script><meta charset="utf-8"><script nonce="VuJTutz9RuTYuSAyP8sYew">var DOCS_timing={}; DOCS_timing['sl']=new Date().getTime();</script><script nonce="VuJTutz9RuTYuSAyP8sYew">function _DumpException(e) {throw e;}</script><script data-id="_gd" nonce="VuJTutz9RuTYuSAyP8sYew">window.WIZ_global_data = {"K1cgmc":"%.@.[null,null,null,[null,1,[1742481985,874329000]],null,0]]","nQyAE":{}};</script><script nonce="VuJTutz9RuTYuSAyP8sYew">_docs_flag_initialData={"atari-emtpr":false,"atari-eibrm":false,"docs-text-elei":false,"docs-text-usc":true,"atari-bae":false,"docs-text-etsrdpn":false,"docs-text-etsrds":false,"docs-text-endes":false,"docs-text-escpv":true,"docs-text-ecfs":false,"docs-text-edctzs":true,"docs-text-eetxp":false,"docs-text-ettctvs":false,"docs-text-ettts":true,"docs-text-escoubs":false,"docs-text-escivs":false,"docs-text-escitrbs":false,"docs-text-ecgvd":false,"docs-text-esbbcts":true,"docs-text-ecvdis":false,"docs-text-eiosmc":false,"docs-text-eipis":false,"docs-text-etb":false,"docs-text-esbefr":false,"docs-etshc":false,"docs-text-tbcb":2.0E7,"docs-efsmsdl":false,"docs-text-etof":false,"docs-text-ehlb":false,"docs-text-epa":true,"docs-text-dwit":false,"docs-text-elawp":false,"docs-eec":false,"docs-text-eusgb":true,"docs-sup":"","umss":false,"docs-dli":false,"docs-liap":"/logImpressions","ilcm":{"eui":"AHKXmL2hk3OlnQkAdlwckH6lS-pjARD0RIhIH2fOI-YRuGTL4a8yKKnC8aGTSVTwZ9NFFzv-cKzp","je":1,"sstu":1742699317208669,"si":"CN7Mgu6cn4wDFcS9IwAdaHgsSA","gsc":null,"ei":[5703839,5704621,5706832,5706836,5707711,5737784,5737800,5738513,5738529,5740798,5740814,5743108,5743124,5747267,5748013,5748029,5752678,5752694,5753313,5753329,5758807,5758823,5762243,5762259,5764252,5764268,5765535,5765551,5766761,5766777,5773662,5773678,5774331,5774347,5774836,5774852,5776501,5776517,5784931,5784947,5784951,5784967,5791766,5791782,14101306,14101502,14101510,14101534,49375314,49375322,49472063,49472071,49643568,49643576,49644015,49644023,49769337,49769345,49822921,49822929,49823164,49823172,49833462,49833470,49842855,49842863,49924706,49924714,50266222,50266230,50273528,50273536,50297076,50297084,50529103,50529111,50549555,50549563,50561343,50561351,50586962,50586970,70971256,70971264,71038255,71038263,71079938,71079946,71085241,71085249,71120968,71120976,71185170,71185178,71238946,71238954,71325556,71325564,71387889,71387897,71429507,71429515,71478200,71478208,71478589,71478597,71528597,71528605,71530083,71530091,71544834,71544842,71545513,71545521,71546425,71546433,71573870,71573878,71642103,71642111,71658040,71658048,71659813,71659821,71689860,71689868,71720760,71721087,71721095,71798420,71798436,71798440,71798456,71849375,71849383,71894363,71894371,71897827,71897835,71960540,71960548,71961126,71961134,94327671,94327679,94333163,94333171,94353368,94353376,94434257,94434265,94440637,94440653,94597639,94597647,94624865,94624873,94629757,94629765,94630911,94661802,94661810,94692298,94692306,94875009,94875017,94904089,94904097,94918952,94918960,94942490,94942498,95065889,95065897,95087186,95087194,95087227,95087235,95111975,95111983,95112873,95112881,95118561,95118569,95135933,95135941,95234871,95234879,95314802,95314810,95317985,99237681,99237689,99265946,99265954,99310979,99310987,99338440,99338448,99368792,99368800,99402331,99402339,99457797,99457805,101488582,101488590,101519280,101519288,101562406,101562414,101617516,101617524,101687117,101687125,101705089,101754342,101754350,101801098,101801106,101836961,101836969,101922739,101922747,101922880,101922888,101939286,101939294,102013666,102013674,102030642,102030650,102065428,102065436,102133181,102133189,102138495,102138503,102145077,102145085,102145825,102145833,102146090,102146095,102159053,102159061,102161447,102161455,102198282,102198290,102199034,102199050,102244489,102244497,102280618,102280626,102378139,102378144,102450892,102450897,102457690,102457698,102515093,102515098,102517339,102517344,102545782,102545790,102617405,102617413,102673375,102685384,102685389,102693395,102693400,102787563],"crc":0,"cvi":[]},"docs-ccdil":false,"docs-eil":true,"info_params":{},"buildLabel":"editors.sites-viewer-frontend_20250304.02_p1","docs-show_debug_info":false,"atari-jefp":"/_/view/jserror","docs-jern":"view","atari-rhpp":"/_/view","docs-ecuach":false,"docs-cclt":2033,"docs-ecci":true,"docs-esi":false,"docs-efypr":true,"docs-eyprp":true,"docs-li":"104240","docs-trgthnt":"","docs-etmhn":false,"docs-thnt":"","docs-hbt":[],"docs-hdet":["nMX17M8pQ0kLUkpsP190WPbQDRJQ","17hED8kG50kLUkpsP190TThQn3DA","BDNZR4PXx0kLUkpsP190SJtNPkYt","Etj5wJCQk0kLUkpsP190NwiL8UMa","xCLbbDUPA0kLUkpsP190XkGJiPUm","2NUkoZehW0kLUkpsP190UUNLiXW9","yuvYtd5590kLUkpsP190Qya5K4UR","ZH4rzt2uk0kLUkpsP190UDkF5Bkq","uQUQhn57A0kLUkpsP190WHoihP41","93w8zoRF70kLUkpsP190TxXbtSeV","fAPatjr1X0kLUkpsP190SaRjNRjw","T4vgqqjK70kLUkpsP190ScPehgAW","JyFR2tYWZ0kLUkpsP190Rn3HzkxT","ufXj7vmeJ0kLUkpsP190QURhvJn2","KFks7UeZ30kLUkpsP190UUMR6cvh","LcTa6EjeC0kLUkpsP190RKgvW5qi","s3UFcjGjt0kLUkpsP190Z45ftWRr","o99ewBQXy0kLUkpsP190Nq2qr6tf","PHVyy5uSS0kLUkpsP190SUsYo8gQ","yZn21akid0iSFTCbiEB0WPiGEST3","h2TtqzmQF0kLUkpsP190YPJiQt7p","MZi9vb5UC0kLUkpsP190ReUhvVjy","dSR6SPjB80kLUkpsP190Y3xHa9qA","Bz6B7VmLu0kLUkpsP190W3FeobP7","AiLoubzsd0kLUkpsP190XtYNPgYT","2J3DVQoVh0kLUkpsP190R5wShSrC","MLmbZasLS0kLUkpsP190YHf6Zjsf","N5u4VeWhx0iSFTCbiEB0VUTNdX6g","XM16tjwrD0iSFTCbiEB0NfzvTeuU","ybYTJk1eD0iSFTCbiEB0QV4rkzSF","TgXar1TSG0iSFTCbiEB0SsXMaKuP","JYfGDkExa0iSFTCbiEB0TTQnEDtH","2i9JBUZ3w0iSFTCbiEB0RytbUoNq","pgvTVXNKa0iSFTCbiEB0ShqmBTMR","NsVnd81bW0iSFTCbiEB0RhcXEK9M","rTQirATnb0iSFTCbiEB0W5cPcA7D","wNyww2Syr0iSFTCbiEB0Pzsbemba","DVdpfbqGj0iSFTCbiEB0RP4dMdFg","WKN3dsuG20iSFTCbiEB0NtEYhMK7","S5iPRteXX0iSFTCbiEB0YkMazE6h","6hmou1AcB0iSFTCbiEB0R9rZWXdz","wvo4NcLUj0iSFTCbiEB0Tt7mcVxE","HWuSeN2AB0iSFTCbiEB0PoBwHT2F","rTcCMw3BM0mHq3jmV6o0RHeAExRK","HUYzfGVRa0mHq3jmV6o0Uxe2caXK","1XYMmM1Cu0mHq3jmV6o0Z3pEi8xm","xHhMJiXiV0mHq3jmV6o0WB8WinyM","xwSFpxEiU0mHq3jmV6o0PcnvcKmd","4MBkBg26q0mHq3jmV6o0QeKPRMpY","y5g8iW2T80mHq3jmV6o0Nr8SAj4C","W9YRKy3Lb0iSFTCbiEB0Xfs1EfPr","Ed3nhrN8D0iSFTCbiEB0RN4bJ53y","zxDKY7PC10iSFTCbiEB0UDYPJwDZ","bhEyDmbwi0mHq3jmV6o0TngCF1v2","6rKYZ6uHA0mHq3jmV6o0TeDZjgB8","71Deousgx0mHq3jmV6o0WXBQiyzi","sVEZbUAa70mHq3jmV6o0TNq1M7FF","P55v8p4Lk0mHq3jmV6o0VjggjHMV","QqnZoz9ko0mHq3jmV6o0QskzBcHn","6nr31z9Wv0mERqSGkGf0VhuvAXWC","RLHeYNm410mERqSGkGf0Y817EUFK","vmx68XtfJ0mERqSGkGf0RCUBfsQr","687J7yD1q0mERqSGkGf0RVmMYHo1","qwhWQy8Zi0mERqSGkGf0W2tdypUF","wF8Sk241e0mERqSGkGf0YNtN6gpV","ijUhdx2QN0mERqSGkGf0TSD26iBJ","3iBLaMnuG0mERqSGkGf0VdY8XuLS","cFR77YEGo0iSFTCbiEB0PcMDWjX2","evUYuNCS80mERqSGkGf0Psi8j3Dw","soWncRV7C0mERqSGkGf0PZheXrWA","TvjoiCaar0mERqSGkGf0S9qS5adj","txL54xWLC0mERqSGkGf0XoEGTvCu","ffZmMGtYT0suK1NZr2K0QUxSzEMN","NagbcZWyB0suK1NZr2K0SJmfmJ3n","KMcLKvubv0suK1NZr2K0PLMUJ7zr","pwLDucJZU0ezFcgqx310NgtmYpbV","TCKDVQ6J0Bn3gbW4AcZC0PQKypCa","Z7vabQzZ0Bn3gbW4AcZC0TfvmSab"],"docs-hunds":false,"docs-hae":"PROD","docs-ehn":false}; _docs_flag_cek= null ; if (window['DOCS_timing']) {DOCS_timing['ifdld']=new Date().getTime();}</script><meta name="viewport" content="width=device-width, initial-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="referrer" content="origin"><link rel="icon" href="https://lh6.googleusercontent.com/_umtIPfsK7p6oqlPxL6G7q6rP40ANYIKDtJooZPf2FKQcO9b3_Qz1hp8Rce2rYxl6PyOaqfCpRnWZqa6efIp9ZTqYrNwqFzUUnlEig4Svt2Gjxec"><meta property="og:title" content="Wrapped V2"><meta property="og:type" content="website"><meta property="og:url" content="https://www.wrappedbot.com/"><meta property="og:description" content="Wrapped V2 Is The Sequel To Our Original Bot, Wrapped. Wrapped Was Our Trial Run For Bot Development. It Allowed Us To Get Our Feet Wet And Learn The Ups And Downs Of Public Bots And Web Development. Once Our Trial Run Was Complete, We Made The Appropriate Changes To Our Processes, Refined Our"><meta itemprop="name" content="Wrapped V2"><meta itemprop="description" content="Wrapped V2 Is The Sequel To Our Original Bot, Wrapped. Wrapped Was Our Trial Run For Bot Development. It Allowed Us To Get Our Feet Wet And Learn The Ups And Downs Of Public Bots And Web Development. Once Our Trial Run Was Complete, We Made The Appropriate Changes To Our Processes, Refined Our"><meta itemprop="url" content="https://www.wrappedbot.com/"><meta itemprop="thumbnailUrl" content="https://lh5.googleusercontent.com/qUvduQ0o9otHfFazj8PPqjGl_EJXMiDGeT3I-iuLExsJHMwgvLlDOComV0jlZDVqBS-PSux92NmwWHI16iQZkd0=w16383"><meta itemprop="image" content="https://lh5.googleusercontent.com/qUvduQ0o9otHfFazj8PPqjGl_EJXMiDGeT3I-iuLExsJHMwgvLlDOComV0jlZDVqBS-PSux92NmwWHI16iQZkd0=w16383"><meta itemprop="imageUrl" content="https://lh5.googleusercontent.com/qUvduQ0o9otHfFazj8PPqjGl_EJXMiDGeT3I-iuLExsJHMwgvLlDOComV0jlZDVqBS-PSux92NmwWHI16iQZkd0=w16383"><meta property="og:image" content="https://lh5.googleusercontent.com/qUvduQ0o9otHfFazj8PPqjGl_EJXMiDGeT3I-iuLExsJHMwgvLlDOComV0jlZDVqBS-PSux92NmwWHI16iQZkd0=w16383"><link href="https://fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:300,400,500,700|Source+Code+Pro:400,700&display=swap" rel="stylesheet" nonce="qy8qT_U74gleNKaaIZ2hYg"><link href="https://fonts.googleapis.com/css?family=Arvo%3Ai%2Cbi%2C700%2C400&display=swap" rel="stylesheet" nonce="qy8qT_U74gleNKaaIZ2hYg"><link href="https://fonts.googleapis.com/css?family=Paytone%20One%3Ai%2Cbi%2C700%2C400&display=swap" rel="stylesheet" nonce="qy8qT_U74gleNKaaIZ2hYg"><link href="https://fonts.googleapis.com/css?family=Saira%3Ai%2Cbi%2C700%2C400&display=swap" rel="stylesheet" nonce="qy8qT_U74gleNKaaIZ2hYg"><style nonce="qy8qT_U74gleNKaaIZ2hYg">@media only screen and (max-width: 479px){.jgG6ef{font-size: 17.0pt;}}@media only screen and (min-width: 480px) and (max-width: 767px){.jgG6ef{font-size: 17.0pt;}}@media only screen and (min-width: 768px) and (max-width: 1279px){.jgG6ef{font-size: 18.0pt;}}@media only screen and (min-width: 1280px){.jgG6ef{font-size: 18.0pt;}}@media only screen and (max-width: 479px){.puwcIf{font-size: 20.0pt;}}@media only screen and (min-width: 480px) and (max-width: 767px){.puwcIf{font-size: 22.0pt;}}@media only screen and (min-width: 768px) and (max-width: 1279px){.puwcIf{font-size: 24.0pt;}}@media only screen and (min-width: 1280px){.puwcIf{font-size: 24.0pt;}}</style><link rel="stylesheet" href="https://www.gstatic.com/_/atari/_/ss/k=atari.vw.GBDDjlKCY-s.L.X.O/am=AAYg/d=1/rs=AGEqA5khmNQ4Placg8oVJzsOZYDXemk2og" data-id="_cl" nonce="qy8qT_U74gleNKaaIZ2hYg"><script nonce="VuJTutz9RuTYuSAyP8sYew"></script><title>Wrapped V2</title><style jsname="ptDGoc" nonce="qy8qT_U74gleNKaaIZ2hYg">.htnAL{height: 27.0pt; font-size: 12.0pt; font-family: Paytone One; font-weight: 400; font-style: normal;}.QmpIrf{background-color: rgba(61,133,198,1); color: rgba(28,28,28,1); border-color: rgba(61,133,198,1);}.xkUom{background-color: rgba(0,0,0,0); color: rgba(223,80,180,1); border-color: rgba(223,80,180,1);}.KjwKmc{background-color: rgba(0,0,0,0); color: rgba(223,80,180,1); border-color: rgba(0,0,0,0);}.qeLZfd .QmpIrf{background-color: rgba(255,255,255,1); color: rgba(28,28,28,1); border-color: rgba(28,28,28,1);}.qeLZfd .xkUom{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(28,28,28,1);}.qeLZfd .KjwKmc{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(0,0,0,0);}.lQAHbd .QmpIrf{background-color: rgba(255,255,255,1); color: rgba(28,28,28,1); border-color: rgba(28,28,28,1);}.lQAHbd .xkUom{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(28,28,28,1);}.lQAHbd .KjwKmc{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(0,0,0,0);}.tpmmCb .QmpIrf{background-color: rgba(223,80,180,1); color: rgba(28,28,28,1); border-color: rgba(223,80,180,1);}.tpmmCb .xkUom{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(28,28,28,1);}.tpmmCb .KjwKmc{background-color: rgba(0,0,0,0); color: rgba(28,28,28,1); border-color: rgba(0,0,0,0);}.nyKByd .QmpIrf{background-color: rgba(223,80,180,1); color: rgba(28,28,28,1); border-color: rgba(223,80,180,1);}.nyKByd .xkUom{background-color: rgba(0,0,0,0); color: rgba(223,80,180,1); border-color: rgba(223,80,180,1);}.nyKByd .KjwKmc{background-color: rgba(0,0,0,0); color: rgba(223,80,180,1); border-color: rgba(0,0,0,0);}.iwQgFb{background-color: rgba(255,0,255,1); height: 2.0px; margin-top: 8.5px;}.qeLZfd .iwQgFb{background-color: rgba(0,0,0,0.150000006); height: 2.0px; margin-top: 8.5px;}.lQAHbd .iwQgFb{background-color: rgba(0,0,0,0.150000006); height: 2.0px; margin-top: 8.5px;}.CbiMKe{background-color: rgba(223,80,180,1);}.qeLZfd .CbiMKe{background-color: rgba(28,28,28,1);}.lQAHbd .CbiMKe{background-color: rgba(28,28,28,1);}.tpmmCb .CbiMKe{background-color: rgba(223,80,180,1);}.nyKByd .CbiMKe{background-color: rgba(223,80,180,1);}.PsKE7e{font-family: Paytone One;}.TlfmSc{font-family: Paytone One;}.Zjiec{font-family: Paytone One;}@media only screen and (max-width: 479px){.TlfmSc{font-size: 13.0pt;}}@media only screen and (min-width: 480px) and (max-width: 767px){.TlfmSc{font-size: 14.0pt;}}@media only screen and (min-width: 768px) and (max-width: 1279px){.TlfmSc{font-size: 15.0pt;}}@media only screen and (min-width: 1280px){.TlfmSc{font-size: 15.0pt;}}@media only screen and (max-width: 479px){.Zjiec{font-size: 16.0pt;}}@media only screen and (min-width: 480px) and (max-width: 767px){.Zjiec{font-size: 18.0pt;}}@media only screen and (min-width: 768px) and (max-width: 1279px){.Zjiec{font-size: 20.0pt;}}@media only screen and (min-width: 1280px){.Zjiec{font-size: 20.0pt;}}@media only screen and (max-width: 479px){.PsKE7e{font-size: 12.0pt;}}@media only screen and (min-width: 480px) and (max-width: 767px){.PsKE7e{font-size: 12.0pt;}}@media only screen and (min-width: 768px) and (max-width: 1279px){.PsKE7e{font-size: 12.0pt;}}@media only screen and (min-width: 1280px){.PsKE7e{font-size: 12.0pt;}}.IKA38e{margin-top: 12.0px;}.eWDljc{padding-top: 0; padding-bottom: 12.0px;}.Zjiec{margin: 48px 32px 62px 48px;}.XMyrgf{margin: 48px 32px 0 48px;}.JzO0Vc{background-color: rgba(0,0,0,1);}.zDUgLc{background-color: rgba(0,0,0,1);}.eWDljc{background-color: rgba(0,0,0,1);}.wgxiMe{background-color: rgba(0,0,0,1);}.YSH9J{color: rgba(249,249,249,1);}.iWs3gf.chg4Jd:focus{background-color: rgba(249,249,249,0.1199999973);}.oNsfjf{color: rgba(249,249,249,1);}.YSH9J:not(.tCHXDc):not(.TlfmSc):not(.M9vuGd):hover{color: rgba(249,249,249,0.8199999928);}.oNsfjf:not(.tCHXDc):not(.Zjiec):not(.lhZOrc):hover{color: rgba(249,249,249,0.8199999928);}.GBy4H .YSH9J{color: rgba(249,249,249,1);}.GBy4H .iWs3gf.chg4Jd:focus{background-color: rgba(249,249,249,0.1199999973);}.GBy4H .PsKE7e.YSH9J:not(.M9vuGd):hover{color: rgba(249,249,249,0.8199999928);}.LBrwzc .YSH9J{color: rgba(28,28,28,1);}.LBrwzc .iWs3gf.chg4Jd:focus{background-color: rgba(28,28,28,0.1199999973);}.LBrwzc .PsKE7e.YSH9J:not(.M9vuGd):hover{color: rgba(28,28,28,0.8199999928);}.GBy4H .oNsfjf{color: rgba(249,249,249,1);}.GBy4H .PsKE7e.oNsfjf:not(.lhZOrc):hover{color: rgba(249,249,249,0.8199999928);}.LBrwzc .oNsfjf{color: rgba(28,28,28,1);}.LBrwzc .PsKE7e.oNsfjf:not(.lhZOrc):hover{color: rgba(28,28,28,0.8199999928);}.M9vuGd{padding-top
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modules</title>
+    <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #111;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4af3;
+            font-family: "Saira", sans-serif;
+        }
+
+        .navbar .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #ff4af3;
+        }
+
+        /* Banner */
+        .banner {
+            width: 100%;
+            height: 250px;
+            background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
+            margin-top: 60px;
+        }
+
+        /* Modules Section */
+        .modules-header {
+            font-weight: 600;
+            font-family: "Saira", sans-serif;
+            font-size: 32px;
+            color: #ff4af3;
+            margin-top: 20px;
+        }
+
+        .dropdown-row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .centered-dropdown {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        details {
+            width: 30%;
+            background-color: #222;
+            border: 1px solid #ff3399;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        summary {
+            font-size: 18px;
+            cursor: pointer;
+            padding: 10px;
+            background-color: #ff3399;
+            color: black;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid pink;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #222;
+        }
+
+        .btn {
+            padding: 8px 12px;
+            background-color: #ff1493;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #ff69b4;
+        }
+
+        @media (max-width: 800px) {
+            .dropdown-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            details {
+                width: 80%;
+            }
+            .centered-dropdown details {
+                width: 80%;
+            }
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar .nav-links {
+                margin-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Wrapped Bot</div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Features</a>
+            <a href="#">Support</a>
+            <a href="#">Contact</a>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner"></div>
+
+    <!-- Modules Section -->
+    <h1 class="modules-header">Modules</h1>
+
+    <!-- First Row -->
+    <div class="dropdown-row">
+        <details>
+            <summary>Utility</summary>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Link</th>
+                </tr>
+                <tr>
+                    <td>Reaction Roles</td>
+                    <td><a href="https://www.wrappedbot.com/utility/reaction-roles" class="btn">Go to Feature</a></td>
+                </tr>
+                <tr>
+                    <td>Welcomer</td>
+                    <td><a href="https://www.wrappedbot.com/utility/welcomer" class="btn">Go to Feature</a></td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+    </div>
+
+    <!-- Second Row -->
+    <div class="dropdown-row">
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+    </div>
+
+    <!-- Third Row (Single Centered Dropdown) -->
+    <div class="centered-dropdown">
+        <details>
+            <summary>Coming Soon...</summary>
+            <table>
+                <tr>
+                    <td>Coming Soon...</td>
+                </tr>
+            </table>
+        </details>
+    </div>
+
+</body>
+</html>
