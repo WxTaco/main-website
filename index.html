@@ -37,26 +37,7 @@
         }
 
 /* Fix logo alignment */
-.navbar .logo {
-    display: flex;
-    align-items: center; /* Center text vertically */
-    gap: 10px; /* Space between image and text */
-    height: 100%; /* Ensure full height usage */
-    line-height: 1; /* Prevents unnecessary vertical spacing */
-}
 
-.navbar .logo img {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block; /* Fixes inline image spacing */
-}
-
-.navbar .logo span {
-    display: flex;
-    align-items: center; /* Ensures text stays aligned with image */
-}
 
 /* Fix image size */
         
@@ -77,7 +58,27 @@
         all: unset;
         display: flex !important; /* Ensure flex is applied */
         flex-direction: row !important; /* Ensure links are inline */
-        justify-content: center; /* Center links under the logo */
+    .navbar .logo {
+    display: flex;
+    align-items: center; /* Ensures text and image align */
+    gap: 10px; /* Space between image and text */
+    white-space: nowrap; /* Prevents text from wrapping */
+}
+
+.navbar .logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block; /* Prevents extra spacing */
+}
+
+.navbar .logo span {
+    font-size: 24px; /* Adjust text size */
+    font-weight: bold;
+    color: #ff4af3;
+    font-family: "Saira", sans-serif;
+}    justify-content: center; /* Center links under the logo */
         gap: 10px; /* Reduce spacing between links */
         flex-wrap: nowrap !important; /* Prevent wrapping */
         width: 100%;
