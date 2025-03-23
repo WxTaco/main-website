@@ -37,14 +37,17 @@
         }
 
 /* Fix logo alignment */
-.navbar .logo {
+..navbar .logo {
     display: flex;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #ff4af3;
-    font-family: "Saira", sans-serif;
-    white-space: nowrap; /* Prevents text wrapping */
+    align-items: center; /* Centers text vertically with image */
+    gap: 10px; /* Adds spacing between image and text */
+}
+
+.navbar .logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 /* Fix image size */
