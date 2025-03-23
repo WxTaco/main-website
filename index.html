@@ -28,6 +28,22 @@
     z-index: 1000;
     box-sizing: border-box;
 }
+        @media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items */
+        padding: 10px 20px; /* Reduce padding */
+    }
+
+    .navbar .logo {
+        margin-bottom: 10px; /* Add space between logo and nav links */
+    }
+
+    .navbar .nav-links {
+        flex-direction: column; /* Stack links vertically */
+        gap: 10px; /* Reduce spacing */
+    }
+        }
 
 /* Fix logo alignment */
 .navbar .logo {
