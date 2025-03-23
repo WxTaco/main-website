@@ -222,7 +222,7 @@
             border-radius: 5px;
             padding: 10px;
             overflow: hidden; /* Ensure content doesn't overflow */
-            transition: height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
+            transition: max-height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
         }
 
         summary {
@@ -233,18 +233,23 @@
             color: black;
             border-radius: 5px;
             text-align: center;
+            display: flex;
+            align-items: center;
         }
 
         summary::marker {
-            font-size: 0; /* Hide default marker */
+            display: none; /* Hide default marker */
+        }
+
+        summary::before {
+            content: "►"; /* Custom closed marker */
+            margin-right: 10px;
+            transition: transform 0.3s ease; /* Add transition for rotation */
         }
 
         details[open] summary::before {
-            content: "▼ "; /* Custom open marker */
-        }
-
-        details summary::before {
-            content: "► "; /* Custom closed marker */
+            content: "▼"; /* Custom open marker */
+            transform: rotate(0deg); /* Ensure proper rotation */
         }
 
         table {
