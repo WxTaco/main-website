@@ -54,14 +54,12 @@
     gap: 15px; /* Adds spacing between links */
 }
 
-.navbar .nav-links a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    white-space: nowrap; /* Prevents wrapping on smaller screens */
+.navbar .nav-links a.active {
+    text-decoration: underline; /* Underline the current page */
+    text-underline-offset: 5px; /* Moves the underline down for better spacing */
+    color: #ff4af3; /* Optional: Change color for visibility */
+    font-weight: bold; /* Optional: Make it stand out */
 }
-
 .navbar .nav-links a:hover {
     color: #ff4af3;
 }
@@ -200,16 +198,16 @@
 <body>
 
     <!-- Navbar -->
- <div class="navbar">
+<div class="navbar">
     <div class="logo">
-        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="icon of wrapped mascot">
+        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/7d9ad7ec-1006-4982-4b5f-4c1d0c0f7e00/public" alt="icon of wrapped mascot">
         Wrapped Bot
     </div>
     <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Features</a>
-        <a href="#">Support</a>
-        <a href="#">Contact</a>
+        <a href="index.html" class="active">Home</a>
+        <a href="features.html">Features</a>
+        <a href="support.html">Support</a>
+        <a href="contact.html">Contact</a>
     </div>
 </div>
 
@@ -308,6 +306,19 @@
             </table>
         </details>
     </div>
+
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+    let currentPage = window.location.pathname.split("/").pop(); // Get current page filename
+    let navLinks = document.querySelectorAll(".nav-links a");
+
+    navLinks.forEach(link => {
+        if (link.getAttribute("href") === currentPage) {
+            link.classList.add("active"); // Add 'active' class to the matching link
+        }
+    });
+});
+    </script>
 
 
 </body>
