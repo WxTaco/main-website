@@ -12,7 +12,6 @@
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 0;
         }
 
         /* Navbar */
@@ -28,17 +27,11 @@
             left: 0;
             z-index: 1000;
             box-sizing: border-box;
-            border: none; /* Ensure no border */
-            outline: none; /* Ensure no outline */
-            box-shadow: none; /* Ensure no shadow */
         }
 
         .nav-links a {
             white-space: nowrap; /* Prevents links from breaking into multiple lines */
             font-size: 16px; /* Adjust for better fit */
-            border: none; /* Ensure no border */
-            outline: none; /* Ensure no outline */
-            box-shadow: none; /* Ensure no shadow */
         }
 
         .navbar .logo {
@@ -67,6 +60,7 @@
         .navbar .nav-links {
             display: flex;
             gap: 15px; /* Adds spacing between links */
+            overflow-x: auto; /* Allow horizontal scrolling if needed */
         }
 
         .navbar .nav-links a {
@@ -345,6 +339,10 @@ document.addEventListener("DOMContentLoaded", function () {
             link.classList.add("active"); // Add 'active' class to the matching link
         }
     });
+
+    // Scroll the nav-links container to the left when the page loads
+    let navLinksContainer = document.querySelector(".nav-links");
+    navLinksContainer.scrollLeft = 0;
 });
 </script>
 
