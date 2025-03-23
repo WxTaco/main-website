@@ -48,11 +48,27 @@
         }
 
         /* Banner */
-        .banner {
+        .banner-container {
+            position: relative;
             width: 100%;
             height: 250px;
-            background: url('https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/6bffd4db-d3f6-4260-2a10-87290acb4e00/public') no-repeat center center/cover;
             margin-top: 60px;
+            overflow: hidden;
+        }
+
+        .banner {
+            width: 100%;
+            height: 100%;
+            background: url('https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/6bffd4db-d3f6-4260-2a10-87290acb4e00/public') no-repeat center center/cover;
+        }
+
+        .overlay-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 50%;
+            max-height: 80%;
         }
 
         /* Modules Section */
@@ -158,8 +174,11 @@
         </div>
     </div>
 
-    <!-- Banner -->
-    <div class="banner"></div>
+    <!-- Banner with Overlay -->
+    <div class="banner-container">
+        <div class="banner"></div>
+        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/aaa87b2f-0404-4338-81b1-4311ea48fb00/public" class="overlay-image" alt="Overlay Image">
+    </div>
 
     <!-- Modules Section -->
     <h1 class="modules-header">Modules</h1>
@@ -175,75 +194,4 @@
                 </tr>
                 <tr>
                     <td>Reaction Roles</td>
-                    <td><a href="https://www.wrappedbot.com/utility/reaction-roles" class="btn">Go to Feature</a></td>
-                </tr>
-                <tr>
-                    <td>Welcomer</td>
-                    <td><a href="https://www.wrappedbot.com/utility/welcomer" class="btn">Go to Feature</a></td>
-                </tr>
-            </table>
-        </details>
-
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-    </div>
-
-    <!-- Second Row -->
-    <div class="dropdown-row">
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-    </div>
-
-    <!-- Third Row (Single Centered Dropdown) -->
-    <div class="centered-dropdown">
-        <details>
-            <summary>Coming Soon...</summary>
-            <table>
-                <tr>
-                    <td>Coming Soon...</td>
-                </tr>
-            </table>
-        </details>
-    </div>
-
-</body>
-</html>
+                    <
