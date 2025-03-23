@@ -173,8 +173,6 @@ body {
     transform: translate(-50%, -50%);
     max-width: 50%;
     max-height: 80%;
-    width: auto;
-    height: auto;
 }
 
 /* Responsive adjustments for banner and overlay image */
@@ -305,10 +303,10 @@ th {
         align-items: center;
     }
     details {
-        width: 80%;
+        width: 90%; /* Adjusted width to fit smaller screens */
     }
     .centered-dropdown details {
-        width: 80%;
+        width: 90%; /* Adjusted width to fit smaller screens */
     }
     .developer-pfp-large {
         width: 100px; /* Adjust size for smaller screens */
