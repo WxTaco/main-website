@@ -7,40 +7,51 @@
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .developer-pfp {
-            width: 75px;
-            height: 75px;
-            border-radius: 50%;
-            object-fit: cover;
-            vertical-align: middle;
-        }
-        .developer-summary {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .developer-summary img {
-            margin-right: 10px;
-        }
-        .quote-table td {
-            padding: 10px;
-            background-color: transparent; /* Remove background color */
-        }
-        .content-wrapper {
-            margin-top: 20px; /* Reduce margin to ensure content is not hidden behind the navbar */
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center the content */
-            gap: 20px; /* Add gap between dropdowns */
-        }
+    .developer-pfp {
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        object-fit: cover;
+        vertical-align: middle;
+    }
+    .developer-summary {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .developer-summary img {
+        margin-right: 10px;
+    }
+    .quote-table td {
+        padding: 10px;
+        background-color: transparent; /* Remove background color */
+    }
+    .content-wrapper {
+        margin-top: 20px; /* Reduce margin to ensure content is not hidden behind the navbar */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the content */
+        gap: 20px; /* Add gap between dropdowns */
+    }
+    .developer-details {
+        width: 80%; /* Default width for larger screens */
+    }
+    @media (max-width: 800px) {
         .developer-details {
-            width: 80%; /* Default width for larger screens */
+            width: 100%; /* Full width for smaller screens */
         }
-        @media (max-width: 800px) {
-            .developer-details {
-                width: 100%; /* Full width for smaller screens */
-            }
-        }
+    }
+    details {
+        width: 100%;
+        max-width: 800px; /* Adjust the maximum width as needed */
+        margin: 0 auto; /* Center the drop-down element */
+    }
+    details summary {
+        cursor: pointer;
+    }
+    details summary::-webkit-details-marker {
+        display: none; /* Remove the default marker */
+    }
     </style>
 </head>
 <body>
