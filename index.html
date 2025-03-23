@@ -337,19 +337,19 @@
             </table>
         </details>
     </div>
-
-    <script>
+<script>
 document.addEventListener("DOMContentLoaded", function () {
-    let currentPage = window.location.pathname.split("/").pop(); // Get current page filename
+    let currentPage = window.location.pathname.split("/").pop() || "index.html"; // Default to index.html if empty
     let navLinks = document.querySelectorAll(".nav-links a");
 
     navLinks.forEach(link => {
-        if (link.getAttribute("href") === currentPage) {
+        let linkPath = link.getAttribute("href");
+        if (linkPath === currentPage || (linkPath === "index.html" && currentPage === "")) {
             link.classList.add("active"); // Add 'active' class to the matching link
         }
     });
 });
-    </script>
+</script>
 
 
 </body>
