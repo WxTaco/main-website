@@ -30,22 +30,23 @@
 }
         @media (max-width: 768px) {
     .navbar {
-        flex-direction: column; /* Stack items */
-        align-items: center; /* Center items */
+        flex-direction: column; /* Stack logo and links container */
+        align-items: center;
         padding: 10px 15px;
     }
 
     .navbar .logo {
-        margin-bottom: 10px; /* Add space between logo and links */
+        margin-bottom: 10px; /* Space between logo and links */
     }
 
     .nav-links {
-        display: flex; /* Keep links inline */
-        flex-direction: row; /* Ensure links stay in a row */
-        gap: 10px;
-        flex-wrap: wrap; /* Allow wrapping if needed */
-        justify-content: center; /* Center links under the logo */
-        width: 100%;
+        display: flex;
+        flex-direction: row; /* Ensure links stay inline */
+        flex-wrap: nowrap; /* Prevent wrapping */
+        gap: 15px; /* Space between links */
+        justify-content: center; /* Center links */
+        width: auto;
+        white-space: nowrap; /* Prevent links from breaking */
     }
         }
 
