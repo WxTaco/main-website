@@ -217,7 +217,7 @@ body {
 
 details {
     width: 100%;
-    max-width: 800px; /* Adjust the maximum width as needed */
+    max-width: 100%; /* Ensure it fits within the container */
     margin: 0 auto; /* Center the drop-down element */
     background-color: #222;
     border: 1px solid #ff3399;
