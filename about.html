@@ -7,28 +7,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .developers-quotes {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .developer {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
         .developer-pfp {
             width: 75px;
             height: 75px;
             border-radius: 50%;
             object-fit: cover;
+            vertical-align: middle;
         }
-        .developer-quote {
-            flex: 1;
-            height: 75px;
+        .developer-summary {
             display: flex;
             align-items: center;
+            gap: 10px;
+        }
+        .developer-summary img {
+            margin-right: 10px;
+        }
+        .quote-table td {
+            padding: 10px;
+            background-color: pink;
         }
     </style>
 </head>
@@ -47,27 +43,18 @@
         </div>
     </div>
 
-    <!-- Banner with Overlay -->
-    <div class="banner-container">
-        <div class="banner"></div>
-        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/6d98aca8-ae26-4659-9401-8793375e2f00/public" class="overlay-image" alt="Overlay Image">
-    </div>
-
-    <h1 class="modules-header">About Us</h1>
-
-    <div class="content">
-        <p>Welcome to Wrapped V2! We are dedicated to bringing the best utility features to enhance your server experience. Our team is passionate about creating tools that help manage and improve you[...]
-        <p>Our core features include Reaction Roles, Welcomer, and more coming soon. Stay tuned for updates!</p>
-        <p>Feel free to reach out to us for support or any inquiries. We are here to help!</p>
-    </div>
-
-    <div class="developers-quotes">
-        <div class="developer">
+    <!-- Drop-down with Profile Picture and Quote -->
+    <details class="developer-details">
+        <summary class="developer-summary">
             <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/7a83e484-3b0a-49a2-aa78-d7e37c74e400/public" alt="Profile Picture" class="developer-pfp">
-            <div class="developer-quote">Hello! I Am The Lead Developer And Project Owner For Wrapped. I Spend A Lot Of My Time Working On This Site And The Bot Itself And Have Thoroughly Enjoyed The Challenges It Has Presented Me With. The Original Version Of This Project, Wrapped V1, Was Shut Down Due To Circumstances Outside Of My Control, And It Was During That Downtime That I Decided I Was Gonna Expand The Capabilities Of Wrapped. Since Then, We've Taken Wrapped From It's Original Purpose, A High Quality Statistics Bot, And Turned It Into An All Purpose Discord Bot, And We Are Excited To Share V2 With You.</div>
-        </div>
-        <!-- Add other developer quotes here in similar fashion -->
-    </div>
+            Taco - Project Owner
+        </summary>
+        <table class="quote-table">
+            <tr>
+                <td>Hello! I Am The Lead Developer And Project Owner For Wrapped. I Spend A Lot Of My Time Working On This Site And The Bot Itself And Have Thoroughly Enjoyed The Challenges It Has Presented Me With. The Original Version Of This Project, Wrapped V1, Was Shut Down Due To Circumstances Outside Of My Control, And It Was During That Downtime That I Decided I Was Gonna Expand The Capabilities Of Wrapped. Since Then, We've Taken Wrapped From It's Original Purpose, A High Quality Statistics Bot, And Turned It Into An All Purpose Discord Bot, And We Are Excited To Share V2 With You.</td>
+            </tr>
+        </table>
+    </details>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
