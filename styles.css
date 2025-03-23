@@ -265,6 +265,14 @@ th {
     background-color: #222;
 }
 
+.developer-pfp-large {
+    width: 150px; /* Larger size for the artist's profile picture */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
 .btn {
     padding: 8px 12px;
     background-color: #ff1493;
@@ -289,5 +297,9 @@ th {
     }
     .centered-dropdown details {
         width: 80%;
+    }
+    .developer-pfp-large {
+        width: 100px; /* Adjust size for smaller screens */
+        height: 100px;
     }
 }
