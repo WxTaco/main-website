@@ -39,8 +39,10 @@
 /* Fix logo alignment */
 .navbar .logo {
     display: flex;
-    align-items: center; /* Centers text vertically with image */
-    gap: 10px; /* Adds spacing between image and text */
+    align-items: center; /* Center text vertically */
+    gap: 10px; /* Space between image and text */
+    height: 100%; /* Ensure full height usage */
+    line-height: 1; /* Prevents unnecessary vertical spacing */
 }
 
 .navbar .logo img {
@@ -48,6 +50,12 @@
     height: 50px;
     object-fit: cover;
     border-radius: 10px;
+    display: block; /* Fixes inline image spacing */
+}
+
+.navbar .logo span {
+    display: flex;
+    align-items: center; /* Ensures text stays aligned with image */
 }
 
 /* Fix image size */
@@ -277,7 +285,7 @@ th {
 <div class="navbar">
     <div class="logo">
         <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="icon of wrapped mascot">
-        Wrapped Bot
+        <span>Wrapped V2</span>
     </div>
     <div class="nav-links">
         <a href="index.html">Home</a>
