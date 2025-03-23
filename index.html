@@ -54,14 +54,26 @@
     gap: 15px; /* Adds spacing between links */
 }
 
-.navbar .nav-links a.active {
-    text-decoration: underline; /* Underline the current page */
-    text-underline-offset: 5px; /* Moves the underline down for better spacing */
-    color: #ff4af3; /* Optional: Change color for visibility */
-    font-weight: bold; /* Optional: Make it stand out */
+.navbar .nav-links a {
+    color: white; /* Default color */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
 }
+
 .navbar .nav-links a:hover {
-    color: #ff4af3;
+    color: #ff4af3; /* Color when hovered */
+}
+
+.navbar .nav-links a:visited {
+    color: white; /* Ensures visited links stay white */
+}
+
+.navbar .nav-links a.active {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: #ff4af3; /* Stands out for active page */
+    font-weight: bold;
 }
 
 /* Fix navbar responsiveness */
