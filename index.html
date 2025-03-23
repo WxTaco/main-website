@@ -173,6 +173,24 @@
             max-height: 80%;
         }
 
+        /* Responsive adjustments for banner and overlay image */
+        @media (max-width: 768px) {
+            .banner-container {
+                height: auto;
+                margin-top: 80px; /* Adjust margin to avoid overlap with navbar */
+            }
+
+            .banner {
+                height: 200px; /* Adjust height for smaller screens */
+                background-size: cover; /* Ensure background image covers the container */
+            }
+
+            .overlay-image {
+                max-width: 80%;
+                max-height: 60%;
+            }
+        }
+
         /* Modules Section */
         .modules-header {
             font-weight: 600;
