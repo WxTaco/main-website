@@ -29,7 +29,9 @@
         .content-wrapper {
             margin-top: 120px; /* Add more margin to ensure content is not hidden behind the navbar */
             display: flex;
-            justify-content: center; /* Center the content */
+            flex-direction: column;
+            align-items: center; /* Center the content */
+            gap: 20px; /* Add gap between dropdowns */
         }
         .developer-details {
             width: 80%; /* Default width for larger screens */
@@ -66,6 +68,19 @@
             <table class="quote-table">
                 <tr>
                     <td>Hello! I Am The Lead Developer And Project Owner For Wrapped. I Spend A Lot Of My Time Working On This Site And The Bot Itself And Have Thoroughly Enjoyed The Challenges It Has Presented Me With. The Original Version Of This Project, Wrapped V1, Was Shut Down Due To Circumstances Outside Of My Control, And It Was During That Downtime That I Decided I Was Gonna Expand The Capabilities Of Wrapped. Since Then, We've Taken Wrapped From It's Original Purpose, A High Quality Statistics Bot, And Turned It Into An All Purpose Discord Bot, And We Are Excited To Share V2 With You.</td>
+                </tr>
+            </table>
+        </details>
+
+        <!-- New Drop-down with Profile Picture and Quote -->
+        <details class="developer-details">
+            <summary class="developer-summary">
+                <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/a305533c-f271-4f78-6d18-be1df5611f00/public" alt="Profile Picture" class="developer-pfp">
+                Switchy - Artist
+            </summary>
+            <table class="quote-table">
+                <tr>
+                    <td>Welcome! I’m Switchy, The Original Artist For Wrapped V1, And I’m Excited To Be Working On Wrapped V2! I Have A Lot Of Fun With The Developers, And They Are Such Kind People. When I’m Not Doing Wrapped Things, I Mostly Work On My Solo Projects, Like Creating Art And Running My Own Communities On Discord. We’ve Got A Lot Of Cool Stuff In The Making With Wrapped So Stay Tuned! For More Information Or Insights, Visit Our Support Server. Thank You For Following The Development Of Wrapped.</td>
                 </tr>
             </table>
         </details>
