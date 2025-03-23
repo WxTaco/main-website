@@ -28,28 +28,7 @@
     z-index: 1000;
     box-sizing: border-box;
 }
-        @media (max-width: 768px) {
-    .navbar {
-        display: flex;
-        flex-direction: column; /* Stack logo and links container */
-        align-items: center;
-        text-align: center;
-        padding: 10px 15px;
-    }
-
-    .navbar .logo {
-        margin-bottom: 10px; /* Space between logo and links */
-    }
-
-    .nav-links {
-        display: flex !important;
-        flex-direction: row; /* Keep links in a single row */
-        justify-content: center; /* Center links under the logo */
-        gap: 15px; /* Spacing between links */
-        flex-wrap: wrap; /* Allow wrapping on very small screens */
-        width: 100%; 
-        max-width: 300px; /* Adjust as needed */
-    }
+        
 
     .nav-links a {
         white-space: nowrap; /* Prevents links from breaking into multiple lines */
@@ -69,6 +48,39 @@
 }
 
 /* Fix image size */
+        
+        @media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: column; /* Stack logo and links container */
+        align-items: center;
+        text-align: center;
+        padding: 10px 15px;
+    }
+
+    .navbar .logo {
+        margin-bottom: 10px; /* Space between logo and links */
+    }
+
+    .nav-links {
+        all: unset;
+        display: flex !important; /* Ensure flex is applied */
+        flex-direction: row !important; /* Ensure links are inline */
+        justify-content: center; /* Center links under the logo */
+        gap: 10px; /* Reduce spacing between links */
+        flex-wrap: nowrap !important; /* Prevent wrapping */
+        width: 100%;
+        max-width: 100%; /* Ensure it doesn’t shrink too much */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+        white-space: nowrap; /* Prevent text breaking */
+    }
+
+    .nav-links a {
+        display: inline-block; /* Ensures inline behavior */
+        font-size: 14px; /* Reduce font size for better fit */
+        padding: 5px 8px; /* Adjust padding */
+    }
+}
 .navbar .logo img {
     width: 50px; /* Ensure a fixed width */
     height: 50px; /* Ensure a fixed height */
