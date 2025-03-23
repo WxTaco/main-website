@@ -236,10 +236,59 @@ th {
             .centered-dropdown details {
                 width: 80%;
             }
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
+            /* Base Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #111;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* Hide menu links by default on mobile */
+.nav-links {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    background-color: #111;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Show menu when active */
+.nav-links.active {
+    display: flex;
+}
+
+/* Style the hamburger menu button */
+.menu-toggle {
+    display: none; /* Hide by default */
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* Show button */
+    }
+
+    .nav-links {
+        display: none; /* Hide by default */
+    }
+}
             .navbar .nav-links {
                 margin-top: 10px;
             }
@@ -248,18 +297,19 @@ th {
 </head>
 <body>
 
-    <!-- Navbar -->
-<div class="navbar">
+<nav class="navbar">
     <div class="logo">
-        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="icon of wrapped mascot">
-        Wrapped Bot
+        <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="Logo">
+        Wrapped V2
     </div>
+    <button class="menu-toggle">&#9776;</button> <!-- Hamburger Icon -->
     <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="features.html">Features</a>
-        <a href="support.html">Support</a>
-        <a href="contact.html">Contact</a>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
     </div>
+</nav>
 </div>
 
     <!-- Banner with Overlay -->
@@ -370,7 +420,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
 
+    menuToggle.addEventListener("click", function () {
+        navLinks.classList.toggle("active"); // Show/hide menu
+    });
+});
+</script>
 
 </body>
 </html>
