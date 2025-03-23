@@ -222,6 +222,7 @@
             border-radius: 5px;
             padding: 10px;
             overflow: hidden; /* Ensure content doesn't overflow */
+            transition: height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
         }
 
         summary {
@@ -254,6 +255,12 @@
             opacity: 0; /* Start with hidden table */
             max-height: 0; /* Start with hidden table */
             overflow: hidden; /* Ensure content doesn't overflow */
+            transition: max-height 0.3s ease, opacity 0.3s ease; /* Add transition for animation */
+        }
+
+        details[open] table {
+            opacity: 1; /* Show table when details is open */
+            max-height: 1000px; /* Ensure content is fully visible */
         }
 
         th, td {
@@ -273,6 +280,7 @@
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
+            transition: background-color 0.3s ease-in-out; /* Add transition for hover effect */
         }
 
         .btn:hover {
