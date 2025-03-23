@@ -209,10 +209,17 @@ body {
     margin: 20px 0;
 }
 
-.centered-dropdown {
-    display: flex;
-    justify-content: center;
+/* Ensure consistent styling for all drop-downs */
+.centered-dropdown details, .dropdown-row details {
+    max-width: 800px; /* Ensure it fits within the container */
+    width: 100%; /* Ensure consistent width */
+}
+
+/* If needed, adjust the margins and padding to match */
+.centered-dropdown, .dropdown-row {
     margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
 }
 
 .centered-dropdown details {
