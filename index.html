@@ -30,8 +30,10 @@
 }
         @media (max-width: 768px) {
     .navbar {
+        display: flex;
         flex-direction: column; /* Stack logo and links container */
         align-items: center;
+        text-align: center;
         padding: 10px 15px;
     }
 
@@ -41,12 +43,17 @@
 
     .nav-links {
         display: flex;
-        flex-direction: row; /* Ensure links stay inline */
-        flex-wrap: nowrap; /* Prevent wrapping */
-        gap: 15px; /* Space between links */
-        justify-content: center; /* Center links */
-        width: auto;
-        white-space: nowrap; /* Prevent links from breaking */
+        flex-direction: row; /* Keep links in a single row */
+        justify-content: center; /* Center links under the logo */
+        gap: 15px; /* Spacing between links */
+        flex-wrap: wrap; /* Allow wrapping on very small screens */
+        width: 100%; 
+        max-width: 300px; /* Adjust as needed */
+    }
+
+    .nav-links a {
+        white-space: nowrap; /* Prevents links from breaking into multiple lines */
+        font-size: 16px; /* Adjust for better fit */
     }
         }
 
