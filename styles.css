@@ -303,7 +303,7 @@ th {
     background-color: #ff69b4;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 768px) {
     .dropdown-row {
         flex-direction: column;
         align-items: center;
@@ -313,17 +313,5 @@ th {
     }
     .centered-dropdown details {
         width: 90%; /* Adjusted width to fit smaller screens */
-    }
-    .developer-pfp-large {
-        width: 100px; /* Adjust size for smaller screens */
-        height: 100px;
-    }
-}
-
-/* Add this block to fix the right margin issue */
-@media (max-width: 800px) {
-    .developer-details {
-        width: calc(100% - 20px); /* Ensure it fits within the viewport with padding */
-        margin: 0 10px; /* Add horizontal margin */
     }
 }
