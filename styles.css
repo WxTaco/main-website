@@ -319,3 +319,11 @@ th {
         height: 100px;
     }
 }
+
+/* Add this block to fix the right margin issue */
+@media (max-width: 800px) {
+    .developer-details {
+        width: calc(100% - 20px); /* Ensure it fits within the viewport with padding */
+        margin: 0 10px; /* Add horizontal margin */
+    }
+}
