@@ -269,6 +269,7 @@ table {
 details[open] table {
     opacity: 1; /* Show table when details is open */
     max-height: 1000px; /* Ensure content is fully visible */
+    margin-bottom: 10px;
 }
 
 th, td {
