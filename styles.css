@@ -42,8 +42,8 @@ body {
 }
 
 .navbar .logo img {
-    width: 65px;
-    height: 65px;
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 10px;
     display: block; /* Prevents extra spacing */
