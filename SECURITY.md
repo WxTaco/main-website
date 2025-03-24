@@ -1,6 +1,7 @@
 Please let me know directly @ 
 
 Discord: **taco.ot**
+
 Email: **wrappeddeveloper@gmail.com**
 
 All security issues need to be addressed promptly and I will personally see to it. If you think something might be an issue, let me know.
