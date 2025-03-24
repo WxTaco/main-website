@@ -6,17 +6,85 @@
     <title>Modules</title>
     <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap');
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            padding: 20px; /* Added padding */
+            box-sizing: border-box;
+            flex-direction: column;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between; /* Keeps logo on left and links on right */
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #111;
+            width: 100%; /* Ensures navbar spans full width */
+            box-sizing: border-box;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px; /* Adds spacing between links */
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .nav-links a:hover {
+            color: #ff4af3;
+        }
+        .nav-links a.active {
+            color: gold; /* Highlight the selected page in gold */
+        }
+        .banner {
+            display: none; /* Hide banner by default */
+        }
+        .border {
+            width: 100%;
+            height: 100%;
+            border: 2px solid gold;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2em;
+            color: white;
+        }
+        @media (min-width: 769px) { 
+            .navbar {
+                justify-content: center; /* Center the navbar content */
+            }
+            .nav-links {
+                order: 2; /* Move nav links to the end */
+            }
+            .banner {
+                display: block; /* Display the banner */
+                order: 1; /* Display the banner in the center */
+            }
+        }
+    </style>
 </head>
 <body>
-
-    <!-- Navbar -->
     <div class="navbar">
         <div class="logo">
-            <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/23e04f52-bf6f-4a3c-0fdd-e7f59a884900/public" alt="icon of wrapped mascot">
-            <span>Wrapped V2</span>
+            <span>Logo</span>
+        </div>
+        <div class="banner">
+            <img src="https://imagedelivery.net/E-dqz4JthTB-jBF781B56A/15752d4d-0456-4ae8-bccf-88a0c1769300/public" alt="Banner Image" style="height: 50px;">
         </div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="utility.html">Utility</a>
             <a href="about.html">About Us</a>
         </div>
