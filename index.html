@@ -134,34 +134,25 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!content) return;
 
         const openDetails = () => {
-            const startHeight = `${summary.offsetHeight}px`;
-            const endHeight = `${summary.offsetHeight + content.scrollHeight}px`;
+            const tableMarginBottom = parseInt(window.getComputedStyle(content).marginBottom, 10) || 0;
+            const endHeight = `${summary.offsetHeight + content.scrollHeight + tableMarginBottom}px`;
 
             content.style.opacity = 0;
-            content.style.maxHeight = "0px";
-            content.style.overflow = "hidden";
-            details.style.height = startHeight;
+            details.style.height = `${summary.offsetHeight}px`;
 
-            requestAnimationFrame(() => {
+            setTimeout(() => {
                 details.style.height = endHeight;
                 content.style.opacity = 1;
-                content.style.maxHeight = `${content.scrollHeight}px`;
-            });
+            }, 50);
         };
 
         const closeDetails = () => {
-            const startHeight = `${details.offsetHeight}px`;
-            const endHeight = `${summary.offsetHeight}px`;
+            details.style.height = `${details.offsetHeight}px`;
 
-            content.style.opacity = 1;
-            content.style.maxHeight = `${content.scrollHeight}px`;
-            details.style.height = startHeight;
-
-            requestAnimationFrame(() => {
-                details.style.height = endHeight;
+            setTimeout(() => {
+                details.style.height = `${summary.offsetHeight}px`;
                 content.style.opacity = 0;
-                content.style.maxHeight = "0px";
-            });
+            }, 50);
         };
 
         details.addEventListener('toggle', () => {
