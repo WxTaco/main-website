@@ -160,6 +160,7 @@ body {
     overflow: hidden;
 }
 
+/* Banner for whole site */
 .banner {
     width: 100%;
     height: 100%;
@@ -247,18 +248,11 @@ summary::marker {
     font-size: 0; /* Hide default marker */
 }
 
-details[open] summary::before {
-    content: "▼ "; /* Custom open marker */
-}
-
-details summary::before {
-    content: "▶ "; /* Custom closed marker */
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
+    margin-bottom: 10px;
     border: 2px solid pink; /* Ensures the table itself has a pink border */
     opacity: 0; /* Start with hidden table */
     max-height: 0; /* Start with hidden table */
