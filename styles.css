@@ -11,9 +11,6 @@ body, html {
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
-summary {
-    background-color: pink;
-}
 
 body {
     background-color: black;
@@ -252,6 +249,7 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    padding: 0 20px;
 }
 
 .centered-dropdown details {
@@ -359,6 +357,7 @@ th {
         .dropdown {
             position: relative;
             display: inline-block;
+            padding: 0 10px;
         }
 
         /* Style the dropdown button */
