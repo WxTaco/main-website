@@ -76,18 +76,18 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!content) return;
 
         const openDetails = () => {
+            const tableMarginBottom = parseInt(window.getComputedStyle(content).marginBottom, 10) || 0;
             const startHeight = `${summary.offsetHeight}px`;
-            const endHeight = `${summary.offsetHeight + content.scrollHeight}px`;
+            const endHeight = `${summary.offsetHeight + content.scrollHeight + tableMarginBottom}px`;
 
+            // Reset styles for animation
             content.style.opacity = 0;
-            content.style.maxHeight = "0px";
-            content.style.overflow = "hidden";
             details.style.height = startHeight;
 
+            // Animate opening
             requestAnimationFrame(() => {
                 details.style.height = endHeight;
                 content.style.opacity = 1;
-                content.style.maxHeight = `${content.scrollHeight}px`;
             });
         };
 
@@ -95,14 +95,12 @@ document.addEventListener("DOMContentLoaded", function () {
             const startHeight = `${details.offsetHeight}px`;
             const endHeight = `${summary.offsetHeight}px`;
 
-            content.style.opacity = 1;
-            content.style.maxHeight = `${content.scrollHeight}px`;
+            // Animate closing
             details.style.height = startHeight;
 
             requestAnimationFrame(() => {
                 details.style.height = endHeight;
                 content.style.opacity = 0;
-                content.style.maxHeight = "0px";
             });
         };
 
@@ -114,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        // Initialize the correct state
         if (details.open) {
             openDetails();
         } else {
