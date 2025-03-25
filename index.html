@@ -18,14 +18,7 @@
         </div>
         <div class="nav-links">
             <a href="index.html">Home</a>
-            <div class="dropdown">
-                <label for="dropdown"><a href="utility.html">Utility</a><label>
-                <select id="dropdown" name="dropdown">
-                    <option value="rr">Reaction Roles</option>
-                    <option value="wlc">Welcomer</option>
-                </select>
-                </label>
-            </div>
+            <a href="utility.html">Utility</a>
             <a href="about.html">About Us</a>
         </div>
     </div>
@@ -179,12 +172,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     document.querySelectorAll('details').forEach(animateDetails);
-
-    // Handle click on dropdown-toggle to navigate to utility.html
-    const dropdownToggle = document.querySelector('.dropdown-toggle');
-    dropdownToggle.addEventListener('click', function (e) {
-        window.location.href = dropdownToggle.getAttribute('href');
-    });
 });
 </script>
 
