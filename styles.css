@@ -371,3 +371,19 @@ th {
         .dropdown:hover .dropdown-content {
             display: block;
         }
+
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: static; /* Change position to static to prevent overflow */
+        width: auto; /* Allow the dropdown content to resize */
+        box-shadow: none; /* Remove box-shadow to prevent overflow */
+    }
+
+    .dropdown-content a {
+        padding: 10px; /* Adjust padding for better fit */
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block; /* Ensure dropdown content is displayed */
+    }
+}
