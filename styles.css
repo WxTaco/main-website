@@ -307,6 +307,10 @@ th {
     .centered-dropdown details {
         width: 90%; /* Adjusted width to fit smaller screens */
     }
+    .index-dropdown {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 @media (max-width: 768px) {
