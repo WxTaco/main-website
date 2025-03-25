@@ -11,7 +11,6 @@ body, html {
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
-
 body {
     background-color: black;
     color: white;
@@ -58,6 +57,32 @@ body {
     display: block;
     font-family: 'Saira', sans-serif;
     font-size: 1rem;
+}
+
+/* Styles for drop-down container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px; /* Ensure padding is applied to prevent overflow */
+}
+
+/* Responsive adjustments for drop-downs */
+@media (max-width: 768px) {
+    .dropdown-content {
+        position: static; /* Change position to static to prevent overflow */
+        width: auto; /* Allow the dropdown content to resize */
+        box-shadow: none; /* Remove box-shadow to prevent overflow */
+        padding-left: 10px; /* Add padding to prevent cutting off */
+        padding-right: 10px; /* Add padding to prevent cutting off */
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block; /* Ensure dropdown content is displayed */
+    }
+
+    .dropdown-content a {
+        padding: 10px; /* Adjust padding for better fit */
+    }
 }
 
 /* Headers */
@@ -353,52 +378,52 @@ th {
     }
 }
 
- /* Style the dropdown container */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            padding: 0 10px;
-        }
+/* Style the dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+    padding: 0 10px;
+}
 
-        /* Style the dropdown button */
-        .dropdown-toggle {
-            background-color: #111;
-            color: white;
-            padding: 10px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            font-family: 'Saira', sans-serif;
-        }
+/* Style the dropdown button */
+.dropdown-toggle {
+    background-color: #111;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Saira', sans-serif;
+}
 
-        /* Style the dropdown content (hidden by default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #111;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+/* Style the dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #111;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
 
-        /* Style the links inside the dropdown */
-        .dropdown-content a {
-            color: white;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-family: 'Saira', sans-serif;
-        }
+/* Style the links inside the dropdown */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: 'Saira', sans-serif;
+}
 
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {
-            background-color: #575757;
-        }
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #575757;
+}
 
-        /* Show the dropdown menu on hover */
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
 @media (max-width: 768px) {
     .dropdown-content {
