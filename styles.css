@@ -230,7 +230,7 @@ details {
     border: 1px solid #ff3399;
     border-radius: 5px;
     padding: 10px;
-    overflow: hidden; /* Ensure content doesn't overflow */
+    overflow: visible; /* Ensure content doesn't overflow */
     transition: height 0.6s ease, opacity 0.6s ease; /* Increase duration for animation */
 }
 
@@ -252,7 +252,7 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     border: 2px solid pink; /* Ensures the table itself has a pink border */
     opacity: 0; /* Start with hidden table */
     max-height: 0; /* Start with hidden table */
@@ -262,7 +262,7 @@ table {
 
 details[open] table {
     opacity: 1; /* Show table when details is open */
-    max-height: 1000px; /* Ensure content is fully visible */
+    max-height: none; /* Ensure content is fully visible */
     margin-bottom: 10px;
 }
 
