@@ -299,3 +299,10 @@ th {
         width: 90%; /* Adjusted width to fit smaller screens */
     }
 }
+
+@media (max-width: 768px) {
+    details, .centered-dropdown details {
+        width: calc(100% - 20px) !important; /* Adjusted width to fit smaller screens with padding */
+        margin: 0 10px !important; /* Add margin to prevent spilling */
+    }
+}
