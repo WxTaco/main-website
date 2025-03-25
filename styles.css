@@ -303,9 +303,13 @@ th {
     }
     details {
         width: 90%; /* Adjusted width to fit smaller screens */
+        padding-left: 10px; /* Add padding to prevent cutting off */
+        padding-right: 10px; /* Add padding to prevent cutting off */
     }
     .centered-dropdown details {
         width: 90%; /* Adjusted width to fit smaller screens */
+        padding-left: 10px; /* Add padding to prevent cutting off */
+        padding-right: 10px; /* Add padding to prevent cutting off */
     }
     .index-dropdown {
         padding-left: 10px;
@@ -317,6 +321,8 @@ th {
     details, .centered-dropdown details {
         width: calc(100% - 20px) !important; /* Adjusted width to fit smaller screens with padding */
         margin: 0 10px !important; /* Add margin to prevent spilling */
+        padding-left: 10px; /* Add padding to prevent cutting off */
+        padding-right: 10px; /* Add padding to prevent cutting off */
     }
 }
 
