@@ -6,6 +6,11 @@ body, html {
     overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
+.centered-dropdown {
+    padding: 0 20px; /* Add padding to both sides */
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+}
+
 body {
     background-color: black;
     color: white;
