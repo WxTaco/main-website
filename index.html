@@ -178,6 +178,12 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     document.querySelectorAll('details').forEach(animateDetails);
+
+    // Handle click on dropdown-toggle to navigate to utility.html
+    const dropdownToggle = document.querySelector('.dropdown-toggle');
+    dropdownToggle.addEventListener('click', function (e) {
+        window.location.href = dropdownToggle.getAttribute('href');
+    });
 });
 </script>
 
