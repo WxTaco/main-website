@@ -143,7 +143,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Animate details element
     const animateDetails = (details) => {
-        const animateDetails = (details) => {
         const summary = details.querySelector('summary');
         const content = details.querySelector('table');
 
@@ -193,9 +192,6 @@ document.addEventListener("DOMContentLoaded", function () {
             closeDetails();
         }
     };
-
-    document.querySelectorAll('details').forEach(animateDetails);
-});
 
     document.querySelectorAll('details').forEach(animateDetails);
 });
