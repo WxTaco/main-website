@@ -11,6 +11,10 @@ body, html {
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
+summary {
+    background-color: pink;
+}
+
 body {
     background-color: black;
     color: white;
