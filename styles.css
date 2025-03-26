@@ -352,7 +352,7 @@ th {
     .centered-dropdown details {
         padding-left: .625rem; /* Add padding to prevent cutting off */
         padding-right: .625rem; /* Add padding to prevent cutting off */
-        margin: 0 40px;
+        margin: 0 2.5rem;
     }
     .index-dropdown {
         padding-left: .625rem;
