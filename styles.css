@@ -275,7 +275,6 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
-    padding: 0 20px;
 }
 
 .centered-dropdown details {
@@ -325,14 +324,6 @@ th, td {
 
 th {
     background-color: #222;
-}
-
-.developer-pfp-large {
-    width: 150px; /* Larger size for the artist's profile picture */
-    height: 150px;
-    border-radius: 50%;
-    object-fit: cover;
-    vertical-align: middle;
 }
 
 .btn {
