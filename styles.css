@@ -7,7 +7,7 @@ body, html {
 }
 
 .centered-dropdown {
-     /* Add padding to both sides */
+    padding: 0 .25rem; /* Add padding to both sides */
     box-sizing: border-box; /* Ensure padding is included in the width calculation */
 }
 
@@ -350,9 +350,9 @@ th {
         padding-right: .625rem; /* Add padding to prevent cutting off */
     }
     .centered-dropdown details {
+        width: 90%; /* Adjusted width to fit smaller screens */
         padding-left: .625rem; /* Add padding to prevent cutting off */
         padding-right: .625rem; /* Add padding to prevent cutting off */
-        margin: 0 2.5rem;
     }
     .index-dropdown {
         padding-left: .625rem;
@@ -360,7 +360,14 @@ th {
     }
 }
 
-
+@media (max-width: 768px) {
+    details, .centered-dropdown details {
+        width: calc(100% - 1.25rem) !important; /* Adjusted width to fit smaller screens with padding */
+        margin: 0 .625rem !important; /* Add margin to prevent spilling */
+        padding-left: .625rem; /* Add padding to prevent cutting off */
+        padding-right: .625rem; /* Add padding to prevent cutting off */
+    }
+}
 
 /* Style the dropdown container */
 .dropdown {
