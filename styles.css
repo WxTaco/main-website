@@ -165,7 +165,7 @@ body {
     font-weight: 500;
 }
 
-.navbar .nav-links a:hover {
+.nav-links a:hover {
     color: #ff4af3 !important; /* Hover effect */
 }
 
@@ -430,4 +430,23 @@ th {
     .dropdown:hover .dropdown-content {
         display: block; /* Ensure dropdown content is displayed */
     }
+}
+
+.nav-links-sub a:hover {
+    color: blue
+}
+
+.nav-links-sub a {
+    color: white;
+    text-decoration: none
+}
+
+.nav-links-sub a:visited {
+    color: white;
+}
+
+.module-showcase {
+    display: inline;
+    justify-content: center;
+    border: 2px solid pink;
 }
