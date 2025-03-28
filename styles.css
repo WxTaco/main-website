@@ -535,15 +535,19 @@ th {
 
 .example-desc {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    margin: 0 1rem;
+    margin-bottom: 1rem;
 }
 
 .ex-desc-font {
     font-size: 24px;
 }
+
+
 @media (max-width: 768px) {
     .icon-desc {
         flex-direction: column;
