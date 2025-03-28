@@ -119,7 +119,7 @@ body {
 /* Nav links alignment */
 .navbar .nav-links {
     display: flex;
-    gap: .9375rem; /* Adds spacing between links */
+    gap: 1rem;
     overflow-x: auto; /* Allow horizontal scrolling if needed */
     position: relative; /* For gradient fade positioning */
 }
@@ -487,4 +487,42 @@ th {
 
 .icon-desc p {
     font-size: 32px;
+}
+
+@media (max-width: 768px) {
+    .icon-desc {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .align {
+        justify-content: center;
+        align-items: center;
+    }
+    .showcase-img {
+        margin-right: 0px;
+    }
+    .module-description {
+        margin-top: -2rem;
+        padding: 0 1rem;
+    }
+    .nav-links-sub {
+        display: flex !important; /* Ensure flex is applied */
+        flex-direction: row !important; /* Ensure links are inline */
+        justify-content: center; /* Center links under the logo */
+        gap: .625rem; /* Reduce spacing between links */
+        flex-wrap: nowrap !important; /* Prevent wrapping */
+        width: 100%;
+        max-width: 100%; /* Ensure it doesn’t shrink too much */
+        overflow-x: auto; /* Allow horizontal scrolling if needed */
+        white-space: nowrap; /* Prevent text breaking */
+    }
+    .nav-links-sub img {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+    }
+    .active {
+        color: #ff4af3 !important;
+    }
 }
