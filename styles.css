@@ -459,6 +459,7 @@ th {
     max-height: 225px;
     object-fit: cover;
     justify-content: center;
+    margin-right: 35px;
 }
 
 .module-description {
@@ -480,5 +481,10 @@ th {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
+}
+
+.icon-desc p {
+    font-size: 32px;
 }
