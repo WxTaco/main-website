@@ -526,6 +526,24 @@ th {
     text-underline-offset: .3rem;
     text-decoration-thickness: .1rem !important;
 }
+
+.example-image {
+    object-fit: cover;
+    justify-content: center;
+    margin-right: 35px;
+}
+
+.example-desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.ex-desc-font {
+    font-size: 24px;
+}
 @media (max-width: 768px) {
     .icon-desc {
         flex-direction: column;
