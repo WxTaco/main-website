@@ -468,3 +468,17 @@ th {
     margin-top: 5rem;
     margin-bottom: 0.5rem;
 }
+
+.modules-header-border {
+    border: pink solid 2px;
+    border-radius: 5px;
+    margin: 3rem 3rem;
+    padding-bottom: 2rem;
+}
+
+.icon-desc {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+}
