@@ -32,6 +32,7 @@ body {
     left: 0;
     z-index: 1000;
     box-sizing: border-box;
+    font-family: "Saira", "Arial";
 }
 
 .nav-links a {
@@ -433,6 +434,11 @@ th {
     }
 }
 
+.nav-links-sub {
+    font-family: "Saira", "Arial";
+    display: flex;
+    gap: 1rem;
+}
 .nav-links-sub a:hover {
     color: blue
 }
@@ -472,7 +478,7 @@ th {
 
 .modules-header-border {
     border: pink solid 2px;
-    border-radius: 5px;
+    border-width: 5px;
     margin: 3rem 3rem;
     padding-bottom: 2rem;
 }
@@ -489,6 +495,37 @@ th {
     font-size: 32px;
 }
 
+.pink {
+    color: #ff4af3;
+}
+
+.yellow {
+    color: #ffc400;
+}
+
+.green {
+    color: green;
+}
+
+.home-desc {
+    margin: 0 2rem;
+}
+
+.blue {
+    color: lightseagreen;
+}
+
+.underline {
+    text-decoration: underline;
+    text-underline-offset: .2rem;
+}
+
+.active {
+    color: #ff4af3 !important;
+    text-decoration: underline !important;
+    text-underline-offset: .3rem;
+    text-decoration-thickness: .1rem !important;
+}
 @media (max-width: 768px) {
     .icon-desc {
         flex-direction: column;
@@ -503,8 +540,7 @@ th {
         margin-right: 0px;
     }
     .module-description {
-        margin-top: -2rem;
-        padding: 0 1rem;
+        display: none;
     }
     .nav-links-sub {
         display: flex !important; /* Ensure flex is applied */
@@ -524,5 +560,6 @@ th {
     }
     .active {
         color: #ff4af3 !important;
+        font-weight: bold !important;
     }
 }
