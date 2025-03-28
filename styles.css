@@ -580,4 +580,9 @@ th {
         color: #ff4af3 !important;
         font-weight: bold !important;
     }
+    .example-image {
+        width: 90%;
+        justify-content: center;
+        margin-right: 0px;
+    }
 }
