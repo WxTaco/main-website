@@ -1,0 +1,116 @@
+body {
+    background-color: black; /* Dark background for the main content */
+    color: white; /* Light text color for readability */
+}
+/* Fixed sidebar styles */
+.fixed-menu h2 {
+    font-family: 'Saira', sans-serif; /* Use the same font as the links */
+    font-weight: 600; /* Bold for headers */
+    padding: 10px 15px; /* Add padding for spacing */
+    margin: 0; /* Remove default margin */
+    background-color: black; /* Background color for header */
+    color: pink; /* Text color for header */
+    justify-content: center; /* Center the header text */
+    text-align: center; /* Center the header text */
+    border: 2px solid #786665; /* Border around the header */
+}
+.docs-menu-dropdown {
+    background-color:   black; /* Background color for dropdown */
+    border: 2px solid #786665; /* Border around the dropdown */
+    border-radius: 5px; /* Optional: Rounded corners for the dropdown */
+    justify-content: center; /* Center the dropdown content */
+    text-align: center; /* Align text to the left for readability */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.fixed-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 220px; /* Fixed width for the sidebar */
+    height: 100%; /* Full height of the viewport */
+    background-color: black;
+    color: white;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Ensure dropdown content does not affect sidebar width */
+/* Reset padding and margin for unordered lists in the sidebar */
+.fixed-menu ul {
+    list-style: none; /* Remove default bullet points */
+    padding: 0; /* Remove default padding */
+    margin: 0px 12px; /* Remove default margin */
+    margin-top: 12px;
+}
+
+/* Reset padding for list items */
+.fixed-menu ul li {
+    padding: 0; /* Remove any default padding */
+    margin: 0; /* Remove any default margin */
+}
+
+/* Remove the default arrow from the <details> element */
+.docs-menu-dropdown summary {
+    list-style: none; /* Removes the default arrow */
+    cursor: pointer; /* Ensures it looks clickable */
+    padding: 5px 0; /* Optional: Add padding for better spacing */
+}
+
+/* Optional: Add a custom arrow */
+.docs-menu-dropdown summary::after {
+    content: "▼"; /* Custom arrow */
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: transform 0.3s ease;
+}
+
+/* Rotate the arrow when <details> is open */
+.docs-menu-dropdown[open] summary::after {
+    transform: rotate(180deg);
+}
+
+/* Ensure proper alignment of nested lists */
+.docs-menu-dropdown ul li {
+    padding: 5px 0; /* Add spacing between dropdown items */
+}
+
+/* Sidebar links */
+.fixed-menu ul li a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Saira', sans-serif;
+    font-weight: 600;
+}
+
+.fixed-menu ul li a:hover {
+    text-decoration: underline;
+}
+
+.docs-menu {
+    border: 2px solid #786665;
+    height: 100%;
+}
+
+body {
+    background-color: black; /* Light background for the main content */
+    margin-left: 220px;
+}
+
+.background h1 {
+    justify-content: center;
+    color: white; /* Text color for the heading */
+    text-align: center; /* Center the heading text */
+    font-family: 'Saira', sans-serif; /* Use the same font as the links */
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.docs-menu-dropdown {
+    margin-bottom: 12px;
+}
