@@ -1,6 +1,9 @@
 body {
     background-color: black; /* Dark background for the main content */
     color: white; /* Light text color for readability */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content horizontally */
 }
 /* Fixed sidebar styles */
 .fixed-menu h2 {
@@ -113,4 +116,81 @@ body {
 
 .docs-menu-dropdown {
     margin-bottom: 12px;
+}
+
+.message-container {
+    display: flex;
+    align-items: flex-start; /* Align items to the top */
+    background-color: #2f3136;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    width: 640px;
+    box-sizing: border-box; /* Include padding in width calculations */
+}
+.pfp {
+    width: 60px;
+    height: 60px;
+}
+
+.pfp-u {
+    width: 60px; /* Smaller size for the user profile picture */
+    height: 60px; /* Smaller size for the user profile picture */
+}
+
+.pfp, .pfp-u {
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover;
+    align-self: flex-start;
+}
+.message-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.text {
+    background-color: #40444b;
+    padding: 8px;
+    border-radius: 5px;
+    margin-top: 3px;
+}
+input {
+    width: 400px;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #40444b;
+    color: white;
+}
+
+.setup-guide {
+    background-color: #40444b;
+    display: flex;
+    flex-direction: column; /* Stack message containers vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: flex-start; /* Align items to the top */
+    box-sizing: border-box; /* Include padding in width/height calculations */
+    padding: 20px; /* Add padding for spacing */
+    height: 100%; /* Ensure it takes up the full height of the parent */
+}
+
+/* Optional: Hide the scrollbar for a cleaner look */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Prevent the <a> element from breaking to a new line */
+.text a {
+    display: inline; /* Ensure the <a> element is inline */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    color: #7289da; /* Optional: Discord-like blue color */
+    text-decoration: underline; /* Optional: Add underline to indicate it's clickable */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.text {
+    white-space: normal; /* Allow wrapping for other text */
 }

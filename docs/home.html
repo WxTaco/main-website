@@ -49,5 +49,51 @@
         <p>Here you can find all the information you need about the Wrapped V2 Discord Bot.</p>
         <!-- Add content sections here -->
     </div>
+
+    <div class="message-container">
+        <img src="https://cdn.wrappedbot.com/03f92351-0b5d-4dca-b4b4-2841e91d60f8.svg" alt="PFP" class="pfp">
+        <div class="message-content">
+            <span class="username">Username</span>
+            <div class="text" id="message">Type a message below...</div>
+        </div>
+    </div>
+
+    <div class="message-container" id="reactionRolesMessage" style="display: none;">
+        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="PFP" class="pfp">
+        <div class="message-content">
+            <span class="username">Username</span>
+            <div class="text" id="message">Type a message below...</div>
+        </div>
+    </div>
+
+    <input type="text" id="inputBox" placeholder="Type a message..." oninput="checkInput()">
+
+    <script>
+         // Function to check the input and show/hide the second message container
+    function checkInput() {
+        const inputBox = document.getElementById("inputBox");
+        const reactionRolesMessage = document.getElementById("reactionRolesMessage");
+
+        // Show the second message container only if the input is "/reaction roles"
+        if (inputBox.value.trim() === "/reaction roles") {
+            reactionRolesMessage.style.display = "flex"; // Show the container
+            inputBox.placeholder = "Reaction roles setup started!"; // Update placeholder
+            inputBox.value = ""; // Clear the input box
+        }
+    }
+
+    // Function to copy a predefined text to the clipboard
+    function copyToClipboard() {
+        const predefinedText = "https://discord.com/channels/1352108406491709440/1352122059735433266/1354987656404275331"; // Set your predefined text here
+        navigator.clipboard.writeText(predefinedText).then(() => {
+            alert("Copied to clipboard: " + predefinedText); // Notify the user
+        }).catch(err => {
+            console.error("Failed to copy text: ", err);
+        });
+    }
+
+    // Initially hide the second message container
+    document.getElementById("reactionRolesMessage").style.display = "none";
+    </script>
 </body>
 </html>

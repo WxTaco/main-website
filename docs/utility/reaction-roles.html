@@ -16,6 +16,14 @@
         <title>Reaction Roles - Wrapped V2</title>
         <link href="https://fonts.googleapis.com/css2?family=Saira:wght@600&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="../styles.css">
+
+        <style>
+            .username {
+                color: pink;
+                font-family: 'Saira', 'Arial', 'sans-serif'; /* Use Saira font for username */
+                font-weight: bold; /* Make username bold */
+            }
+        </style>
     </head>
 
     <body>
@@ -43,5 +51,81 @@
                     </ul>
                 </div>
         </div>
+
+        <div class="background">
+            <h1>Wrapped V2 Documentation</h1>
+            <p>Here you can find all the information you need about the Wrapped V2 Discord Bot.</p>
+            <!-- Add content sections here -->
+             <div class="setup-guide">
+                <div class="message-container">
+                    <img src="https://cdn.wrappedbot.com/NEW%20Taco%20PFP" alt="PFP" class="pfp">
+                    <div class="message-content">
+                        <span class="username">Taco</span>
+                        <div class="text" id="message">Let's run through how to setup reaction roles for your server.<br><br>
+                        Start by typing `/reaction roles`</div>
+                    </div>
+                </div>
+            <!-- Second message container, initially hidden -->
+                <div class="message-container" id="reactionRolesMessage">
+                    <img src="https://cdn.discordapp.com/embed/avatars/2.png" alt="PFP" class="pfp-u">
+                    <div class="message-content">
+                        <span class="username">Discord User</span>
+                        <div class="text" id="message">
+                            /reaction roles
+                        </div>
+                    </div>
+                </div>
+        
+            <!-- Third message container, initially hidden-->
+            <div class="message-container" id="reactionRolesMessage2">
+                <img src="https://cdn.wrappedbot.com/NEW%20Taco%20PFP" alt="PFP" class="pfp">
+                <div class="message-content">
+                    <span class="username">Taco</span>
+                    <div class="text" id="message">Good job! However, you need to give it a message link and reaction.<br><br>
+                    To do that, right click a message in your discord (or hold click for mobile) and click copy message link.<br><br>
+                    For the reaction, you can use any default emojis for this example. In the command on Discord, you'll be able to use server emojis too!</div>
+                </div>
+            </div>
+        </div>
+        <input type="text" id="inputBox" placeholder="Type `/reaction roles` and click send" oninput="checkInput()">
+        <input type="text" id="inputBox2" placeholder="Type the message link here" style="display:none" onblur="validateMessageLink()">
+        <input type="text" id="inputBox3" placeholder="Type the reaction here" style="display:none">
+            <script>
+                // Function to check the input and show/hide the second message container
+                function checkInput() {
+                    const inputBox = document.getElementById("inputBox");
+                    const reactionRolesMessage = document.getElementById("reactionRolesMessage");
+                    const reactionRolesMessage2 = document.getElementById("reactionRolesMessage2");
+                    const inputBox2 = document.getElementById("inputBox2");
+                    const inputBox3 = document.getElementById("inputBox3");
+            
+                    // Show the second message container only if the input is "/reaction roles"
+                    if (inputBox.value.trim() === "/reaction roles") {
+                        reactionRolesMessage.style.display = "flex";
+                        reactionRolesMessage2.style.display = "flex";
+                        inputBox.style.display = "none";     
+                        inputBox2.style.display = "flex";
+                        inputBox3.style.display = "flex";
+                    }
+                }
+            
+                // Function to validate Discord message link
+                function validateMessageLink() {
+                    const inputBox2 = document.getElementById("inputBox2");
+                    const messageLink = inputBox2.value.trim();
+            
+                    // Regex to match valid Discord message links
+                    const discordMessageLinkRegex = /^https:\/\/discord\.com\/channels\/\d+\/\d+\/\d+$/;
+            
+                    if (discordMessageLinkRegex.test(messageLink)) {
+                    } else {
+                        alert("Invalid Discord message link. Please enter a valid link.");
+                    }
+                }
+            
+                // Initially hide the second and third message containers
+                document.getElementById("reactionRolesMessage").style.display = "none";
+                document.getElementById("reactionRolesMessage2").style.display = "none";
+            </script>
     </body>
 </html>
