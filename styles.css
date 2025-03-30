@@ -199,15 +199,21 @@ body {
         gap: .625rem; /* Reduce spacing between links */
         flex-wrap: nowrap !important; /* Prevent wrapping */
         width: 100%;
-        max-width: 100%; /* Ensure it doesn’t shrink too much */
+        max-width: 100%; /* Ensure it doesn't shrink too much */
         overflow-x: auto; /* Allow horizontal scrolling if needed */
         white-space: nowrap; /* Prevent text breaking */
+        padding-left: calc(50% - 2rem); /* Add padding to center first item */
+        padding-right: calc(50% - 2rem); /* Balance the padding */
     }
 
     .nav-links a {
         display: inline-block; /* Ensures inline behavior */
         font-size: .875rem; /* Reduce font size for better fit */
         padding: .3125rem .5rem; /* Adjust padding */
+    }
+
+    .nav-links a:first-child {
+        margin-left: auto; /* Push first item to center */
     }
 }
 
