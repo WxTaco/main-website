@@ -180,6 +180,7 @@ input {
 .setup-guide {
     background-color: #40444b;
     display: flex;
+    width: 100%;
     flex-direction: column; /* Stack message containers vertically */
     align-items: center; /* Center horizontally */
     justify-content: flex-start; /* Align items to the top */
@@ -288,4 +289,12 @@ input {
     transition: opacity 0.3s ease; /* Smooth fade-in effect */
 }
 
+@media (max-width: 768px) {
+    .fixed-menu {
+        display: none; /* Hide the fixed menu on smaller screens */
+    }
 
+    body {
+        margin-left: 0; /* Remove left margin on smaller screens */
+    }
+}
