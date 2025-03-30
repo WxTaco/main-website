@@ -298,3 +298,16 @@ input {
         margin-left: 0; /* Remove left margin on smaller screens */
     }
 }
+
+.submitButton {
+    border: 2px solid pink;
+    background-color: transparent;
+    color: white;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.submitButton:hover {
+    background-color: pink;
+    cursor: pointer;;
+}
