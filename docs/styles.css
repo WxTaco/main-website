@@ -178,7 +178,7 @@ input {
 }
 
 .setup-guide {
-    background-color: #40444b;
+    background-color: black;
     display: flex;
     width: 100%;
     flex-direction: column; /* Stack message containers vertically */
