@@ -5,6 +5,11 @@ body {
     flex-direction: column;
     align-items: center; /* Center the content horizontally */
 }
+
+.page-desc {
+    justify-content: center;
+    text-align: center;
+}
 /* Fixed sidebar styles */
 .fixed-menu h2 {
     font-family: 'Saira', sans-serif; /* Use the same font as the links */
@@ -237,6 +242,50 @@ input {
     color: #b9bbbe; /* Discord footer text color */
     margin-top: 10px;
     text-align: left;
+}
+
+/* Button styling */
+.button {
+    background-color: rgba(114, 137, 218, 0.8); /* Slightly blue background */
+    color: white; /* White text color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 0px 0px;
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    position: relative; /* Position relative for tooltip positioning */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+/* Hover effect for the button */
+.button:hover {
+    background-color: #5b6eae; /* Darker blue on hover */
+}
+
+/* Tooltip styling */
+.button:hover::after {
+    content: attr(data-link); /* Display the message link stored in the data-link attribute */
+    position: absolute; /* Position relative to the button */
+    bottom: 120%; /* Position above the button */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    background-color: #2f3136; /* Dark background for the tooltip */
+    color: white; /* White text color */
+    padding: 5px 10px; /* Padding for the tooltip */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 14px; /* Smaller font size for the tooltip */
+    white-space: nowrap; /* Prevent text wrapping */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional: Add shadow for depth */
+    z-index: 10; /* Ensure it appears above other elements */
+    opacity: 1; /* Make the tooltip visible */
+    pointer-events: none; /* Prevent the tooltip from interfering with hover */
+}
+
+/* Tooltip hidden by default */
+.button::after {
+    content: "";
+    opacity: 0; /* Hide the tooltip */
+    transition: opacity 0.3s ease; /* Smooth fade-in effect */
 }
 
 

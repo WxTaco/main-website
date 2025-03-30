@@ -53,8 +53,8 @@
         </div>
 
         <div class="background">
-            <h1>Wrapped V2 Documentation</h1>
-            <p>Here you can find all the information you need about the Wrapped V2 Discord Bot.</p>
+            <h1>Experimental Interactive Documentation</h1>
+            <p class="page-desc">Need help? Let the owner of Wrapped walk you through the setup process!</p>
             <!-- Add content sections here -->
             <div class="setup-guide">
                 <div class="message-container">
@@ -85,7 +85,9 @@
                         <div class="text" id="message">
                             Good job! However, you need to give it a message link and reaction.<br><br>
                             To do that, right click a message in your discord (or hold click for mobile) and click copy message link.<br><br>
-                            For the reaction, you can use any default emojis for this example. In the command on Discord, you'll be able to use server emojis too!
+                            For the reaction, you can use any default emojis for this example. In the command on Discord, you'll be able to use server emojis too!<br><br>
+                            If you don't want to get on Discord to get a message link, just use this one:<br><br>
+                            <code>https://discord.com/channels/123456789012345678/987654321098765432/123456789012345678</code>
                         </div>
                     </div>
                 </div>
@@ -111,13 +113,24 @@
                                 </div>
                                 <div class="embed-content">
                                     <p>You are setting up a new reaction role. Here are the settings:<br><br>
-                                    Message link: $link <br>
+                                    Message link: <span class="button" id="hoverSpan">Message Link</span> <br>
                                     Reaction: $reaction
                                 </div>
                                 <div class="embed-footer">
                                     <span>Wrapped V2 Bot</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Sixth message container, initially hidden -->
+                <div class="message-container" id="reactionRolesMessage5">
+                    <img src="https://cdn.wrappedbot.com/NEW%20Taco%20PFP" alt="PFP" class="pfp">
+                    <div class="message-content">
+                        <span class="username">Taco</span>
+                        <div class="text" id="message">
+                            Congratulations! You've successfully set up reaction roles for your server!<br>
+                            You'll also be given a select menu to choose which role should be given, but I'll leave you to see that once you use the command in Discord. Have fun!
                         </div>
                     </div>
                 </div>
@@ -154,13 +167,14 @@
                     const inputBox3 = document.getElementById("inputBox3");
                     const reactionRolesMessage3 = document.getElementById("reactionRolesMessage3");
                     const reactionRolesMessage4 = document.getElementById("reactionRolesMessage4");
-            
+                    const reactionRolesMessage5 = document.getElementById("reactionRolesMessage5"); // Last message container
+
                     const messageLink = inputBox2.value.trim();
                     const reaction = inputBox3.value.trim();
-            
+
                     // Regex to match valid Discord message links
                     const discordMessageLinkRegex = /^https:\/\/discord\.com\/channels\/\d+\/\d+\/\d+$/;
-            
+
                     // Validate both inputs
                     if (discordMessageLinkRegex.test(messageLink) && reaction) {
                         // Replace placeholders in message 3
@@ -168,12 +182,27 @@
                         message3Text.innerHTML = `/reaction roles message-link: ${messageLink} reaction: ${reaction}`;
 
                         // Replace placeholders in message 4
-                        const message4Text = reactionRolesMessage4.querySelector("#message");
-                        message4Text.innerHTML = `You are setting up a new reaction role. Here are the settings: <br><br> Message link: ${messageLink} <br>Reaction: ${reaction}`;
-            
+                        const message4Content = reactionRolesMessage4.querySelector(".embed-content");
+                        message4Content.innerHTML = `
+                            <p>You are setting up a new reaction role. Here are the settings:<br><br>
+                            Message link: <span class="button" id="hoverSpan">Message Link</span> <br>
+                            Reaction: ${reaction}</p>
+                        `;
+
+                        // Dynamically update the hover content for the span element
+                        const hoverSpan = document.getElementById("hoverSpan");
+                        hoverSpan.setAttribute("data-link", messageLink);
+
                         // Show messages 3 and 4
                         reactionRolesMessage3.style.display = "flex";
                         reactionRolesMessage4.style.display = "flex";
+                        reactionRolesMessage5.style.display = "flex";
+                        submitButton.style.display = "none";
+                        inputBox2.style.display = "none"; // Hide the message link input box
+                        inputBox3.style.display = "none"; // Hide the reaction input box
+
+                        // Show the last message (Message 2) only after Messages 3 and 4 are shown
+                        reactionRolesMessage2.style.display = "flex";
                     } else {
                         alert("Invalid Discord message link or reaction. Please enter valid inputs.");
                     }
@@ -184,6 +213,7 @@
                 document.getElementById("reactionRolesMessage2").style.display = "none";
                 document.getElementById("reactionRolesMessage3").style.display = "none";
                 document.getElementById("reactionRolesMessage4").style.display = "none";
+                document.getElementById("reactionRolesMessage5").style.display = "none";
             </script>
     </body>
 </html>
