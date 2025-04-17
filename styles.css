@@ -591,5 +591,5 @@ th {
     }
 }
 a:hover {
-    color: #ff4af3
+    color: #ff4af3 !important
 }
