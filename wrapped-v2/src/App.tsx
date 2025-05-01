@@ -19,6 +19,7 @@ import RolesOverview from './pages/RolesOverview';
 import ServerOverview from './pages/ServerOverview';
 import ChannelsOverview from './pages/ChannelsOverview';
 import UsersOverview from './pages/UsersOverview';
+import About from './pages/About';
 import NotFound from './pages/NotFound';
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+      {
+        path: 'about',
+        element: <About />,
       },
       {
         path: 'terms',

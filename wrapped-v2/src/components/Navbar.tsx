@@ -24,7 +24,7 @@ const Navbar = () => {
             <img
               src="https://cdn.wrappedbot.com/Wrapped%20Mascot%20Icon"
               alt="Wrapped mascot"
-              className="w-10 h-10 transition-transform duration-300 group-hover:scale-110"
+              className="w-10 h-10 rounded-full transition-transform duration-300 group-hover:scale-110"
             />
             <span className="text-xl font-saira transition-colors duration-300 group-hover:text-wrapped-pink">Wrapped V2</span>
           </Link>

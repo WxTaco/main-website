@@ -13,13 +13,13 @@ const roleCommands = [
 const RolesOverview = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
-      <div className="max-w-3xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
-        <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-6 text-center drop-shadow">Role Commands</h1>
-        <p className="text-lg text-gray-100 mb-8 text-center">Manage and view roles with these powerful commands.</p>
-        <ul className="space-y-3 mb-6 animate-fade-in">
+      <div className="max-w-2xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
+        <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-4 text-center drop-shadow">Role Commands Overview</h1>
+        <p className="text-lg text-white mb-6 text-center">Manage and view roles with these powerful commands.</p>
+        <ul className="space-y-3 mb-6 text-pink-200">
           {roleCommands.map((cmd, i) => (
-            <li key={cmd.name} className="text-gray-200 font-medium transition-opacity duration-500" style={{ animationDelay: `${i * 60}ms` }}>
-              <span className="font-bold">{cmd.name}</span> — {cmd.description}
+            <li key={cmd.name} className="font-medium transition-opacity duration-500" style={{ animationDelay: `${i * 60}ms` }}>
+              <span className="font-bold text-white">{cmd.name}</span> — {cmd.description}
             </li>
           ))}
         </ul>

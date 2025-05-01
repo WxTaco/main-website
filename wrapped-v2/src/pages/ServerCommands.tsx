@@ -5,11 +5,11 @@ const ServerCommands = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
       <div className="max-w-2xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
         <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-4 text-center drop-shadow">Server Commands</h1>
-        <p className="text-lg text-gray-100 mb-6 text-center">
+        <p className="text-lg text-white mb-6 text-center">
           Get all the info you need about your server! View general info, owner details, boosters, invites, roles, and even the server splash image.
         </p>
         <h2 className="text-2xl font-bold text-wrapped-pink mb-2">Available Commands</h2>
-        <ul className="list-disc ml-6 mb-6 text-gray-200">
+        <ul className="list-disc ml-6 mb-6 text-pink-200">
           <li><span className="font-bold">/server info</span> — View general server information.</li>
           <li><span className="font-bold">/server owner</span> — See info about the server owner.</li>
           <li><span className="font-bold">/server boosters</span> — List all server boosters.</li>
