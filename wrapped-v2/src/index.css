@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;600&display=swap');
 
 @layer base {
   html {
     font-family: 'Saira', sans-serif;
   }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-fade-in {
+  animation: fade-in 0.7s both;
 } 

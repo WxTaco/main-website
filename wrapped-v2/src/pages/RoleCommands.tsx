@@ -19,9 +19,9 @@ const RoleCommands = () => {
           Manage and view roles with ease! The <span className="font-bold">/role</span> command lets you perform a variety of actions on server roles.
         </p>
         <h2 className="text-2xl font-bold text-wrapped-pink mb-2">Subcommands</h2>
-        <ul className="space-y-3 mb-6">
-          {roleCommands.map(cmd => (
-            <li key={cmd.name} className="text-gray-200 font-medium">
+        <ul className="space-y-3 mb-6 animate-fade-in">
+          {roleCommands.map((cmd, i) => (
+            <li key={cmd.name} className="text-gray-200 font-medium transition-opacity duration-500" style={{ animationDelay: `${i * 60}ms` }}>
               <span className="font-bold">{cmd.name}</span> — {cmd.description}
             </li>
           ))}
