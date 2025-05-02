@@ -19,6 +19,9 @@ import RolesOverview from './pages/RolesOverview';
 import ServerOverview from './pages/ServerOverview';
 import ChannelsOverview from './pages/ChannelsOverview';
 import UsersOverview from './pages/UsersOverview';
+import FunOverview from './pages/FunOverview';
+import FunCommands from './pages/FunCommands';
+import TicketsOverview from './pages/TicketsOverview';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
 
@@ -62,6 +65,14 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: <UsersOverview />,
+      },
+      {
+        path: 'fun',
+        element: <FunOverview />,
+      },
+      {
+        path: 'tickets',
+        element: <TicketsOverview />,
       },
       {
         path: 'utility/tickets',
@@ -108,6 +119,10 @@ const router = createBrowserRouter([
         element: <UserCommands />,
       },
       {
+        path: 'fun/commands',
+        element: <FunCommands />,
+      },
+      {
         path: '*',
         element: <NotFound />,
       },
@@ -119,4 +134,4 @@ function App() {
   return <RouterProvider router={router} />;
 }
 
-export default App; 
+export default App;
