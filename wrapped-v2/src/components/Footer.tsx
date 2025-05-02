@@ -16,7 +16,7 @@ const Footer = () => {
     {
       title: "Resources",
       links: [
-        { name: "Invite Bot", path: "#", external: true },
+        { name: "Invite Bot", path: "https://discord.com/oauth2/authorize?client_id=1308803843446014052", external: true },
         { name: "Support Server", path: "https://discord.gg/M5uYGRudBv", external: true },
         { name: "Command List", path: "/" },
         { name: "About", path: "/about" },
