@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom';
 
+// Define TypeScript interfaces
+interface Feature {
+  name: string;
+  link?: string;
+  description?: string;
+}
+
+interface Module {
+  title: string;
+  features: Feature[];
+}
+
+interface Category {
+  title: string;
+  modules: Module[];
+}
+
 const Home = () => {
-  const categories = [
+  const categories: Category[] = [
     {
       title: "Server Management",
       modules: [
