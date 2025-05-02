@@ -76,14 +76,7 @@ const Home = () => {
             { name: '/ticket config list', link: '/tickets#config-list' },
           ],
         },
-        {
-          title: 'Reaction Roles',
-          features: [
-            { name: '/reaction-role add', link: '/utility/reaction-roles' },
-            { name: '/reaction-role remove', link: '/utility/reaction-roles' },
-            { name: '/reaction-role list', link: '/utility/reaction-roles' },
-          ],
-        },
+
         {
           title: 'Welcomer',
           features: [

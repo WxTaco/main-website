@@ -18,16 +18,6 @@ const Utility = () => {
           </div>
 
           <div className="bg-gray-900/50 p-4 rounded-lg border border-white/20">
-            <Link to="/utility/reaction-roles" className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-wrapped-pink font-bold py-1 px-3 rounded-md border border-wrapped-pink/50 transition-all duration-200 mb-2">
-              <span className="mr-1">Reaction Roles</span>
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-            <p className="text-pink-200">Let users assign themselves roles with emoji reactions.</p>
-          </div>
-
-          <div className="bg-gray-900/50 p-4 rounded-lg border border-white/20">
             <Link to="/utility/welcomer" className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-wrapped-pink font-bold py-1 px-3 rounded-md border border-wrapped-pink/50 transition-all duration-200 mb-2">
               <span className="mr-1">Welcomer</span>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
