@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Saira:wght@400;600&display=swap');
+@import './styles/theme.css';
 
 @tailwind base;
 @tailwind components;
@@ -16,4 +17,4 @@
 }
 .animate-fade-in {
   animation: fade-in 0.7s both;
-} 
+}

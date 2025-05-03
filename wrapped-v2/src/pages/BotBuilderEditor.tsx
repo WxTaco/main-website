@@ -449,17 +449,17 @@ const BotBuilderEditor = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-6 px-4">
-      <div className="max-w-7xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-4 border border-white/30 flex flex-col h-[calc(100vh-6rem)]">
+    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-6 px-4">
+      <div className="max-w-7xl w-full themed-container p-4 flex flex-col h-[calc(100vh-6rem)]">
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-saira font-extrabold text-wrapped-pink">Discord Bot Builder</h1>
+          <h1 className="text-2xl font-bold text-theme-primary">Discord Bot Builder</h1>
 
           <div className="flex space-x-2">
             <button
               onClick={() => setActiveTab('editor')}
               className={`px-4 py-2 rounded-md transition-colors ${
                 activeTab === 'editor'
-                  ? 'bg-wrapped-pink text-white'
+                  ? 'bg-theme-primary text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -470,7 +470,7 @@ const BotBuilderEditor = () => {
               onClick={() => setActiveTab('preview')}
               className={`px-4 py-2 rounded-md transition-colors ${
                 activeTab === 'preview'
-                  ? 'bg-wrapped-pink text-white'
+                  ? 'bg-theme-primary text-white'
                   : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
               }`}
             >
@@ -479,14 +479,14 @@ const BotBuilderEditor = () => {
 
             <button
               onClick={handleGenerateFiles}
-              className="px-4 py-2 bg-wrapped-green text-gray-900 rounded-md hover:bg-green-400 transition-colors"
+              className="px-4 py-2 bg-theme-success text-white rounded-md hover:bg-theme-success/80 transition-colors"
             >
               Generate Files
             </button>
 
             <button
               onClick={handleDownloadFiles}
-              className="px-4 py-2 bg-wrapped-blue text-gray-900 rounded-md hover:bg-blue-400 transition-colors"
+              className="px-4 py-2 bg-theme-accent text-white rounded-md hover:bg-theme-accent/80 transition-colors"
             >
               Download
             </button>
@@ -504,19 +504,19 @@ const BotBuilderEditor = () => {
           <div className="flex flex-1 h-full">
             {/* Left sidebar - Block palette */}
             <div className="w-64 bg-gray-900/70 rounded-lg p-4 mr-4 overflow-y-auto">
-              <h2 className="text-lg font-bold text-wrapped-pink mb-3">Blocks</h2>
+              <h2 className="text-lg font-bold text-theme-primary mb-3">Blocks</h2>
 
               <div className="space-y-2">
                 <div className="text-white font-semibold mb-1">Commands</div>
                 <button
                   onClick={() => addNode('command')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-pink-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-primary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Slash Command
                 </button>
                 <button
                   onClick={() => addNode('messageCommand')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-pink-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-primary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Message Command
                 </button>
@@ -524,19 +524,19 @@ const BotBuilderEditor = () => {
                 <div className="text-white font-semibold mb-1 mt-4">Events</div>
                 <button
                   onClick={() => addNode('readyEvent')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-pink-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-primary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Ready Event
                 </button>
                 <button
                   onClick={() => addNode('messageEvent')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-pink-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-primary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Message Event
                 </button>
                 <button
                   onClick={() => addNode('interactionEvent')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-pink-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-primary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Interaction Event
                 </button>
@@ -544,13 +544,13 @@ const BotBuilderEditor = () => {
                 <div className="text-white font-semibold mb-1 mt-4">Responses</div>
                 <button
                   onClick={() => addNode('message')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-blue-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-accent py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Message Response
                 </button>
                 <button
                   onClick={() => addNode('embed')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-blue-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-accent py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Embed Builder
                 </button>
@@ -558,7 +558,7 @@ const BotBuilderEditor = () => {
                 <div className="text-white font-semibold mb-1 mt-4">Logic</div>
                 <button
                   onClick={() => addNode('condition')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-purple-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-secondary py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Condition
                 </button>
@@ -566,13 +566,13 @@ const BotBuilderEditor = () => {
                 <div className="text-white font-semibold mb-1 mt-4">Data</div>
                 <button
                   onClick={() => addNode('database')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-green-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-theme-success py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> Database
                 </button>
                 <button
                   onClick={() => addNode('api')}
-                  className="w-full bg-gray-800 hover:bg-gray-700 text-yellow-200 py-2 px-3 rounded-md transition-colors flex items-center"
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-yellow-300 py-2 px-3 rounded-md transition-colors flex items-center"
                 >
                   <span className="mr-2">+</span> API Request
                 </button>
@@ -600,7 +600,7 @@ const BotBuilderEditor = () => {
 
             {/* Right sidebar - Properties panel */}
             <div className="w-72 bg-gray-900/70 rounded-lg p-4 ml-4 overflow-y-auto">
-              <h2 className="text-lg font-bold text-wrapped-pink mb-3">Properties</h2>
+              <h2 className="text-lg font-bold text-theme-primary mb-3">Properties</h2>
 
               {selectedNode ? (
                 <div className="space-y-4">

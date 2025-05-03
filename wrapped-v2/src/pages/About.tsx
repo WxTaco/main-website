@@ -263,7 +263,7 @@ const DiscordMessage = ({ message, avatar, username }: MessageProps) => {
                 onClick={() => handleReactionClick(idx)}
                 className={`${
                   userReactions.includes(idx)
-                    ? 'bg-gray-700 border border-wrapped-pink'
+                    ? 'bg-gray-700 border border-theme-primary'
                     : 'bg-gray-800 hover:bg-gray-700'
                 } rounded-md px-2 py-1 flex items-center text-sm transition-all ${
                   recentlyClicked === idx ? 'transform scale-125' : ''
@@ -331,9 +331,9 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
-      <div className="max-w-3xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
-        <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-6 text-center drop-shadow">About Us</h1>
+    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-12 px-4">
+      <div className="max-w-3xl w-full themed-container">
+        <h1 className="themed-title mb-6">About Us</h1>
         <p className="text-lg text-white mb-8 text-center">
           Wrapped V2 is a passion project dedicated to providing a free, feature-rich, and user-friendly Discord bot for everyone. Our team is committed to transparency, creativity, and putting the community first.
         </p>
@@ -373,7 +373,7 @@ const About = () => {
                       <h2 className="text-xl font-bold text-white">{member.name}</h2>
                       <span className="text-gray-400 ml-1">{member.tag}</span>
                     </div>
-                    <h3 className="text-wrapped-pink font-semibold">{member.role}</h3>
+                    <h3 className="text-theme-primary font-semibold">{member.role}</h3>
                     {member.statusMessage && (
                       <div className="text-gray-300 text-sm mt-1">
                         <span className="inline-block w-2 h-2 rounded-full mr-1" style={{
@@ -442,7 +442,7 @@ const About = () => {
                   {(expandedMember === member.id || isClosing === member.id) && (
                     <>
                       <h4 className="text-white font-medium mb-3 flex items-center">
-                        <svg className="w-5 h-5 mr-2 text-wrapped-pink" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                         </svg>
                         Messages

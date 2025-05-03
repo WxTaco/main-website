@@ -127,10 +127,10 @@ const Home = () => {
   ];
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
+    <div className="min-h-screen w-full bg-gradient-to-br from-theme-gradient-start via-theme-gradient-middle to-theme-gradient-end flex flex-col items-center justify-start py-12 px-4 transition-colors duration-300">
       {/* Main Heading */}
-      <div className="w-full max-w-3xl bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30 mb-8">
-        <h1 className="text-6xl md:text-7xl font-extrabold font-saira text-wrapped-pink drop-shadow-lg mb-4 text-center">
+      <div className="w-full max-w-3xl bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-8 border border-theme-border/30 mb-8 dark:bg-black/80 dark:border-white/20">
+        <h1 className="text-6xl md:text-7xl font-extrabold font-saira text-theme-primary drop-shadow-lg mb-4 text-center">
           Wrapped V2
         </h1>
         <section className="text-center">
@@ -141,8 +141,8 @@ const Home = () => {
             a bot that has the best user experience possible, and we accomplish that by putting{' '}
             <span className="text-wrapped-green font-bold">you</span>, the user, first!
           </p>
-          <div className="bg-gray-900/80 rounded-lg p-4 mt-6 border border-wrapped-pink">
-            <p className="text-lg text-wrapped-pink font-bold text-center">
+          <div className="bg-gray-900/90 rounded-lg p-4 mt-6 border border-theme-primary/30 dark:bg-black/60">
+            <p className="text-lg text-theme-primary font-bold text-center">
               <span className="text-white">We have</span> <span className="underline">no current plans to lock any features behind a paywall</span> <span className="text-white">on Wrapped V2. All features are free for everyone!</span>
             </p>
           </div>
@@ -153,8 +153,8 @@ const Home = () => {
       <section className="w-full max-w-7xl">
         {categories.map((category, categoryIndex) => (
           <div key={category.title} className="mb-10">
-            <div className="bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-6 border border-white/20">
-              <h2 className="text-2xl font-saira text-wrapped-pink mb-6 font-semibold drop-shadow">
+            <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20">
+              <h2 className="text-2xl font-saira text-theme-primary mb-6 font-semibold drop-shadow">
                 {category.title}
               </h2>
 
@@ -162,7 +162,7 @@ const Home = () => {
                 {category.modules.map((module) => (
                   <div
                     key={module.title}
-                    className="bg-gray-900/80 rounded-lg shadow p-4 border border-white/30 min-h-[180px] flex flex-col"
+                    className="bg-gray-900/90 rounded-lg shadow p-4 border border-theme-border/30 min-h-[180px] flex flex-col dark:bg-black/70 dark:border-white/20"
                   >
                     <h3 className="text-lg font-saira mb-2 text-gray-100 font-bold">{module.title}</h3>
                     <div className="space-y-2 flex-grow">
@@ -172,7 +172,7 @@ const Home = () => {
                             <div className="mb-1.5">
                               <Link
                                 to={feature.link}
-                                className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-wrapped-pink font-bold py-0.5 px-2 text-sm rounded-md border border-wrapped-pink/30 transition-all duration-200"
+                                className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-theme-primary font-bold py-0.5 px-2 text-sm rounded-md border border-theme-primary/30 transition-all duration-200 dark:bg-black/60 dark:hover:bg-gray-900"
                               >
                                 <span>{feature.name}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -182,7 +182,7 @@ const Home = () => {
                             </div>
                           ) : feature.description ? (
                             <div className="text-gray-200 font-medium">
-                              <span className="font-bold text-wrapped-pink">{feature.name}</span> — {feature.description}
+                              <span className="font-bold text-theme-primary">{feature.name}</span> — {feature.description}
                             </div>
                           ) : (
                             <div className="text-gray-200 font-medium">{feature.name}</div>

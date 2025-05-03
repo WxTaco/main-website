@@ -52,22 +52,22 @@ const moderationCommands = [
 
 const Moderation = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
-      <div className="max-w-2xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
-        <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-4 text-center drop-shadow">Moderation Tools</h1>
+    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-12 px-4">
+      <div className="max-w-2xl w-full themed-container">
+        <h1 className="themed-title">Moderation Tools</h1>
         <p className="text-lg text-white mb-6 text-center">
           Keep your server safe and friendly with our suite of moderation commands. Manage users and enforce rules with ease.
         </p>
 
-        <h2 className="text-2xl font-bold text-wrapped-pink mb-4">Available Commands</h2>
+        <h2 className="themed-subtitle">Available Commands</h2>
         <div className="space-y-4 mb-6">
           {moderationCommands.map((cmd) => (
-            <div key={cmd.name} id={cmd.name.replace('/', '')} className={`${cmd.details ? 'bg-gray-900/50 p-4 rounded-lg border border-white/10' : ''}`}>
-              <h3 className="text-lg font-bold text-wrapped-pink mb-1">{cmd.name}</h3>
-              <p className="text-pink-200 mb-1">{cmd.description}</p>
+            <div key={cmd.name} id={cmd.name.replace('/', '')} className={`${cmd.details ? 'themed-card' : ''}`}>
+              <h3 className="text-lg font-bold text-theme-primary mb-1">{cmd.name}</h3>
+              <p className="themed-text mb-1">{cmd.description}</p>
 
               {cmd.permission && (
-                <p className="text-pink-200 mb-1">
+                <p className="themed-text mb-1">
                   <span className="text-white font-semibold">Required Permission:</span> {cmd.permission}
                 </p>
               )}
@@ -75,7 +75,7 @@ const Moderation = () => {
               {cmd.options && cmd.options.length > 0 && (
                 <>
                   <h4 className="text-white font-medium mt-2 mb-1">Options:</h4>
-                  <ul className="list-disc ml-6 mb-2 text-pink-200">
+                  <ul className="list-disc ml-6 mb-2 themed-text">
                     {cmd.options.map(opt => (
                       <li key={opt.name}>
                         <span className="font-semibold">{opt.name}</span> — {opt.description}
@@ -89,19 +89,19 @@ const Moderation = () => {
               {cmd.details && (
                 <>
                   <h4 className="text-white font-medium mt-2 mb-1">Details:</h4>
-                  <p className="text-pink-200 ml-2">{cmd.details}</p>
+                  <p className="themed-text ml-2">{cmd.details}</p>
                 </>
               )}
 
               {cmd.example && (
-                <p className="text-pink-200 italic mt-2 text-sm">{cmd.example}</p>
+                <p className="themed-text italic mt-2 text-sm">{cmd.example}</p>
               )}
             </div>
           ))}
         </div>
 
         <div className="text-center mt-8">
-          <Link to="/" className="inline-flex items-center bg-gray-800 hover:bg-gray-700 text-wrapped-pink font-bold py-2 px-4 rounded-md border border-wrapped-pink/50 transition-all duration-200">
+          <Link to="/" className="themed-button-lg">
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
