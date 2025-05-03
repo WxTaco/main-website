@@ -1,25 +1,25 @@
-import { Node, Edge } from 'reactflow';
+import { Node, Edge as ReactFlowEdge } from 'reactflow';
 
 interface GeneratedFiles {
   [key: string]: string;
 }
 
 // Function to generate bot files based on the flow
-export const generateBotFiles = (nodes: Node[], edges: Edge[]): GeneratedFiles => {
+export const generateBotFiles = (nodes: Node[], edges: ReactFlowEdge[]): GeneratedFiles => {
   // This is a simplified implementation - in a real app, we would analyze the nodes and edges
   // to generate the appropriate files based on their connections and properties
-  
+
   const indexJs = `const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 const { token } = require('./config.js');
 
-const client = new Client({ 
+const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent
-  ] 
+  ]
 });
 
 client.commands = new Collection();
@@ -31,7 +31,7 @@ const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
-  
+
   if ('data' in command && 'execute' in command) {
     client.commands.set(command.data.name, command);
   } else {
@@ -46,7 +46,7 @@ const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'
 for (const file of eventFiles) {
   const filePath = path.join(eventsPath, file);
   const event = require(filePath);
-  
+
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
@@ -111,7 +111,7 @@ npm start
   // Generate command files based on command nodes
   const commandFiles: GeneratedFiles = {};
   const eventFiles: GeneratedFiles = {};
-  
+
   // Add a default ping command
   commandFiles['commands/ping.js'] = `const { SlashCommandBuilder } = require('discord.js');
 
@@ -119,7 +119,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('ping')
     .setDescription('Replies with Pong!'),
-    
+
   async execute(interaction) {
     await interaction.reply('Pong!');
   },
@@ -169,13 +169,13 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('${commandName}')
     .setDescription('${node.data?.description || 'A custom command'}'),
-    
+
   async execute(interaction) {
     await interaction.reply('This is the ${node.data?.label || 'custom'} command!');
   },
 };`;
     }
-    
+
     if (node.type === 'messageCommand') {
       const commandName = node.data?.label?.toLowerCase().replace(/\s+/g, '-') || 'message-command';
       commandFiles[`commands/${commandName}.js`] = `const { SlashCommandBuilder } = require('discord.js');
@@ -184,13 +184,13 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName('${commandName}')
     .setDescription('${node.data?.description || 'A message command'}'),
-    
+
   async execute(interaction) {
     await interaction.reply('This is the ${node.data?.label || 'message'} command!');
   },
 };`;
     }
-    
+
     if (node.type?.includes('Event')) {
       const eventName = node.data?.label?.toLowerCase().replace(/\s+/g, '-') || 'custom-event';
       eventFiles[`events/${eventName}.js`] = `module.exports = {
