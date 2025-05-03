@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import type { ColorScheme, ThemeCategory, ThemeSettings, ThemeContextType } from '../types/theme';
+import type { ColorScheme, ThemeSettings, ThemeContextType } from '../types/theme';
 
 // Create context with default values
 const ThemeContext = createContext<ThemeContextType>({
   theme: {
     colorScheme: 'pink',
-    darkMode: false,
   },
   setColorScheme: () => {},
-  toggleDarkMode: () => {},
   setTheme: () => {},
 });
 
@@ -23,7 +21,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       try {
-        return JSON.parse(savedTheme);
+        const parsedTheme = JSON.parse(savedTheme);
+        return { colorScheme: parsedTheme.colorScheme };
       } catch (e) {
         console.error('Failed to parse saved theme', e);
       }
@@ -32,7 +31,6 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     // Default theme
     return {
       colorScheme: 'pink',
-      darkMode: window.matchMedia('(prefers-color-scheme: dark)').matches,
     };
   });
 
@@ -41,12 +39,8 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     // Save theme to localStorage
     localStorage.setItem('theme', JSON.stringify(theme));
     
-    // Apply dark mode
-    if (theme.darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
+    // Always apply dark mode
+    document.documentElement.classList.add('dark');
     
     // Apply color scheme
     document.documentElement.setAttribute('data-color-scheme', theme.colorScheme);
@@ -56,22 +50,19 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     setThemeState(prev => ({ ...prev, colorScheme }));
   };
 
-  const toggleDarkMode = () => {
-    setThemeState(prev => ({ ...prev, darkMode: !prev.darkMode }));
-  };
-
   const setTheme = (settings: ThemeSettings) => {
     setThemeState(settings);
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, setColorScheme, toggleDarkMode, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setColorScheme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );
 };
 
 export const useTheme = () => useContext(ThemeContext);
+
 
 
 

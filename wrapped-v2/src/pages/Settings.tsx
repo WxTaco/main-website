@@ -4,7 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import type { ColorScheme, ThemeCategory } from '../types/theme';
 
 const Settings: React.FC = () => {
-  const { theme, setColorScheme, toggleDarkMode } = useTheme();
+  const { theme, setColorScheme } = useTheme();
   const [activeCategory, setActiveCategory] = useState<ThemeCategory>('primary');
 
   // Theme information
@@ -202,26 +202,6 @@ const Settings: React.FC = () => {
               ))}
             </div>
           </div>
-
-          {/* Dark Mode Toggle */}
-          <div className="bg-theme-card dark:bg-dark-card rounded-lg shadow-md p-6">
-            <h2 className="text-2xl font-bold mb-4 text-theme-primary">Display</h2>
-            <div className="flex items-center justify-between">
-              <span className="text-lg">Dark Mode</span>
-              <button
-                onClick={toggleDarkMode}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none ${
-                  theme.darkMode ? 'bg-theme-primary' : 'bg-gray-300 dark:bg-gray-600'
-                }`}
-              >
-                <span
-                  className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform duration-300 ${
-                    theme.darkMode ? 'translate-x-6' : 'translate-x-1'
-                  }`}
-                />
-              </button>
-            </div>
-          </div>
         </div>
 
         {/* Account Settings */}
@@ -243,6 +223,7 @@ const Settings: React.FC = () => {
 };
 
 export default Settings;
+
 
 
 
