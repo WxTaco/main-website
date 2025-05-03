@@ -11,6 +11,8 @@ export default {
         'wrapped-yellow': '#FFD700',
         'wrapped-green': '#98FB98',
         'wrapped-blue': '#87CEEB',
+        'pastel-blue': '#A6D1E6',
+        'invomagic-blue': '#2457ff',
       },
       fontFamily: {
         'saira': ['Saira', 'sans-serif'],
@@ -18,4 +20,4 @@ export default {
     },
   },
   plugins: [],
-} 
+}
