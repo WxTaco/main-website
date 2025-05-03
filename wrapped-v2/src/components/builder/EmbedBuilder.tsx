@@ -34,13 +34,16 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    
+
     if (name.includes('.')) {
       const [section, field] = name.split('.');
+      const sectionKey = section as keyof EmbedData;
+      const sectionData = embedData[sectionKey] || {};
+
       onChange({
         ...embedData,
         [section]: {
-          ...embedData[section as keyof EmbedData],
+          ...sectionData,
           [field]: value
         }
       });
@@ -77,10 +80,10 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
 
   const updateField = (index: number, field: { name: string; value: string; inline: boolean }) => {
     if (!embedData.fields) return;
-    
+
     const newFields = [...embedData.fields];
     newFields[index] = field;
-    
+
     onChange({
       ...embedData,
       fields: newFields
@@ -89,10 +92,10 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
 
   const removeField = (index: number) => {
     if (!embedData.fields) return;
-    
+
     const newFields = [...embedData.fields];
     newFields.splice(index, 1);
-    
+
     onChange({
       ...embedData,
       fields: newFields
@@ -330,9 +333,9 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
                 {embedData.author && embedData.author.name && (
                   <div className="flex items-center mb-2">
                     {embedData.author.iconURL && (
-                      <img 
-                        src={embedData.author.iconURL} 
-                        alt="Author" 
+                      <img
+                        src={embedData.author.iconURL}
+                        alt="Author"
                         className="w-6 h-6 rounded-full mr-2"
                         onError={(e) => (e.currentTarget.style.display = 'none')}
                       />
@@ -364,9 +367,9 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
 
                 {embedData.image && (
                   <div className="mb-3">
-                    <img 
-                      src={embedData.image} 
-                      alt="Embed" 
+                    <img
+                      src={embedData.image}
+                      alt="Embed"
                       className="max-w-full rounded-md"
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />
@@ -377,9 +380,9 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
                   {embedData.footer && embedData.footer.text && (
                     <div className="flex items-center">
                       {embedData.footer.iconURL && (
-                        <img 
-                          src={embedData.footer.iconURL} 
-                          alt="Footer" 
+                        <img
+                          src={embedData.footer.iconURL}
+                          alt="Footer"
                           className="w-5 h-5 rounded-full mr-2"
                           onError={(e) => (e.currentTarget.style.display = 'none')}
                         />
@@ -397,9 +400,9 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
 
                 {embedData.thumbnail && (
                   <div className="absolute top-0 right-0 mt-3 mr-3">
-                    <img 
-                      src={embedData.thumbnail} 
-                      alt="Thumbnail" 
+                    <img
+                      src={embedData.thumbnail}
+                      alt="Thumbnail"
                       className="w-16 h-16 rounded-md"
                       onError={(e) => (e.currentTarget.style.display = 'none')}
                     />

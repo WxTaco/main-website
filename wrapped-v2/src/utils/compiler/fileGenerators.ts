@@ -250,9 +250,9 @@ export function generateCommandFiles(analysis: FlowAnalysis): GeneratedFiles {
       analysis,
       indent: '  ',
       currentIndentLevel: 0,
-      variables: new Map(),
-      imports: new Set(),
-      usedNodeIds: new Set()
+      variables: new Map<string, string>(),
+      imports: new Set<string>(),
+      usedNodeIds: new Set<string>()
     };
 
     const commandCode = generateCommandCode(node, context);
@@ -287,9 +287,9 @@ export function generateEventFiles(analysis: FlowAnalysis): GeneratedFiles {
       analysis,
       indent: '  ',
       currentIndentLevel: 0,
-      variables: new Map(),
-      imports: new Set(),
-      usedNodeIds: new Set()
+      variables: new Map<string, string>(),
+      imports: new Set<string>(),
+      usedNodeIds: new Set<string>()
     };
 
     const eventCode = generateEventCode(node, context);
