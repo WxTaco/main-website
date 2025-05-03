@@ -6,13 +6,30 @@ import ReactFlow, {
   applyNodeChanges,
   applyEdgeChanges,
   addEdge,
-  Node,
-  Edge,
   NodeChange,
   EdgeChange,
   Connection
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+
+// Define our own Node and Edge types
+interface Node {
+  id: string;
+  type?: string;
+  data?: {
+    label?: string;
+    description?: string;
+    [key: string]: any;
+  };
+  position: { x: number; y: number };
+}
+
+interface Edge {
+  id: string;
+  source: string;
+  target: string;
+  type?: string;
+}
 
 // Import node types directly
 import CommandNode from '../components/builder/CommandNode';

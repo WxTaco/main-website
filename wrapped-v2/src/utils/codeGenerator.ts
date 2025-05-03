@@ -1,4 +1,21 @@
-import { Node, Edge as ReactFlowEdge } from 'reactflow';
+// Define our own Node and Edge types instead of importing from ReactFlow
+interface Node {
+  id: string;
+  type?: string;
+  data?: {
+    label?: string;
+    description?: string;
+    [key: string]: any;
+  };
+  position?: { x: number; y: number };
+}
+
+interface ReactFlowEdge {
+  id: string;
+  source: string;
+  target: string;
+  type?: string;
+}
 
 interface GeneratedFiles {
   [key: string]: string;
