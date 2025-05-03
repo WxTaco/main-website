@@ -14,7 +14,22 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 
-import nodeTypes from '../components/builder/nodeTypes';
+// Import node types directly
+import CommandNode from '../components/builder/CommandNode';
+import EventNode from '../components/builder/EventNode';
+import UtilityNode from '../components/builder/UtilityNode';
+
+// Define node types
+const nodeTypes = {
+  command: CommandNode,
+  messageCommand: CommandNode,
+  readyEvent: EventNode,
+  messageEvent: EventNode,
+  interactionEvent: EventNode,
+  database: UtilityNode,
+  api: UtilityNode,
+  embed: UtilityNode,
+};
 import generateBotFiles from '../utils/codeGenerator';
 import downloadFiles from '../utils/fileDownloader';
 const BotBuilderEditor = () => {
