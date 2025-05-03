@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet';
-import { useTheme, ColorScheme, ThemeCategory } from '../contexts/ThemeContext';
+import { useTheme } from '../contexts/ThemeContext';
+import type { ColorScheme, ThemeCategory } from '../types/theme';
 
 const Settings: React.FC = () => {
   const { theme, setColorScheme, toggleDarkMode } = useTheme();
@@ -141,10 +142,6 @@ const Settings: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Helmet>
-        <title>Settings | Wrapped</title>
-      </Helmet>
-
       <h1 className="text-3xl font-bold mb-8 text-theme-primary">Settings</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -246,4 +243,10 @@ const Settings: React.FC = () => {
 };
 
 export default Settings;
+
+
+
+
+
+
 
