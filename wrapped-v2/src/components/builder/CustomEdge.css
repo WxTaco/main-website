@@ -1,0 +1,29 @@
+.react-flow__edge-button {
+  cursor: pointer;
+  pointer-events: all;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.react-flow__edge:hover .react-flow__edge-button {
+  opacity: 1;
+}
+
+.react-flow__edge-button-circle {
+  pointer-events: none;
+}
+
+.react-flow__edge-button-path {
+  pointer-events: none;
+}
+
+.react-flow__edge-path {
+  stroke: #b1b1b7;
+  stroke-width: 2;
+  transition: stroke 0.2s ease;
+}
+
+.react-flow__edge:hover .react-flow__edge-path {
+  stroke: #FF0072;
+  stroke-width: 3;
+}

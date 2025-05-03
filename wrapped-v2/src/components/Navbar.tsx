@@ -14,6 +14,7 @@ const Navbar = () => {
     { to: '/channels', label: 'Channels' },
     { to: '/users', label: 'Users' },
     { to: '/bot-builder', label: 'Bot Builder' },
+    { to: '/partnerships', label: 'Partnerships' },
     { to: '/about', label: 'About Us' },
   ];
 

@@ -2,15 +2,67 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactFlow, {
   Controls,
-  Background,
-  applyNodeChanges,
-  applyEdgeChanges,
-  addEdge,
-  NodeChange,
-  EdgeChange,
-  Connection
+  Background
 } from 'reactflow';
 import 'reactflow/dist/style.css';
+
+// Define our own types for ReactFlow
+interface Connection {
+  source: string;
+  target: string;
+  sourceHandle?: string | null;
+  targetHandle?: string | null;
+}
+
+// Define NodeChange types
+type NodeChange =
+  | { type: 'add'; item: Node; }
+  | { type: 'remove'; id: string; }
+  | { type: 'select'; id: string; selected: boolean; }
+  | { type: 'position'; id: string; position: { x: number; y: number; }; }
+  | { type: 'dimensions'; id: string; dimensions: { width: number; height: number; }; };
+
+// Define EdgeChange types
+type EdgeChange =
+  | { type: 'add'; item: Edge; }
+  | { type: 'remove'; id: string; }
+  | { type: 'select'; id: string; selected: boolean; };
+
+// Define our own utility functions
+const applyNodeChanges = (changes: NodeChange[], nodes: Node[]): Node[] => {
+  return nodes.map(node => {
+    const change = changes.find(c => c.id === node.id);
+    if (change) {
+      if (change.type === 'position' && 'position' in change) {
+        return { ...node, position: change.position };
+      } else if (change.type === 'select' && 'selected' in change) {
+        return { ...node, selected: change.selected };
+      }
+    }
+    return node;
+  }).filter(node => !changes.some(c => c.type === 'remove' && c.id === node.id));
+};
+
+const applyEdgeChanges = (changes: EdgeChange[], edges: Edge[]): Edge[] => {
+  return edges.map(edge => {
+    const change = changes.find(c => c.id === edge.id);
+    if (change && change.type === 'select' && 'selected' in change) {
+      return { ...edge, selected: change.selected };
+    }
+    return edge;
+  }).filter(edge => !changes.some(c => c.type === 'remove' && c.id === edge.id));
+};
+
+const addEdge = (connection: Connection, edges: Edge[]): Edge[] => {
+  const newEdge: Edge = {
+    id: `${connection.source}-${connection.target}-${Date.now()}`,
+    source: connection.source,
+    target: connection.target,
+    type: 'custom',
+    data: { onDelete: (id: string) => {} }, // This will be updated in the component
+  };
+  return [...edges, newEdge];
+};
 
 // Define our own Node and Edge types
 interface Node {
@@ -29,12 +81,17 @@ interface Edge {
   source: string;
   target: string;
   type?: string;
+  data?: {
+    onDelete?: (id: string) => void;
+    [key: string]: any;
+  };
 }
 
 // Import node types directly
 import CommandNode from '../components/builder/CommandNode';
 import EventNode from '../components/builder/EventNode';
 import UtilityNode from '../components/builder/UtilityNode';
+import CustomEdge from '../components/builder/CustomEdge';
 
 // Define node types
 const nodeTypes = {
@@ -46,6 +103,11 @@ const nodeTypes = {
   database: UtilityNode,
   api: UtilityNode,
   embed: UtilityNode,
+};
+
+// Define edge types
+const edgeTypes = {
+  custom: CustomEdge,
 };
 import generateBotFiles from '../utils/codeGenerator';
 import downloadFiles from '../utils/fileDownloader';
@@ -81,15 +143,45 @@ const BotBuilderEditor = () => {
   // Handle new connections between nodes
   const onConnect = useCallback(
     (connection: Connection) => {
-      setEdges((eds) => addEdge(connection, eds));
+      setEdges((eds) => {
+        const newEdges = addEdge(connection, eds);
+        // Update the last edge with the onDelete function
+        const lastEdge = newEdges[newEdges.length - 1];
+        if (lastEdge && lastEdge.data) {
+          lastEdge.data.onDelete = (id: string) => {
+            setEdges((eds) => eds.filter((e) => e.id !== id));
+          };
+        }
+        return newEdges;
+      });
     },
     []
   );
+
+  // Function to handle edge deletion
+  const onEdgeDelete = useCallback((id: string) => {
+    setEdges((eds) => eds.filter((e) => e.id !== id));
+  }, []);
 
   // Function to handle node selection
   const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
     setSelectedNode(node);
   }, []);
+
+  // Function to handle key down events for deleting nodes
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Delete' && selectedNode) {
+        setNodes((nds) => nds.filter((node) => node.id !== selectedNode.id));
+        setSelectedNode(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [selectedNode]);
 
   // Function to add a new node
   const addNode = (type: string) => {
@@ -267,6 +359,8 @@ const BotBuilderEditor = () => {
                 onConnect={onConnect}
                 onNodeClick={onNodeClick}
                 nodeTypes={nodeTypes}
+                edgeTypes={edgeTypes}
+                defaultEdgeOptions={{ type: 'custom' }}
                 fitView
               >
                 <Background color="#444" gap={16} />
@@ -322,6 +416,24 @@ const BotBuilderEditor = () => {
                       className="w-full bg-gray-800 border border-gray-700 rounded-md px-3 py-2 text-white h-40 font-mono text-sm"
                       placeholder="Custom code here..."
                     ></textarea>
+                  </div>
+
+                  <div className="mt-6">
+                    <button
+                      onClick={() => {
+                        if (selectedNode) {
+                          setNodes((nds) => nds.filter((node) => node.id !== selectedNode.id));
+                          setSelectedNode(null);
+                        }
+                      }}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white py-2 px-3 rounded-md transition-colors flex items-center justify-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                      </svg>
+                      Delete Block
+                    </button>
+                    <p className="text-xs text-gray-400 mt-1 text-center">You can also press the Delete key</p>
                   </div>
                 </div>
               ) : (

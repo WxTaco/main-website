@@ -23,6 +23,7 @@ import FunOverview from './pages/FunOverview';
 import FunCommands from './pages/FunCommands';
 import TicketsOverview from './pages/TicketsOverview';
 import About from './pages/About';
+import Partnerships from './pages/Partnerships';
 import NotFound from './pages/NotFound';
 import BotBuilder from './pages/BotBuilder';
 import BotBuilderEditor from './pages/BotBuilderEditor';
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: 'about',
         element: <About />,
+      },
+      {
+        path: 'partnerships',
+        element: <Partnerships />,
       },
       {
         path: 'terms',
