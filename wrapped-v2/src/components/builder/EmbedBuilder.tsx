@@ -38,37 +38,27 @@ const EmbedBuilder: React.FC<EmbedBuilderProps> = ({ embedData, onChange }) => {
     if (name.includes('.')) {
       const [section, field] = name.split('.');
 
-      // Create a new embed data object
-      const newData = { ...embedData };
-
-      // Handle specific section types
+      // Handle nested properties based on the section
       if (section === 'author') {
-        newData.author = {
-          ...(newData.author || {}),
-          [field]: value
-        };
-      } else if (section === 'footer') {
-        newData.footer = {
-          ...(newData.footer || {}),
-          [field]: value
-        };
-      } else {
-        // For any other sections we might add in the future
-        const sectionKey = section as keyof EmbedData;
-        if (typeof newData[sectionKey] === 'object' && newData[sectionKey] !== null) {
-          // Safe spread for known object types
-          newData[sectionKey] = {
-            ...((newData[sectionKey] as Record<string, unknown>) || {}),
+        onChange({
+          ...embedData,
+          author: {
+            ...embedData.author,
             [field]: value
-          };
-        } else {
-          // Initialize as new object if it doesn't exist
-          (newData as any)[sectionKey] = { [field]: value };
-        }
+          }
+        });
+      } else if (section === 'footer') {
+        onChange({
+          ...embedData,
+          footer: {
+            ...embedData.footer,
+            [field]: value
+          }
+        });
       }
-
-      onChange(newData);
+      // Add more sections here if needed in the future
     } else {
+      // Handle top-level properties
       onChange({
         ...embedData,
         [name]: value
