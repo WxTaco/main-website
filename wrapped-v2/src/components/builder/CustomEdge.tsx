@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { getBezierPath } from 'reactflow';
+import { getBezierPath, Position } from 'reactflow';
 import './CustomEdge.css';
 
 interface CustomEdgeProps {
@@ -8,8 +8,8 @@ interface CustomEdgeProps {
   sourceY: number;
   targetX: number;
   targetY: number;
-  sourcePosition?: string;
-  targetPosition?: string;
+  sourcePosition?: Position;
+  targetPosition?: Position;
   style?: React.CSSProperties;
   data?: any;
   markerEnd?: string;
@@ -19,9 +19,10 @@ interface EdgeRemoveButtonProps {
   x: number;
   y: number;
   onClick: () => void;
+  color?: string;
 }
 
-const EdgeRemoveButton = ({ x, y, onClick }: EdgeRemoveButtonProps) => {
+const EdgeRemoveButton = ({ x, y, onClick, color = "#FF0072" }: EdgeRemoveButtonProps) => {
   return (
     <g
       transform={`translate(${x - 10} ${y - 10})`}
@@ -34,14 +35,14 @@ const EdgeRemoveButton = ({ x, y, onClick }: EdgeRemoveButtonProps) => {
       <circle
         className="react-flow__edge-button-circle"
         r={8}
-        stroke="#FF0072"
+        stroke={color}
         strokeWidth={2}
         fill="#ffffff"
       />
       <path
         className="react-flow__edge-button-path"
         d="M -4 -4 L 4 4 M -4 4 L 4 -4"
-        stroke="#FF0072"
+        stroke={color}
         strokeWidth={2}
       />
     </g>
@@ -75,16 +76,31 @@ const CustomEdge = ({
     }
   };
 
+  // Determine if this is a condition edge and what type
+  const isConditionEdge = data && data.conditionResult;
+  const edgeColor = isConditionEdge
+    ? data.conditionResult === 'true'
+      ? '#10b981' // Green for true
+      : '#ef4444' // Red for false
+    : '#FF0072'; // Default pink
+
+  const edgeStyles = {
+    ...style,
+    stroke: edgeColor,
+    strokeWidth: 2,
+  };
+
   return (
     <>
       <path
         id={id}
-        style={style}
+        style={edgeStyles}
         className="react-flow__edge-path"
         d={edgePath}
         markerEnd={markerEnd}
       />
-      <EdgeRemoveButton x={labelX} y={labelY} onClick={onEdgeClick} />
+      {/* No labels on the edges */}
+      <EdgeRemoveButton x={labelX} y={labelY} onClick={onEdgeClick} color={edgeColor} />
     </>
   );
 };
