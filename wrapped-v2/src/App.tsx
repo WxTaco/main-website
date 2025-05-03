@@ -24,6 +24,9 @@ import FunCommands from './pages/FunCommands';
 import TicketsOverview from './pages/TicketsOverview';
 import About from './pages/About';
 import NotFound from './pages/NotFound';
+import BotBuilder from './pages/BotBuilder';
+import BotBuilderEditor from './pages/BotBuilderEditor';
+import BotBuilderImport from './pages/BotBuilderImport';
 
 const router = createBrowserRouter([
   {
@@ -121,6 +124,18 @@ const router = createBrowserRouter([
       {
         path: 'fun/commands',
         element: <FunCommands />,
+      },
+      {
+        path: 'bot-builder',
+        element: <BotBuilder />,
+      },
+      {
+        path: 'bot-builder/editor',
+        element: <BotBuilderEditor />,
+      },
+      {
+        path: 'bot-builder/import',
+        element: <BotBuilderImport />,
       },
       {
         path: '*',

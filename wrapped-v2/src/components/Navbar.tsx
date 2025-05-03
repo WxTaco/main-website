@@ -13,6 +13,7 @@ const Navbar = () => {
     { to: '/server', label: 'Server' },
     { to: '/channels', label: 'Channels' },
     { to: '/users', label: 'Users' },
+    { to: '/bot-builder', label: 'Bot Builder' },
     { to: '/about', label: 'About Us' },
   ];
 
@@ -110,4 +111,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
