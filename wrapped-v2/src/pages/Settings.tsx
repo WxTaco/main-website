@@ -58,7 +58,7 @@ const Settings = () => {
                     }`}
                     style={{
                       borderColor: colorSchemeInfo[scheme].primaryColor,
-                      borderOpacity: theme.colorScheme === scheme ? 1 : 0.4
+                      opacity: theme.colorScheme === scheme ? 1 : 0.4
                     }}
                     onClick={() => setColorScheme(scheme)}
                   >
@@ -98,4 +98,5 @@ const Settings = () => {
 };
 
 export default Settings;
+
 

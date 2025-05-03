@@ -1,19 +1,27 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
-// Define available themes
-export type ColorScheme = 'default' | 'blue' | 'green' | 'purple' | 'cyberpunk' | 'red' | 'teal' | 'orange' | 'rose' | 'indigo' | 'slate' | 'lime' | 'amber' | 'sky' | 'fuchsia';
+// Theme types
+export type ColorScheme = 'pink' | 'blue' | 'green' | 'purple' | 'cyberpunk' | 'red' | 'teal' | 'orange' | 'rose' | 'indigo' | 'slate' | 'lime' | 'amber' | 'sky' | 'fuchsia';
 
-export interface ThemeSettings {
-  colorScheme: ColorScheme;
+export interface ThemeContextType {
+  theme: {
+    colorScheme: ColorScheme;
+    darkMode: boolean;
+  };
+  setColorScheme: (scheme: ColorScheme) => void;
+  toggleDarkMode: () => void;
 }
 
-export type ThemeCategory = 'Featured' | 'Vibrant' | 'Cool' | 'Warm' | 'Earthy' | 'Pastel';
-
-interface ThemeContextType {
-  theme: ThemeSettings;
-  setTheme: (theme: ThemeSettings) => void;
-  setColorScheme: (colorScheme: ColorScheme) => void;
-}
+// Create context with default values
+const ThemeContext = createContext<ThemeContextType>({
+  theme: {
+    colorScheme: 'pink',
+    darkMode: false,
+  },
+  setColorScheme: () => {},
+  toggleDarkMode: () => {},
+});
 
 // Theme descriptions for the settings page
 export const colorSchemeInfo = {
@@ -124,8 +132,6 @@ export const colorSchemeInfo = {
   }
 };
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
-
 // Helper function to get a cookie value
 const getCookie = (name: string): string | undefined => {
   if (typeof document === 'undefined') return undefined;
@@ -190,3 +196,4 @@ export const useTheme = (): ThemeContextType => {
   }
   return context;
 };
+
