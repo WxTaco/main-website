@@ -1702,6 +1702,7 @@ const NewSettings: React.FC = () => {
             Themes
           </div>
         </button>
+
         <button
           className={`px-5 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
             activeTab === 'accessibility'
@@ -2023,21 +2024,237 @@ const NewSettings: React.FC = () => {
                               </svg>
                             </button>
                           </div>
-                          <p className="text-gray-200 text-sm mb-3">{themeInfo.description}</p>
+                          <p className="text-gray-200 text-sm mb-4">{themeInfo.description}</p>
 
-                          {/* Preview Bar */}
-                          <div className="mt-3 flex space-x-2">
-                            <div className={`h-2 flex-grow rounded-full opacity-100`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                            <div className={`h-2 flex-grow rounded-full opacity-75`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                            <div className={`h-2 flex-grow rounded-full opacity-50`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                          {/* Color Preview */}
+                          <div className="grid grid-cols-3 gap-2 mb-3">
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Primary</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Accent</span>
+                            </div>
                           </div>
                         </div>
                       );
                     })}
                   </div>
                 )}
+
+                {/* Favorites Section */}
+                <div className="mt-12">
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-xl font-bold text-theme-primary flex items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                      </svg>
+                      Favorite Themes
+                    </h3>
+                  </div>
+
+                  {/* Favorites Grid */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                    {/* No favorites message */}
+                    {favoritedPremadeThemes.length === 0 && Object.values(customThemes).filter(theme => theme.isFavorite).length === 0 && (
+                      <div className="col-span-2 p-8 text-center bg-gray-800/50 rounded-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 mx-auto text-gray-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                        </svg>
+                        <p className="text-gray-400 text-lg mb-2">No favorite themes yet</p>
+                        <p className="text-gray-500 text-sm mb-4">Star your favorite themes to see them here</p>
+                      </div>
+                    )}
+
+                    {/* Favorited Built-in Theme Cards */}
+                    {favoritedPremadeThemes
+                      .filter(scheme => {
+                        const themeInfo = colorSchemeInfo[scheme as ColorScheme];
+                        return !!themeInfo;
+                      })
+                      .sort((a, b) => {
+                        const themeInfoA = colorSchemeInfo[a as ColorScheme];
+                        const themeInfoB = colorSchemeInfo[b as ColorScheme];
+
+                        if (!themeInfoA || !themeInfoB) return 0;
+
+                        // Sort by name
+                        if (sortOrder === 'name') {
+                          return themeInfoA.name.localeCompare(themeInfoB.name);
+                        }
+
+                        // Default to alphabetical
+                        return themeInfoA.name.localeCompare(themeInfoB.name);
+                      })
+                      .map((scheme) => {
+                        const themeInfo = colorSchemeInfo[scheme as ColorScheme];
+                        if (!themeInfo) return null;
+
+                        return (
+                          <div
+                            key={scheme}
+                            className={`p-5 rounded-lg transition-all duration-200 cursor-pointer bg-gray-800/80 backdrop-blur-sm ${
+                              theme.colorScheme === scheme
+                                ? 'border-[3px] shadow-lg scale-[1.02]'
+                                : 'border hover:border-opacity-70 hover:shadow-md hover:scale-[1.01]'
+                            }`}
+                            style={{
+                              borderColor: themeInfo.primaryColor,
+                              opacity: theme.colorScheme === scheme ? 1 : 0.8
+                            }}
+                            onClick={() => {
+                              // Clear active custom theme when selecting a built-in theme
+                              setActiveCustomTheme('');
+                              localStorage.removeItem('activeCustomTheme');
+                              setColorScheme(scheme as ColorScheme);
+                            }}
+                            title={`Apply ${themeInfo.name} theme`}
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter' || e.key === ' ') {
+                                e.preventDefault();
+                                // Clear active custom theme when selecting a built-in theme
+                                setActiveCustomTheme('');
+                                localStorage.removeItem('activeCustomTheme');
+                                setColorScheme(scheme as ColorScheme);
+                              }
+                            }}
+                          >
+                            <div className="flex items-center justify-between mb-3">
+                              <div className="flex items-center">
+                                <div
+                                  className="w-8 h-8 rounded-full mr-3 shadow-md"
+                                  style={{ backgroundColor: themeInfo.primaryColor }}
+                                ></div>
+                                <h3 className="text-lg font-semibold text-white">{themeInfo.name}</h3>
+                              </div>
+                              <button
+                                className="text-yellow-400 hover:text-yellow-300 transition-colors"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  toggleFavorite(scheme);
+                                }}
+                                aria-label="Remove from favorites"
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                                </svg>
+                              </button>
+                            </div>
+                            <p className="text-gray-200 text-sm mb-4">{themeInfo.description}</p>
+
+                            {/* Color Preview */}
+                            <div className="grid grid-cols-3 gap-2 mb-3">
+                              <div className="flex flex-col items-center">
+                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                                <span className="text-xs text-gray-400 mt-1">Primary</span>
+                              </div>
+                              <div className="flex flex-col items-center">
+                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
+                                <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                              </div>
+                              <div className="flex flex-col items-center">
+                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
+                                <span className="text-xs text-gray-400 mt-1">Accent</span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                    {/* Favorited Custom Theme Cards */}
+                    {Object.entries(customThemes)
+                      .filter(([_, theme]) => theme.isFavorite)
+                      .sort(([, themeA], [, themeB]) => {
+                        // Sort by name
+                        if (sortOrder === 'name') {
+                          return themeA.name.localeCompare(themeB.name);
+                        }
+
+                        // Sort by newest (using the timestamp of the first history entry)
+                        if (sortOrder === 'newest') {
+                          const aTimestamp = themeA.history?.[0]?.timestamp || 0;
+                          const bTimestamp = themeB.history?.[0]?.timestamp || 0;
+                          return bTimestamp - aTimestamp; // Newest first
+                        }
+
+                        return 0;
+                      })
+                      .map(([name, theme]) => (
+                        <div
+                          key={name}
+                          className={`p-5 rounded-lg transition-all duration-200 cursor-pointer bg-gray-800/80 backdrop-blur-sm ${
+                            activeCustomTheme === name
+                              ? 'border-[3px] shadow-lg scale-[1.02]'
+                              : 'border hover:border-opacity-70 hover:shadow-md hover:scale-[1.01]'
+                          }`}
+                          style={{
+                            borderColor: theme.primaryColor,
+                            opacity: activeCustomTheme === name ? 1 : 0.8
+                          }}
+                          onClick={() => applyCustomThemeByName(name)}
+                          title={`Apply ${theme.name} theme`}
+                          role="button"
+                          tabIndex={0}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              applyCustomThemeByName(name);
+                            }
+                          }}
+                        >
+                          <div className="flex items-center justify-between mb-3">
+                            <div className="flex items-center">
+                              <div
+                                className="w-8 h-8 rounded-full mr-3 shadow-md"
+                                style={{ backgroundColor: theme.primaryColor }}
+                              ></div>
+                              <h3 className="text-lg font-semibold text-white">{theme.name}</h3>
+                            </div>
+                            <button
+                              className="text-yellow-400 hover:text-yellow-300 transition-colors"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                toggleFavorite(name);
+                              }}
+                              aria-label="Remove from favorites"
+                            >
+                              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                              </svg>
+                            </button>
+                          </div>
+                          <p className="text-gray-200 text-sm mb-4">Custom Theme</p>
+
+                          {/* Color Preview */}
+                          <div className="grid grid-cols-3 gap-2 mb-3">
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: theme.primaryColor }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Primary</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: theme.secondaryColor }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                            </div>
+                            <div className="flex flex-col items-center">
+                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: theme.accentColor }}></div>
+                              <span className="text-xs text-gray-400 mt-1">Accent</span>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                </div>
               </div>
             )}
+
+
 
             {activeTab === 'accessibility' && (
               <div>
@@ -2492,6 +2709,7 @@ const NewSettings: React.FC = () => {
                 Active Theme
               </>
             )}
+
             {activeTab === 'accessibility' && (
               <>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
