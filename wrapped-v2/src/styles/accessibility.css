@@ -1,0 +1,87 @@
+/* Accessibility styles */
+
+/* Color blindness simulation filters */
+.protanopia {
+  filter: url('#protanopia-filter');
+}
+
+.deuteranopia {
+  filter: url('#deuteranopia-filter');
+}
+
+.tritanopia {
+  filter: url('#tritanopia-filter');
+}
+
+/* High contrast mode */
+.high-contrast {
+  --color-primary: #ffffff !important;
+  --color-secondary: #ffffff !important;
+  --color-accent: #ffffff !important;
+  --color-muted: #ffffff !important;
+  --color-background: #000000 !important;
+  --color-card: #000000 !important;
+  --color-border: #ffffff !important;
+}
+
+.high-contrast * {
+  border-color: white !important;
+}
+
+.high-contrast button,
+.high-contrast a,
+.high-contrast input,
+.high-contrast select {
+  border: 2px solid white !important;
+}
+
+.high-contrast img {
+  filter: grayscale(100%) contrast(120%);
+}
+
+/* Font size adjustments */
+.text-size-small {
+  font-size: 0.875rem;
+}
+
+.text-size-medium {
+  font-size: 1rem;
+}
+
+.text-size-large {
+  font-size: 1.125rem;
+}
+
+.text-size-xl {
+  font-size: 1.25rem;
+}
+
+/* Reduced motion */
+.reduce-motion * {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* SVG filters for color blindness simulation */
+#accessibility-filters {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}

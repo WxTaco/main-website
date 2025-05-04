@@ -2,6 +2,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Terms from './pages/Terms';
+import CookiePolicy from './pages/CookiePolicy';
 import ReactionRoles from './pages/ReactionRoles';
 import Welcomer from './pages/Welcomer';
 import Tickets from './pages/Tickets';
@@ -25,10 +26,14 @@ import TicketsOverview from './pages/TicketsOverview';
 import About from './pages/About';
 import Partnerships from './pages/Partnerships';
 import Settings from './pages/Settings';
+import NewSettings from './pages/NewSettings';
 import NotFound from './pages/NotFound';
 import BotBuilder from './pages/BotBuilder';
 import BotBuilderEditor from './pages/BotBuilderEditor';
 import BotBuilderImport from './pages/BotBuilderImport';
+
+// Import accessibility styles
+import './styles/accessibility.css';
 
 const router = createBrowserRouter([
   {
@@ -50,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'terms',
         element: <Terms />,
+      },
+      {
+        path: 'cookie-policy',
+        element: <CookiePolicy />,
       },
       {
         path: 'utility',
@@ -145,6 +154,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'settings',
+        element: <NewSettings />,
+      },
+      {
+        path: 'old-settings',
         element: <Settings />,
       },
       {
@@ -156,7 +169,52 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      {/* SVG filters for color blindness simulation */}
+      <svg id="accessibility-filters" aria-hidden="true">
+        <defs>
+          {/* Protanopia (red-blind) filter */}
+          <filter id="protanopia-filter">
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
+              values="0.567, 0.433, 0,     0, 0
+                      0.558, 0.442, 0,     0, 0
+                      0,     0.242, 0.758, 0, 0
+                      0,     0,     0,     1, 0"
+            />
+          </filter>
+
+          {/* Deuteranopia (green-blind) filter */}
+          <filter id="deuteranopia-filter">
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
+              values="0.625, 0.375, 0,   0, 0
+                      0.7,   0.3,   0,   0, 0
+                      0,     0.3,   0.7, 0, 0
+                      0,     0,     0,   1, 0"
+            />
+          </filter>
+
+          {/* Tritanopia (blue-blind) filter */}
+          <filter id="tritanopia-filter">
+            <feColorMatrix
+              in="SourceGraphic"
+              type="matrix"
+              values="0.95, 0.05,  0,     0, 0
+                      0,    0.433, 0.567, 0, 0
+                      0,    0.475, 0.525, 0, 0
+                      0,    0,     0,     1, 0"
+            />
+          </filter>
+        </defs>
+      </svg>
+
+      <RouterProvider router={router} />
+    </>
+  );
 }
 
 export default App;

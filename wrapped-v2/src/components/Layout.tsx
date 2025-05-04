@@ -3,11 +3,14 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import { useState, useEffect } from 'react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useCookies } from '../contexts/CookieContext';
+import CookieConsent from './CookieConsent';
 
 const Layout = () => {
   const [showToast, setShowToast] = useState(false);
   const { theme } = useTheme();
-  
+  const { cookiesAccepted, acceptCookies, declineCookies } = useCookies();
+
   // Show toast after a short delay when component mounts
   useEffect(() => {
     const toastShown = localStorage.getItem('botBuilderToastShown');
@@ -31,7 +34,7 @@ const Layout = () => {
         <Outlet />
       </main>
       <Footer />
-      
+
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed bottom-4 right-4 max-w-sm w-full bg-gradient-to-r from-indigo-600 to-wrapped-pink text-white rounded-lg shadow-lg overflow-hidden z-50 animate-slide-up">
@@ -61,6 +64,14 @@ const Layout = () => {
             </div>
           </div>
         </div>
+      )}
+
+      {/* Cookie Consent Toast - only show if user hasn't made a decision yet */}
+      {cookiesAccepted === null && (
+        <CookieConsent
+          onAccept={acceptCookies}
+          onDecline={declineCookies}
+        />
       )}
     </div>
   );

@@ -10,20 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.1",
     "@heroicons/react": "^2.1.1",
+    "@uiw/react-codemirror": "^4.21.21",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
     "react": "^18.2.0",
+    "react-color": "^2.19.3",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.22.3",
-    "reactflow": "^11.10.4",
-    "@codemirror/lang-javascript": "^6.2.1",
-    "@uiw/react-codemirror": "^4.21.21",
-    "react-helmet": "^6.1.0"
+    "reactflow": "^11.10.4"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
     "@types/react": "^18.2.64",
+    "@types/react-color": "^3.0.13",
     "@types/react-dom": "^18.2.21",
     "@types/react-helmet": "^6.1.11",
     "@typescript-eslint/eslint-plugin": "^7.1.1",

@@ -28,7 +28,7 @@ const Footer = () => {
       links: [
         { name: "Terms of Service", path: "/terms" },
         { name: "Privacy Policy", path: "/privacy" },
-        { name: "Cookie Policy", path: "/cookies" },
+        { name: "Cookie Policy", path: "/cookie-policy" },
       ]
     }
   ];
