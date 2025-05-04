@@ -420,6 +420,18 @@ export default {
           '--gradient-middle': '#8A2BE2',
           '--gradient-end': '#9370DB',
         },
+        '[data-color-scheme="electricblue"]': {
+          '--color-primary': '#1F53FF',
+          '--color-secondary': '#4D75FF',
+          '--color-accent': '#00CCFF',
+          '--color-muted': '#9ca3af',
+          '--color-background': '#f3f4f6',
+          '--color-card': '#ffffff',
+          '--color-border': '#e5e7eb',
+          '--gradient-start': '#0033CC',
+          '--gradient-middle': '#1F53FF',
+          '--gradient-end': '#99BBFF',
+        },
         '[data-color-scheme="custom"]': {
           '--color-primary': 'var(--custom-primary)',
           '--color-secondary': 'var(--custom-secondary)',

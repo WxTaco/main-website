@@ -33,6 +33,7 @@ export type ColorScheme =
   | 'lavender'
   | 'peridot'
   | 'amethyst'
+  | 'electricblue'
   | 'custom';
 
 export type ThemeCategory = 'primary' | 'cool' | 'warm' | 'nature' | 'vibrant';

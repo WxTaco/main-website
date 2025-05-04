@@ -1284,6 +1284,13 @@ const NewSettings: React.FC = () => {
       previewClass: 'bg-amethyst-500',
       category: 'cool'
     },
+    electricblue: {
+      name: 'MagicGamer Blue',
+      description: 'MagicGamer\'s signature color',
+      primaryColor: '#1F53FF',
+      previewClass: 'bg-blue-600',
+      category: 'cool'
+    },
     custom: {
       name: 'Custom',
       description: 'Your personalized theme',
@@ -1296,7 +1303,7 @@ const NewSettings: React.FC = () => {
   // Group themes by category
   const themesByCategory: Record<ThemeCategory, ColorScheme[]> = {
     primary: ['pink', 'custom'],
-    cool: ['blue', 'purple', 'teal', 'indigo', 'sky', 'silver', 'sapphire', 'aquamarine', 'lavender', 'cyan', 'violet'],
+    cool: ['blue', 'purple', 'teal', 'indigo', 'sky', 'silver', 'sapphire', 'aquamarine', 'lavender', 'cyan', 'violet', 'electricblue'],
     warm: ['red', 'orange', 'rose', 'amber', 'peach', 'topaz', 'coral'],
     nature: ['green', 'lime', 'brown', 'mint', 'emerald', 'peridot'],
     vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst']
