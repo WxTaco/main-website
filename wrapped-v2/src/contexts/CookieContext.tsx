@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext, useEffect, ReactNode } from 'react';
+import React, { createContext, useState, useContext, useEffect } from 'react';
+import type { ReactNode } from 'react';
 
 interface CookieContextType {
   cookiesAccepted: boolean | null;
@@ -35,7 +36,7 @@ export const CookieProvider: React.FC<CookieProviderProps> = ({ children }) => {
   const declineCookies = () => {
     setCookiesAccepted(false);
     localStorage.setItem('cookieConsent', 'declined');
-    
+
     // Clear any existing cookies except essential ones
     // This is a simplified approach - in a real app you might want to be more selective
     document.cookie.split(';').forEach(cookie => {
