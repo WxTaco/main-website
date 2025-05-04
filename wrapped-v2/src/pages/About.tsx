@@ -46,7 +46,7 @@ const team = [
     statusMessage: 'Working on Wrapped V2',
     messages: [
       {
-        content: 'Hello! I Am The Lead Developer And Project Owner For Wrapped. I Spend A Lot Of My Time Working On This Site And The Bot Itself And Have Thoroughly Enjoyed The Challenges It Has Presented Me With. The Original Version Of This Project, Wrapped V1, Was Shut Down Due To Circumstances Outside Of My Control, And It Was During That Downtime That I Decided I Was Gonna Expand The Capabilities Of Wrapped. Since Then, We\'ve Taken Wrapped From It\'s Original Purpose, A High Quality Statistics Bot, And Turned It Into An All Purpose Discord Bot, And We Are Excited To Share V2 With You.',
+        content: 'Hello! I am the lead developer and project owner for Wrapped. I spend a lot of my time working on this site and the bot itself and have thoroughly enjoyed the challenges it has presented me with. The original version of this project, Wrapped V1, was shut down due to circumstances outside of my control, and it was during that downtime that I decided I was gonna expand the capabilities of Wrapped. Since then, we\'ve taken Wrapped from it\'s original purpose, a high quality statistics bot, and turned it into an all purpose Discord bot, and we are excited to share V2 with you.',
         timestamp: new Date().toISOString(),
         reactions: [
           { emoji: '❤️', count: 42 },
@@ -243,20 +243,26 @@ const DiscordMessage = ({ message, avatar, username }: MessageProps) => {
   };
 
   return (
-    <div className="bg-gray-700 rounded-md p-3 mb-2 hover:bg-gray-650 transition-colors">
+    <div className="bg-gray-700 rounded-md p-2 sm:p-3 mb-2 hover:bg-gray-650 transition-colors">
       <div className="flex items-start">
-        <img src={avatar} alt={username} className="w-10 h-10 rounded-full mr-3" />
-        <div className="flex-1">
-          <div className="flex items-center mb-1">
-            <span className="font-medium text-white">{username}</span>
-            <span className="text-gray-400 text-xs ml-2">
-              {new Date(message.timestamp).toLocaleString()}
+        <img src={avatar} alt={username} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full mr-2 sm:mr-3 flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <div className="flex flex-wrap items-center mb-1 gap-1 sm:gap-0">
+            <span className="font-medium text-white text-sm sm:text-base">{username}</span>
+            <span className="text-gray-400 text-xs sm:ml-2 w-full sm:w-auto">
+              {new Date(message.timestamp).toLocaleString(undefined, {
+                year: '2-digit',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: '2-digit'
+              })}
             </span>
           </div>
-          <div className="text-gray-300 whitespace-pre-wrap">
+          <div className="text-gray-300 whitespace-pre-wrap text-sm sm:text-base break-words">
             {message.content}
           </div>
-          <div className="flex flex-wrap mt-2 gap-2">
+          <div className="flex flex-wrap mt-2 gap-1 sm:gap-2">
             {reactions && reactions.length > 0 && reactions.map((reaction, idx) => (
               <button
                 key={idx}
@@ -265,8 +271,8 @@ const DiscordMessage = ({ message, avatar, username }: MessageProps) => {
                   userReactions.includes(idx)
                     ? 'bg-gray-700 border border-theme-primary'
                     : 'bg-gray-800 hover:bg-gray-700'
-                } rounded-md px-2 py-1 flex items-center text-sm transition-all ${
-                  recentlyClicked === idx ? 'transform scale-125' : ''
+                } rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 flex items-center text-xs sm:text-sm transition-all ${
+                  recentlyClicked === idx ? 'transform scale-110 sm:scale-125' : ''
                 }`}
                 title={userReactions.includes(idx) ? "Click to remove your reaction" : "Click to add reaction"}
               >
@@ -285,7 +291,7 @@ const DiscordMessage = ({ message, avatar, username }: MessageProps) => {
                 if (timeoutRef.current) clearTimeout(timeoutRef.current);
                 timeoutRef.current = setTimeout(() => setRecentlyClicked(null), 1000);
               }}
-              className="bg-gray-800 hover:bg-gray-700 rounded-md px-2 py-1 flex items-center text-sm transition-all"
+              className="bg-gray-800 hover:bg-gray-700 rounded-md px-1.5 sm:px-2 py-0.5 sm:py-1 flex items-center text-xs sm:text-sm transition-all"
               title="Add random reaction"
             >
               <span>+</span>
@@ -331,10 +337,10 @@ const About = () => {
   };
 
   return (
-    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-12 px-4">
+    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-6 sm:py-12 px-3 sm:px-4">
       <div className="max-w-3xl w-full themed-container">
-        <h1 className="themed-title mb-6">About Us</h1>
-        <p className="text-lg text-white mb-8 text-center">
+        <h1 className="themed-title mb-4 sm:mb-6 text-2xl sm:text-3xl">About Us</h1>
+        <p className="text-base sm:text-lg text-white mb-6 sm:mb-8 text-center">
           Wrapped V2 is a passion project dedicated to providing a free, feature-rich, and user-friendly Discord bot for everyone. Our team is committed to transparency, creativity, and putting the community first.
         </p>
 
@@ -343,7 +349,7 @@ const About = () => {
             <div key={member.id} className="bg-gray-900/90 rounded-lg shadow border border-white/20 overflow-hidden">
               {/* Banner */}
               <div
-                className="h-64 w-full relative"
+                className="h-40 sm:h-64 w-full relative"
                 style={{
                   backgroundColor: member.bannerColor,
                   backgroundImage: member.banner ? `url(${member.banner})` : 'none',
@@ -353,23 +359,23 @@ const About = () => {
               ></div>
 
               {/* Profile section */}
-              <div className="px-6 pt-20 pb-6 relative">
+              <div className="px-4 sm:px-6 pt-16 sm:pt-20 pb-6 relative">
                 {/* Avatar */}
-                <div className="absolute -top-16 left-6">
+                <div className="absolute -top-12 sm:-top-16 left-4 sm:left-6">
                   <div className="relative">
                     <img
                       src={member.avatar}
                       alt={member.name}
-                      className="w-28 h-28 rounded-full border-4 border-gray-900"
+                      className="w-24 h-24 sm:w-28 sm:h-28 rounded-full border-4 border-gray-900"
                     />
                     <StatusIndicator status={member.status} />
                   </div>
                 </div>
 
                 {/* User info */}
-                <div className="flex justify-between items-start">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3 sm:gap-0">
                   <div>
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-wrap">
                       <h2 className="text-xl font-bold text-white">{member.name}</h2>
                       <span className="text-gray-400 ml-1">{member.tag}</span>
                     </div>
@@ -389,7 +395,7 @@ const About = () => {
                   {/* Toggle button */}
                   <button
                     onClick={() => toggleMember(member.id)}
-                    className={`text-white rounded-md px-3 py-1 text-sm transition-all duration-300 ${
+                    className={`text-white rounded-md px-3 py-1 text-sm transition-all duration-300 w-full sm:w-auto ${
                       isAnimating ? 'opacity-50 cursor-not-allowed' : ''
                     } ${
                       isClosing === member.id
@@ -400,7 +406,7 @@ const About = () => {
                     }`}
                     disabled={isAnimating}
                   >
-                    <div className="flex items-center">
+                    <div className="flex items-center justify-center sm:justify-start">
                       {expandedMember === member.id || isClosing === member.id ? (
                         <>
                           <span>Hide Messages</span>
@@ -427,12 +433,12 @@ const About = () => {
                 </div>
 
                 {/* Bio */}
-                <div className="mt-4 text-gray-300">
+                <div className="mt-3 sm:mt-4 text-gray-300 text-sm sm:text-base">
                   {member.bio}
                 </div>
 
                 {/* Messages */}
-                <div className={`mt-6 border-t border-gray-700 pt-4 overflow-hidden transition-all duration-700 ease-in-out ${
+                <div className={`mt-4 sm:mt-6 border-t border-gray-700 pt-3 sm:pt-4 overflow-hidden transition-all duration-700 ease-in-out ${
                   expandedMember === member.id
                     ? 'max-h-[5000px] opacity-100 transform translate-y-0'
                     : isClosing === member.id
@@ -441,13 +447,13 @@ const About = () => {
                 }`}>
                   {(expandedMember === member.id || isClosing === member.id) && (
                     <>
-                      <h4 className="text-white font-medium mb-3 flex items-center">
-                        <svg className="w-5 h-5 mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <h4 className="text-white font-medium mb-2 sm:mb-3 flex items-center text-sm sm:text-base">
+                        <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1 sm:mr-2 text-theme-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                         </svg>
                         Messages
                       </h4>
-                      <div className="space-y-3">
+                      <div className="space-y-2 sm:space-y-3">
                         {member.messages.map((message, idx) => {
                           return (
                             <div
