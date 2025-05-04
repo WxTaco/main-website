@@ -63,22 +63,22 @@ const purgeCommand = {
 
 const ChannelCommands = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
-      <div className="max-w-2xl w-full bg-gray-800/80 backdrop-blur-md rounded-lg shadow-lg p-8 border border-white/30">
-        <h1 className="text-4xl font-saira font-extrabold text-wrapped-pink mb-4 text-center drop-shadow">Channel Commands</h1>
+    <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-12 px-4">
+      <div className="max-w-2xl w-full themed-container">
+        <h1 className="themed-title">Channel Commands</h1>
         <p className="text-lg text-white mb-6 text-center">
           Manage and view channel information, lock/unlock channels, set slowmode, and purge messages with ease.
         </p>
 
-        <h2 className="text-2xl font-bold text-wrapped-pink mb-3">Channel Management</h2>
+        <h2 className="themed-subtitle mb-3">Channel Management</h2>
         <div className="space-y-4 mb-6">
           {channelCommands.map((cmd) => (
-            <div id={cmd.name.replace('/', '')} key={cmd.name} className={`${cmd.details ? 'bg-gray-900/50 p-4 rounded-lg border border-white/10' : ''}`}>
-              <h3 className="text-lg font-bold text-wrapped-pink mb-1">{cmd.name}</h3>
-              <p className="text-pink-200 mb-1">{cmd.description}</p>
+            <div id={cmd.name.replace('/', '')} key={cmd.name} className={`${cmd.details ? 'themed-card' : ''}`}>
+              <h3 className="text-lg font-bold text-theme-primary mb-1">{cmd.name}</h3>
+              <p className="themed-text mb-1">{cmd.description}</p>
 
               {cmd.permission && (
-                <p className="text-pink-200 mb-1">
+                <p className="themed-text mb-1">
                   <span className="text-white font-semibold">Required Permission:</span> {cmd.permission}
                 </p>
               )}
@@ -86,7 +86,7 @@ const ChannelCommands = () => {
               {cmd.options && cmd.options.length > 0 && (
                 <>
                   <h4 className="text-white font-medium mt-2 mb-1">Options:</h4>
-                  <ul className="list-disc ml-6 mb-2 text-pink-200">
+                  <ul className="list-disc ml-6 mb-2 themed-text">
                     {cmd.options.map(opt => (
                       <li key={opt.name}>
                         <span className="font-semibold">{opt.name}</span> — {opt.description}
@@ -99,32 +99,32 @@ const ChannelCommands = () => {
               {cmd.details && (
                 <>
                   <h4 className="text-white font-medium mt-2 mb-1">Details:</h4>
-                  <p className="text-pink-200 ml-2">{cmd.details}</p>
+                  <p className="themed-text ml-2">{cmd.details}</p>
                 </>
               )}
 
               {cmd.example && (
-                <p className="text-pink-200 italic mt-2 text-sm">{cmd.example}</p>
+                <p className="themed-text italic mt-2 text-sm">{cmd.example}</p>
               )}
             </div>
           ))}
         </div>
 
-        <h2 className="text-2xl font-bold text-wrapped-pink mb-3">Message Management</h2>
-        <div id="purge" className="bg-gray-900/50 p-4 rounded-lg border border-white/10 mb-6">
-          <h3 className="text-xl font-bold text-wrapped-pink mb-2">{purgeCommand.name}</h3>
-          <p className="text-pink-200 mb-2">{purgeCommand.description}</p>
-          <p className="text-pink-200 mb-3"><span className="text-white font-semibold">Required Permission:</span> {purgeCommand.permission}</p>
+        <h2 className="themed-subtitle mb-3">Message Management</h2>
+        <div id="purge" className="themed-card mb-6">
+          <h3 className="text-xl font-bold text-theme-primary mb-2">{purgeCommand.name}</h3>
+          <p className="themed-text mb-2">{purgeCommand.description}</p>
+          <p className="themed-text mb-3"><span className="text-white font-semibold">Required Permission:</span> {purgeCommand.permission}</p>
 
           <h4 className="text-lg font-semibold text-white mb-2">Subcommands:</h4>
           <div className="space-y-4 ml-4">
             {purgeCommand.subcommands.map((sub) => (
-              <div key={sub.name} className="border-l-2 border-wrapped-pink pl-4">
-                <h5 className="text-lg font-semibold text-wrapped-pink mb-1">/purge {sub.name}</h5>
-                <p className="text-pink-200 mb-2">{sub.description}</p>
+              <div key={sub.name} className="border-l-2 border-theme-primary pl-4">
+                <h5 className="text-lg font-semibold text-theme-primary mb-1">/purge {sub.name}</h5>
+                <p className="themed-text mb-2">{sub.description}</p>
 
                 <h6 className="text-white font-medium mb-1">Options:</h6>
-                <ul className="list-disc ml-6 mb-2 text-pink-200">
+                <ul className="list-disc ml-6 mb-2 themed-text">
                   {sub.options.map((opt) => (
                     <li key={opt.name}>
                       <span className="font-semibold">{opt.name}</span> — {opt.description}
@@ -133,14 +133,14 @@ const ChannelCommands = () => {
                   ))}
                 </ul>
 
-                <p className="text-pink-200 text-sm italic">{sub.details}</p>
+                <p className="themed-text text-sm italic">{sub.details}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="text-center mt-8">
-          <Link to="/" className="text-wrapped-pink font-bold hover:underline">Back to Home</Link>
+          <Link to="/" className="themed-button-lg">Back to Home</Link>
         </div>
       </div>
     </div>
