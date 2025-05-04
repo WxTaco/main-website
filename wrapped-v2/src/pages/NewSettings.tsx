@@ -151,66 +151,82 @@ const NewSettings: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const sharedThemeData = params.get('t');
 
-    if (sharedThemeData) {
-      try {
-        // Decode and parse the shared theme data
-        const decodedData = atob(sharedThemeData);
-        const sharedTheme = JSON.parse(decodedData);
+    if (sharedThemeData && cookiesAccepted === true) {
+      // Use a small delay to ensure the page is fully loaded before processing the theme
+      setTimeout(() => {
+        try {
+          // Decode and parse the shared theme data
+          const decodedData = atob(sharedThemeData);
+          const sharedTheme = JSON.parse(decodedData);
 
-        if (sharedTheme && Object.keys(sharedTheme).length > 0) {
-          const themeName = Object.keys(sharedTheme)[0];
-          const themeData = sharedTheme[themeName];
+          if (sharedTheme && Object.keys(sharedTheme).length > 0) {
+            const themeName = Object.keys(sharedTheme)[0];
+            const themeData = sharedTheme[themeName];
 
-          // Add version history
-          const historyEntry: CustomThemeVersion = {
-            primaryColor: themeData.primaryColor,
-            secondaryColor: themeData.secondaryColor,
-            accentColor: themeData.accentColor,
-            version: 1,
-            timestamp: Date.now()
-          };
+            // Add version history
+            const historyEntry: CustomThemeVersion = {
+              primaryColor: themeData.primaryColor,
+              secondaryColor: themeData.secondaryColor,
+              accentColor: themeData.accentColor,
+              version: 1,
+              timestamp: Date.now()
+            };
 
-          // Create a proper theme object
-          const importedTheme: CustomTheme = {
-            ...themeData,
-            name: `${themeData.name} (Imported)`,
-            history: [historyEntry],
-            isFavorite: false
-          };
+            // Create a proper theme object
+            const importedTheme: CustomTheme = {
+              ...themeData,
+              name: `${themeData.name} (Imported)`,
+              history: [historyEntry],
+              isFavorite: false
+            };
 
-          // Generate a unique key for the imported theme
-          const newThemeKey = `${themeName}_imported_${Date.now()}`;
+            // Generate a unique key for the imported theme
+            const newThemeKey = `${themeName}_imported_${Date.now()}`;
 
-          // Add to existing themes
-          const updatedThemes = {
-            ...parsedThemes,
-            [newThemeKey]: importedTheme
-          };
+            // Add to existing themes
+            const updatedThemes = {
+              ...parsedThemes,
+              [newThemeKey]: importedTheme
+            };
 
-          // Update state and localStorage
-          setCustomThemes(updatedThemes);
-          localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
-          setActiveCustomTheme(newThemeKey);
-          localStorage.setItem('activeCustomTheme', newThemeKey);
+            // Update state and localStorage
+            setCustomThemes(updatedThemes);
+            localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
+            setActiveCustomTheme(newThemeKey);
+            localStorage.setItem('activeCustomTheme', newThemeKey);
 
-          // Apply the theme directly
-          skipEffectRef.current = true;
-          applyCustomTheme(
-            importedTheme.primaryColor,
-            importedTheme.secondaryColor,
-            importedTheme.accentColor
-          );
+            // Apply the theme directly
+            skipEffectRef.current = true;
+            applyCustomTheme(
+              importedTheme.primaryColor,
+              importedTheme.secondaryColor,
+              importedTheme.accentColor
+            );
 
-          // Show a notification
-          alert('Theme imported successfully!');
+            // Show a notification using the custom dialog
+            setAlertDialog({
+              isOpen: true,
+              title: 'Theme Imported',
+              message: 'Theme has been imported successfully and applied!'
+            });
 
-          // Remove the parameter from the URL to prevent reimporting on refresh
+            // Remove the parameter from the URL to prevent reimporting on refresh
+            const newUrl = window.location.pathname;
+            window.history.replaceState({}, document.title, newUrl);
+          }
+        } catch (e) {
+          console.error('Failed to import shared theme', e);
+          setAlertDialog({
+            isOpen: true,
+            title: 'Import Error',
+            message: 'Failed to import the shared theme. The link may be invalid or corrupted.'
+          });
+
+          // Remove the parameter from the URL
           const newUrl = window.location.pathname;
           window.history.replaceState({}, document.title, newUrl);
         }
-      } catch (e) {
-        console.error('Failed to import shared theme', e);
-      }
+      }, 500); // 500ms delay to ensure the page is fully loaded
     }
 
     // We don't need to set isInitialMount to false here anymore
@@ -818,10 +834,18 @@ const NewSettings: React.FC = () => {
           importedData.accentColor
         );
 
-        alert(`Theme "${themeName}" imported successfully!`);
+        setAlertDialog({
+          isOpen: true,
+          title: 'Theme Imported',
+          message: `Theme "${themeName}" has been imported successfully and applied!`
+        });
       } catch (error) {
         console.error('Failed to import theme', error);
-        alert('Failed to import theme. Please check the file format and try again.');
+        setAlertDialog({
+          isOpen: true,
+          title: 'Import Error',
+          message: 'Failed to import theme. Please check the file format and try again.'
+        });
       }
 
       // Reset the file input
@@ -834,7 +858,11 @@ const NewSettings: React.FC = () => {
   // Export all custom themes to a JSON file
   const exportCustomThemes = () => {
     if (Object.keys(customThemes).length === 0) {
-      alert('No custom themes to export');
+      setAlertDialog({
+        isOpen: true,
+        title: 'Export Error',
+        message: 'No custom themes to export'
+      });
       return;
     }
 
@@ -983,14 +1011,26 @@ const NewSettings: React.FC = () => {
           setCustomThemes(updatedThemes);
           localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
 
-          // Show result
-          alert(`Successfully imported ${importCount} theme${importCount !== 1 ? 's' : ''}${skipCount > 0 ? ` (${skipCount} skipped due to invalid format)` : ''}`);
+          // Show result using custom dialog
+          setAlertDialog({
+            isOpen: true,
+            title: 'Themes Imported',
+            message: `Successfully imported ${importCount} theme${importCount !== 1 ? 's' : ''}${skipCount > 0 ? ` (${skipCount} skipped due to invalid format)` : ''}`
+          });
         } else {
-          alert('No valid themes found in the import file');
+          setAlertDialog({
+            isOpen: true,
+            title: 'Import Error',
+            message: 'No valid themes found in the import file'
+          });
         }
       } catch (error) {
         console.error('Failed to import themes', error);
-        alert('Failed to import themes. Please check the file format and try again.');
+        setAlertDialog({
+          isOpen: true,
+          title: 'Import Error',
+          message: 'Failed to import themes. Please check the file format and try again.'
+        });
       }
 
       // Reset the file input
