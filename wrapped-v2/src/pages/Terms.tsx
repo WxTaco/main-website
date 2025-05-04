@@ -1,10 +1,10 @@
-import LegalPage from '../components/LegalPage';
+// Terms of Service page
 
 const Terms = () => {
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-[#c94baf] via-fuchsia-400 to-purple-700 flex flex-col items-center justify-start py-12 px-4">
-      <div className="max-w-4xl w-full bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-white/20">
-        <h1 className="text-3xl font-saira mb-2 text-wrapped-pink">Terms of Service</h1>
+    <div className="min-h-screen w-full bg-gradient-to-br from-theme-gradient-start via-theme-gradient-middle to-theme-gradient-end flex flex-col items-center justify-start py-12 px-4 transition-colors duration-300">
+      <div className="max-w-4xl w-full bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-theme-border/30 dark:bg-black/80 dark:border-white/20">
+        <h1 className="text-3xl font-saira mb-2 text-theme-primary">Terms of Service</h1>
         <p className="text-gray-300 mb-8">Last updated: May 1, 2024</p>
         <div className="prose prose-invert max-w-none text-gray-100">
           <section>
@@ -54,7 +54,7 @@ const Terms = () => {
               For any questions regarding these Terms of Service, please contact us through our{' '}
               <a
                 href="https://wrappedbot.com/support"
-                className="text-wrapped-pink hover:underline"
+                className="text-theme-primary hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -69,4 +69,4 @@ const Terms = () => {
   );
 };
 
-export default Terms; 
+export default Terms;
