@@ -866,7 +866,7 @@ const NewSettings: React.FC = () => {
     }, 100);
   };
 
-  // Import multiple themes from a JSON file
+  // Import themes from a JSON file (supports both single theme and multiple themes)
   const importCustomThemes = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -877,29 +877,19 @@ const NewSettings: React.FC = () => {
         const content = e.target?.result as string;
         const importedData = JSON.parse(content);
 
-        // Validate the imported data
-        if (!importedData.themes || typeof importedData.themes !== 'object') {
-          throw new Error('Invalid themes file format');
-        }
-
-        const importedThemes = importedData.themes;
+        // Create a copy of the current themes
+        const updatedThemes = { ...customThemes };
         let importCount = 0;
         let skipCount = 0;
 
-        // Create a copy of the current themes
-        const updatedThemes = { ...customThemes };
+        // Check if this is a single theme file
+        if (importedData.name && importedData.primaryColor &&
+            importedData.secondaryColor && importedData.accentColor) {
+          // This is a single theme file
+          const themeData = importedData;
 
-        // Process each imported theme
-        Object.entries(importedThemes).forEach(([key, themeData]: [string, any]) => {
-          // Validate theme data
-          if (!themeData.name || !themeData.primaryColor ||
-              !themeData.secondaryColor || !themeData.accentColor) {
-            skipCount++;
-            return;
-          }
-
-          // Create a unique key if needed
-          let themeKey = key;
+          // Create a unique key
+          let themeKey = themeData.name.replace(/\s+/g, '_').toLowerCase();
           if (updatedThemes[themeKey]) {
             themeKey = `${themeKey}_imported_${Date.now()}`;
           }
@@ -917,16 +907,84 @@ const NewSettings: React.FC = () => {
 
           // Add to updated themes
           updatedThemes[themeKey] = themeData;
-          importCount++;
-        });
+          importCount = 1;
+        }
+        // Check if this is a themes collection file
+        else if (importedData.themes && typeof importedData.themes === 'object') {
+          const importedThemes = importedData.themes;
 
-        // Update state and localStorage
-        setCustomThemes(updatedThemes);
-        localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
+          // Process each imported theme
+          Object.entries(importedThemes).forEach(([key, themeData]: [string, any]) => {
+            // Validate theme data
+            if (!themeData.name || !themeData.primaryColor ||
+                !themeData.secondaryColor || !themeData.accentColor) {
+              skipCount++;
+              return;
+            }
 
-        // Show result
+            // Create a unique key if needed
+            let themeKey = key;
+            if (updatedThemes[themeKey]) {
+              themeKey = `${themeKey}_imported_${Date.now()}`;
+            }
+
+            // Ensure history exists
+            if (!themeData.history || !Array.isArray(themeData.history) || themeData.history.length === 0) {
+              themeData.history = [{
+                primaryColor: themeData.primaryColor,
+                secondaryColor: themeData.secondaryColor,
+                accentColor: themeData.accentColor,
+                version: 1,
+                timestamp: Date.now()
+              }];
+            }
+
+            // Add to updated themes
+            updatedThemes[themeKey] = themeData;
+            importCount++;
+          });
+        }
+        // Try to handle other formats
+        else if (typeof importedData === 'object') {
+          // Try to interpret as a collection of themes directly
+          Object.entries(importedData).forEach(([key, themeData]: [string, any]) => {
+            // Validate theme data
+            if (!themeData.name || !themeData.primaryColor ||
+                !themeData.secondaryColor || !themeData.accentColor) {
+              skipCount++;
+              return;
+            }
+
+            // Create a unique key if needed
+            let themeKey = key;
+            if (updatedThemes[themeKey]) {
+              themeKey = `${themeKey}_imported_${Date.now()}`;
+            }
+
+            // Ensure history exists
+            if (!themeData.history || !Array.isArray(themeData.history) || themeData.history.length === 0) {
+              themeData.history = [{
+                primaryColor: themeData.primaryColor,
+                secondaryColor: themeData.secondaryColor,
+                accentColor: themeData.accentColor,
+                version: 1,
+                timestamp: Date.now()
+              }];
+            }
+
+            // Add to updated themes
+            updatedThemes[themeKey] = themeData;
+            importCount++;
+          });
+        }
+
         if (importCount > 0) {
-          alert(`Successfully imported ${importCount} themes${skipCount > 0 ? ` (${skipCount} skipped due to invalid format)` : ''}`);
+          // Update state and localStorage
+          setCustomThemes(updatedThemes);
+          localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
+
+          // Show result
+          alert(`Successfully imported ${importCount} theme${importCount !== 1 ? 's' : ''}${skipCount > 0 ? ` (${skipCount} skipped due to invalid format)` : ''}`);
         } else {
           alert('No valid themes found in the import file');
         }
@@ -1703,58 +1761,13 @@ const NewSettings: React.FC = () => {
             {/* Tab Content - Will be populated in the next steps */}
             {activeTab === 'themes' && (
               <div>
-                <div className="flex justify-between items-center mb-6">
+                <div className="mb-6">
                   <h2 className="text-2xl font-bold text-theme-primary flex items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
                     </svg>
                     Theme Settings
                   </h2>
-                  <div className="flex space-x-2">
-                    <Tooltip text="Create a new custom theme" position="top">
-                      <button
-                        className="px-3 py-1.5 bg-gray-700 text-white text-sm rounded hover:bg-gray-600 transition-colors flex items-center"
-                        onClick={() => setShowNewThemeForm(true)}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
-                        New Theme
-                      </button>
-                    </Tooltip>
-                    <Tooltip text="Export all your custom themes to a file" position="top">
-                      <button
-                        className="px-3 py-1.5 bg-gray-700 text-white text-sm rounded hover:bg-gray-600 transition-colors flex items-center"
-                        onClick={exportCustomThemes}
-                        disabled={Object.keys(customThemes).length === 0}
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                        </svg>
-                        Export
-                      </button>
-                    </Tooltip>
-                    <Tooltip text="Import themes from a JSON file" position="top">
-                      <div className="relative">
-                        <input
-                          type="file"
-                          id="import-themes"
-                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                          accept=".json"
-                          onChange={importCustomThemes}
-                        />
-                        <label
-                          htmlFor="import-themes"
-                          className="px-3 py-1.5 bg-gray-700 text-white text-sm rounded hover:bg-gray-600 transition-colors flex items-center cursor-pointer"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                          </svg>
-                          Import
-                        </label>
-                      </div>
-                    </Tooltip>
-                  </div>
                 </div>
 
                 {/* Theme Categories */}
@@ -2653,8 +2666,10 @@ const NewSettings: React.FC = () => {
                       </Tooltip>
                       <Tooltip text="Import a theme from a JSON file" position="top">
                         <label className="w-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2 rounded-md text-sm flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
-                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v-1a3 3 0 013-3h10a3 3 0 013 3v1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
                           </svg>
                           Import
                           <input
@@ -2721,14 +2736,14 @@ const NewSettings: React.FC = () => {
                           Export All Themes
                         </button>
                       </Tooltip>
-                      <Tooltip text="Import multiple themes from a file" position="top">
+                      <Tooltip text="Import themes from a file" position="top">
                         <label className="w-full bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-4 py-2.5 rounded-md text-sm flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
                             <polyline points="17 8 12 3 7 8" />
                             <line x1="12" y1="3" x2="12" y2="15" />
                           </svg>
-                          Import All Themes
+                          Import Themes
                           <input
                             type="file"
                             accept=".json"
