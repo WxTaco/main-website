@@ -24,6 +24,13 @@ const Footer = () => {
       ]
     },
     {
+      title: "Builders",
+      links: [
+        { name: "Bot Builder", path: "/bot-builder" },
+        { name: "Website Builder", path: "/website-builder" },
+      ]
+    },
+    {
       title: "Legal",
       links: [
         { name: "Terms of Service", path: "/terms" },
@@ -47,7 +54,7 @@ const Footer = () => {
             </div>
             <div>
               <h2 className="text-2xl font-saira font-bold text-theme-primary">Wrapped V2</h2>
-              <p className="text-gray-300 text-sm">A multi-purpose Discord bot designed with you in mind</p>
+              <p className="text-gray-300 text-sm">Create Discord bots and websites with our intuitive builders</p>
             </div>
           </div>
 

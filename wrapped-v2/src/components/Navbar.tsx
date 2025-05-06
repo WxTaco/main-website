@@ -25,6 +25,7 @@ const Navbar = () => {
   const mainNavLinks = [
     { to: '/', label: 'Home' },
     { to: '/bot-builder', label: 'Bot Builder' },
+    { to: '/website-builder', label: 'Website Builder' },
     { to: '/partnerships', label: 'Partnerships' },
     { to: '/about', label: 'About Us' },
   ];

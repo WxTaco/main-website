@@ -1,6 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ChromePicker } from 'react-color';
 
+// Define a type for color result from react-color
+interface ColorResult {
+  hex: string;
+  rgb: { r: number; g: number; b: number; a?: number };
+  hsl: { h: number; s: number; l: number; a?: number };
+}
+
+// Custom wrapper for ChromePicker to avoid defaultProps warnings
+const CustomChromePicker = ({
+  color,
+  onChange,
+  disableAlpha = false
+}: {
+  color: string;
+  onChange: (color: ColorResult) => void;
+  disableAlpha?: boolean;
+}) => {
+  return (
+    <ChromePicker
+      color={color}
+      onChange={onChange}
+      disableAlpha={disableAlpha}
+    />
+  );
+};
+
 interface ColorPickerPopupProps {
   color: string;
   onChange: (color: string) => void;
@@ -11,7 +37,7 @@ const ColorPickerPopup: React.FC<ColorPickerPopupProps> = ({ color, onChange, la
   const [showPicker, setShowPicker] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);
 
-  const handleColorChange = (newColor: any) => {
+  const handleColorChange = (newColor: ColorResult) => {
     onChange(newColor.hex);
   };
 
@@ -53,7 +79,7 @@ const ColorPickerPopup: React.FC<ColorPickerPopupProps> = ({ color, onChange, la
         <div className="color-picker-popup">
           <div className="color-picker-popup-overlay" onClick={togglePicker}></div>
           <div className="color-picker-popup-content" ref={pickerRef}>
-            <ChromePicker
+            <CustomChromePicker
               color={color}
               onChange={handleColorChange}
               disableAlpha={false}

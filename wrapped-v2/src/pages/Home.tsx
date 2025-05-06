@@ -135,11 +135,10 @@ const Home = () => {
         </h1>
         <section className="text-center">
           <p className="text-xl max-w-3xl mx-auto text-gray-100 font-medium shadow-sm mb-4">
-            <span className="text-wrapped-yellow font-bold">Wrapped</span> is our version of a{' '}
-            <span className="text-wrapped-green font-bold">multi-purpose</span> discord bot designed with{' '}
-            <span className="text-wrapped-blue font-bold">you</span> in mind! We are dedicated to developing
-            a bot that has the best user experience possible, and we accomplish that by putting{' '}
-            <span className="text-wrapped-green font-bold">you</span>, the user, first!
+            <span className="text-wrapped-yellow font-bold">Wrapped</span> is your all-in-one platform for creating{' '}
+            <span className="text-wrapped-green font-bold">Discord bots</span> and{' '}
+            <span className="text-wrapped-blue font-bold">websites</span> with ease! Our intuitive builders let you create without coding, putting{' '}
+            <span className="text-wrapped-green font-bold">you</span>, the creator, first!
           </p>
           <div className="bg-gray-900/90 rounded-lg p-4 mt-6 border border-theme-primary/30 dark:bg-black/60">
             <p className="text-lg text-theme-primary font-bold text-center">
@@ -147,6 +146,47 @@ const Home = () => {
             </p>
           </div>
         </section>
+      </div>
+
+      {/* Builder Cards */}
+      <div className="w-full max-w-5xl mb-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Bot Builder Card */}
+        <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20 flex flex-col">
+          <h2 className="text-3xl font-saira text-theme-primary mb-4 font-semibold drop-shadow text-center">Bot Builder</h2>
+          <p className="text-gray-100 mb-6 flex-grow">
+            Create your own Discord bot with our visual block-based builder! No coding experience required - just drag, drop, and connect blocks to build your perfect bot.
+          </p>
+          <div className="flex justify-center">
+            <Link
+              to="/bot-builder"
+              className="inline-flex items-center bg-theme-primary hover:bg-theme-primary/80 text-white font-bold py-2 px-4 rounded-md transition-all duration-200 transform hover:scale-105"
+            >
+              <span className="mr-2">Start Building</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+
+        {/* Website Builder Card */}
+        <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20 flex flex-col">
+          <h2 className="text-3xl font-saira text-theme-primary mb-4 font-semibold drop-shadow text-center">Website Builder</h2>
+          <p className="text-gray-100 mb-6 flex-grow">
+            Create your own website with our visual block-based builder! Drag and drop components to design beautiful, responsive websites without writing a single line of code.
+          </p>
+          <div className="flex justify-center">
+            <Link
+              to="/website-builder"
+              className="inline-flex items-center bg-theme-primary hover:bg-theme-primary/80 text-white font-bold py-2 px-4 rounded-md transition-all duration-200 transform hover:scale-105"
+            >
+              <span className="mr-2">Start Building</span>
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </Link>
+          </div>
+        </div>
       </div>
 
       {/* Categories Section */}
