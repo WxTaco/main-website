@@ -435,6 +435,7 @@ const WebsiteBuilderEditor = () => {
   const [previewDevice, setPreviewDevice] = useState<'desktop' | 'tablet' | 'mobile'>('desktop');
   const [showDeployDialog, setShowDeployDialog] = useState(false);
   const [showDeploymentHistoryDialog, setShowDeploymentHistoryDialog] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   // Initialize with default navbar and footer
   useEffect(() => {
@@ -633,6 +634,24 @@ const WebsiteBuilderEditor = () => {
     setSelectedComponentData(null);
     setShowClearDialog(false);
   }, []);
+
+  useEffect(() => {
+    const checkDevice = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  if (!isDesktop) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-gray-900 text-white text-center p-8">
+        <div className="max-w-md mx-auto">
+          <h1 className="text-2xl font-bold mb-4">You can only use this service on a desktop or laptop computer.</h1>
+          <p className="text-lg">Please switch to a desktop or laptop to use the Website Builder.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen w-full themed-gradient-bg flex flex-col items-center justify-start py-6 px-4">

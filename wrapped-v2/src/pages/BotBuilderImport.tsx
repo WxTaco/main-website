@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,6 +11,25 @@ const BotBuilderImport = () => {
   const [importMethod, setImportMethod] = useState('upload');
   const [githubUrl, setGithubUrl] = useState('');
   const [importStatus, setImportStatus] = useState('');
+  const [isDesktop, setIsDesktop] = useState(true);
+
+  useEffect(() => {
+    const checkDevice = () => setIsDesktop(window.innerWidth >= 1024);
+    checkDevice();
+    window.addEventListener('resize', checkDevice);
+    return () => window.removeEventListener('resize', checkDevice);
+  }, []);
+
+  if (!isDesktop) {
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center bg-gray-900 text-white text-center p-8">
+        <div className="max-w-md mx-auto">
+          <h1 className="text-2xl font-bold mb-4">You can only use this service on a desktop or laptop computer.</h1>
+          <p className="text-lg">Please switch to a desktop or laptop to use the Bot Builder.</p>
+        </div>
+      </div>
+    );
+  }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
