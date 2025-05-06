@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Import the dummy export
-import { WebsiteComponentProps as _WebsiteComponentProps } from './componentTypes';
+import type { WebsiteComponentProps } from './componentTypes';
 
 // Base interface for all website components - defined as a type but not exported
 // @ts-ignore
@@ -47,7 +47,7 @@ const WebsiteComponent: React.FC<WebsiteComponentProps> = ({
   const combinedStyle = {
     ...style,
     width: isContainer ? '100%' : style?.width,
-    boxSizing: 'border-box',
+    boxSizing: 'border-box' as React.CSSProperties['boxSizing'],
   };
 
   return (

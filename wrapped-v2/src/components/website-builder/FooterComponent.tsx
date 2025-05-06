@@ -1,6 +1,6 @@
 import React from 'react';
 import WebsiteComponent from './WebsiteComponent';
-import { FooterComponentProps as _FooterComponentProps } from './componentTypes';
+import type { FooterComponentProps } from './componentTypes';
 
 // @ts-ignore
 /** @typedef {Object} FooterComponentProps

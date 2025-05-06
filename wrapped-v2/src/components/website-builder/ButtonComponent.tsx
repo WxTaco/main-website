@@ -1,6 +1,6 @@
 import React from 'react';
 import WebsiteComponent from './WebsiteComponent';
-import { ButtonComponentProps as _ButtonComponentProps } from './componentTypes';
+import type { ButtonComponentProps } from './componentTypes';
 
 // @ts-ignore
 /** @typedef {Object} ButtonComponentProps

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import WebsiteComponent from './WebsiteComponent';
-import { ContainerComponentProps as _ContainerComponentProps } from './componentTypes';
+import type { ContainerComponentProps } from './componentTypes';
 import { renderComponent } from './ComponentRegistry';
 import ResizableContainer from './ResizableContainer';
 
@@ -214,7 +214,7 @@ const ContainerComponent: React.FC<ContainerComponentProps> = ({
         onResizeEnd={handleResizeEnd}
         gridColumnSpan={gridColumnSpan}
         gridRowSpan={gridRowSpan}
-        isSelected={isSelected}
+        isSelected={!!isSelected}
       >
         <div
           ref={containerRef}

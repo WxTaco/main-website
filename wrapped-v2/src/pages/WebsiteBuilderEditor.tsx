@@ -28,7 +28,7 @@ interface ComponentItem {
 export interface Component {
   id: string;
   type: string;
-  props?: any;
+  props: any;
   children?: Component[];
 }
 
@@ -142,6 +142,15 @@ const DraggableComponent = ({ type, name, icon }: { type: string; name: string; 
 };
 
 // Droppable component for containers
+interface DroppableContainerProps {
+  id: string;
+  children: React.ReactNode;
+  components: Component[];
+  setComponents: React.Dispatch<React.SetStateAction<Component[]>>;
+  selectedComponent: string | null;
+  setSelectedComponent: React.Dispatch<React.SetStateAction<string | null>>;
+}
+
 const DroppableContainer = ({
   id,
   children,
@@ -149,7 +158,7 @@ const DroppableContainer = ({
   setComponents,
   selectedComponent,
   setSelectedComponent,
-}) => {
+}: DroppableContainerProps) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: 'component',
     drop: (item: ComponentItem, monitor) => {
@@ -193,13 +202,21 @@ const DroppableContainer = ({
 };
 
 // Droppable area for the preview
+interface DroppablePreviewProps {
+  components: Component[];
+  setComponents: React.Dispatch<React.SetStateAction<Component[]>>;
+  selectedComponent: string | null;
+  setSelectedComponent: React.Dispatch<React.SetStateAction<string | null>>;
+  onAddChildToContainer: (containerId: string, component: Component) => void;
+}
+
 const DroppablePreview = ({
   components,
   setComponents,
   selectedComponent,
   setSelectedComponent,
   onAddChildToContainer,
-}) => {
+}: DroppablePreviewProps) => {
   // Set up drop functionality for the main content area
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'component',
@@ -226,7 +243,7 @@ const DroppablePreview = ({
   });
 
   // Helper function to recursively find a component by ID
-  const findComponentById = (components: any[], id: string): any => {
+  const findComponentById = (components: Component[], id: string): Component | null => {
     for (const component of components) {
       if (component.id === id) {
         return component;
@@ -244,7 +261,7 @@ const DroppablePreview = ({
   };
 
   // Helper function to recursively delete a component by ID
-  const deleteComponentById = (components: any[], id: string): any[] => {
+  const deleteComponentById = (components: Component[], id: string): Component[] => {
     // First check if the component is at this level
     const filteredComponents = components.filter(comp => comp.id !== id);
 
@@ -288,7 +305,7 @@ const DroppablePreview = ({
   };
 
   // Render a component and its children recursively
-  const renderComponentWithChildren = (component: any) => {
+  const renderComponentWithChildren = (component: Component) => {
     // Special handling for container components with children
     if (component.type === 'container') {
       // Ensure container props include gridColumnSpan and gridRowSpan
@@ -481,7 +498,7 @@ const WebsiteBuilderEditor = () => {
   // Handle updating component properties
   const handleUpdateComponent = useCallback((id: string, props: any) => {
     // Helper function to update a component in a nested structure
-    const updateComponentProps = (components: any[], id: string, props: any): any[] => {
+    const updateComponentProps = (components: Component[], id: string, props: any): Component[] => {
       return components.map(component => {
         if (component.id === id) {
           return { ...component, props };
@@ -541,9 +558,9 @@ const WebsiteBuilderEditor = () => {
   }, [websiteName, components]);
 
   // Handle adding a child component to a container
-  const handleAddChildToContainer = useCallback((containerId: string, childComponent: any) => {
+  const handleAddChildToContainer = useCallback((containerId: string, childComponent: Component) => {
     // Helper function to add a child to a container in a nested structure
-    const addChildToContainer = (components: any[], containerId: string, childComponent: any): any[] => {
+    const addChildToContainer = (components: Component[], containerId: string, childComponent: Component): Component[] => {
       return components.map(component => {
         if (component.id === containerId) {
           return {

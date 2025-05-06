@@ -1,6 +1,6 @@
 import React from 'react';
 import WebsiteComponent from './WebsiteComponent';
-import { TextComponentProps as _TextComponentProps } from './componentTypes';
+import type { TextComponentProps } from './componentTypes';
 
 // @ts-ignore
 /** @typedef {Object} TextComponentProps

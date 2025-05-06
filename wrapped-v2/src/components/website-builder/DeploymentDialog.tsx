@@ -106,7 +106,7 @@ const DeploymentDialog: React.FC<DeploymentDialogProps> = ({
       } else {
         setDeploymentResult({
           success: false,
-          message: `Deployment failed: ${result.errors.map(e => e.message).join(', ')}`,
+          message: `Deployment failed: ${result.errors.map((e: any) => e.message).join(', ')}`,
         });
       }
     } catch (error) {

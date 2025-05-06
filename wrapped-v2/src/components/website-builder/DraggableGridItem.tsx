@@ -38,58 +38,61 @@ const DraggableGridItem: React.FC<DraggableGridItemProps> = ({
   });
 
   // Set up drop
-  const [{ handlerId, isOver }, drop] = useDrop({
-    accept: 'grid-item',
-    collect: (monitor) => ({
-      handlerId: monitor.getHandlerId(),
-      isOver: monitor.isOver(),
+  const [{ handlerId, isOver }, drop] = useDrop<{ handlerId: string }, void, { handlerId: string; isOver: boolean }>(
+    () => ({
+      accept: 'grid-item',
+      collect: (monitor) => ({
+        handlerId: monitor.getHandlerId() as string,
+        isOver: !!monitor.isOver(),
+      }),
+      hover: (item: unknown, monitor) => {
+        const dragItem = item as DragItem;
+        if (!ref.current) {
+          return;
+        }
+
+        const dragIndex = dragItem.index;
+        const hoverIndex = index;
+
+        // Don't replace items with themselves
+        if (dragIndex === hoverIndex) {
+          return;
+        }
+
+        // Get rectangle on screen
+        const hoverBoundingRect = ref.current.getBoundingClientRect();
+
+        // Get horizontal middle
+        const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
+
+        // Get mouse position
+        const clientOffset = monitor.getClientOffset();
+
+        // Get pixels to the left
+        const hoverClientX = clientOffset!.x - hoverBoundingRect.left;
+
+        // Only perform the move when the mouse has crossed half of the item's width
+        // Dragging left to right
+        if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
+          return;
+        }
+
+        // Dragging right to left
+        if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
+          return;
+        }
+
+        // Time to actually perform the action
+        moveItem(dragIndex, hoverIndex);
+
+        // Note: we're mutating the monitor item here!
+        // Generally it's better to avoid mutations,
+        // but it's good here for the sake of performance
+        // to avoid expensive index searches.
+        dragItem.index = hoverIndex;
+      },
     }),
-    hover: (item: DragItem, monitor) => {
-      if (!ref.current) {
-        return;
-      }
-
-      const dragIndex = item.index;
-      const hoverIndex = index;
-
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Get rectangle on screen
-      const hoverBoundingRect = ref.current.getBoundingClientRect();
-
-      // Get horizontal middle
-      const hoverMiddleX = (hoverBoundingRect.right - hoverBoundingRect.left) / 2;
-
-      // Get mouse position
-      const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the left
-      const hoverClientX = clientOffset!.x - hoverBoundingRect.left;
-
-      // Only perform the move when the mouse has crossed half of the item's width
-      // Dragging left to right
-      if (dragIndex < hoverIndex && hoverClientX < hoverMiddleX) {
-        return;
-      }
-
-      // Dragging right to left
-      if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
-        return;
-      }
-
-      // Time to actually perform the action
-      moveItem(dragIndex, hoverIndex);
-
-      // Note: we're mutating the monitor item here!
-      // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
-      // to avoid expensive index searches.
-      item.index = hoverIndex;
-    },
-  });
+  );
 
   // Initialize drag and drop refs
   drag(drop(ref));

@@ -1,6 +1,6 @@
 import React from 'react';
 import WebsiteComponent from './WebsiteComponent';
-import { NavbarComponentProps as _NavbarComponentProps } from './componentTypes';
+import type { NavbarComponentProps } from './componentTypes';
 
 // @ts-ignore
 /** @typedef {Object} NavbarComponentProps
@@ -74,9 +74,7 @@ const NavbarComponent: React.FC<NavbarComponentProps> = ({
               key={index}
               href={link.url}
               className="transition-colors duration-200"
-              style={{ color: textColor, ':hover': { color: accentColor } }}
-              onMouseOver={(e) => e.currentTarget.style.color = accentColor}
-              onMouseOut={(e) => e.currentTarget.style.color = textColor}
+              style={{ color: textColor }}
             >
               {link.text}
             </a>
