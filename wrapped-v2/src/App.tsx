@@ -36,6 +36,7 @@ import TextCaseConverter from './pages/TextCaseConverter';
 import CSSGenerator from './pages/CSSGenerator';
 import MarkdownEditor from './pages/MarkdownEditor';
 import ImageOptimizer from './pages/ImageOptimizer';
+import APITester from './pages/APITester';
 import BotBuilder from './pages/BotBuilder';
 import BotBuilderEditor from './pages/BotBuilderEditor';
 import BotBuilderImport from './pages/BotBuilderImport';
@@ -209,6 +210,10 @@ const router = createBrowserRouter([
       {
         path: '/tools/image-optimizer',
         element: <ImageOptimizer />,
+      },
+      {
+        path: '/tools/api-tester',
+        element: <APITester />,
       },
       {
         path: '*',

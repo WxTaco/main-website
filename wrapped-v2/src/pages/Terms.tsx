@@ -5,7 +5,7 @@ const Terms = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-theme-gradient-start via-theme-gradient-middle to-theme-gradient-end flex flex-col items-center justify-start py-12 px-4 transition-colors duration-300">
       <div className="max-w-4xl w-full bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-theme-border/30 dark:bg-black/80 dark:border-white/20">
         <h1 className="text-3xl font-saira mb-2 text-theme-primary">Terms of Service</h1>
-        <p className="text-gray-300 mb-8">Last updated: May 1, 2024</p>
+        <p className="text-gray-300 mb-8">Last updated: June 15, 2024</p>
         <div className="prose prose-invert max-w-none text-gray-100">
           <section>
             <h2>1. Acceptance of Terms</h2>
@@ -27,29 +27,46 @@ const Terms = () => {
               <li>You may not attempt to gain unauthorized access to the Bot's systems or networks.</li>
             </ul>
           </section>
+
           <section className="mt-8">
-            <h2>3. Disclaimer</h2>
+            <h2>3. Responsible Use of Tools</h2>
+            <p>
+              Wrapped V2 provides various developer tools, including an API testing tool. When using these tools, you agree to:
+            </p>
+            <ul className="list-disc ml-6 mt-4">
+              <li>Only test APIs for which you have explicit permission or ownership.</li>
+              <li>Not use our tools to conduct stress tests, load tests, or any form of Denial of Service (DoS) testing without explicit permission from the API owner.</li>
+              <li>Not use repeated or automated requests in a manner that could disrupt or degrade the performance of third-party services.</li>
+              <li>Comply with the terms of service of any third-party API you interact with.</li>
+              <li>Take full responsibility for any consequences resulting from your use of our tools.</li>
+            </ul>
+            <p className="mt-4">
+              We reserve the right to limit or restrict access to our tools if we detect abusive patterns or receive complaints about misuse.
+            </p>
+          </section>
+          <section className="mt-8">
+            <h2>4. Disclaimer</h2>
             <p>
               The Bot is provided "as is" without any warranties, expressed or implied. We do not warrant
               that the Bot will be uninterrupted or error-free.
             </p>
           </section>
           <section className="mt-8">
-            <h2>4. Limitations</h2>
+            <h2>5. Limitations</h2>
             <p>
               In no event shall Wrapped V2 or its developers be liable for any damages arising out of the
               use or inability to use the Bot.
             </p>
           </section>
           <section className="mt-8">
-            <h2>5. Changes to Terms</h2>
+            <h2>6. Changes to Terms</h2>
             <p>
               We reserve the right to modify these terms at any time. We will notify users of any changes
               by updating the "Last updated" date of these Terms of Service.
             </p>
           </section>
           <section className="mt-8">
-            <h2>6. Contact Information</h2>
+            <h2>7. Contact Information</h2>
             <p>
               For any questions regarding these Terms of Service, please contact us through our{' '}
               <a
