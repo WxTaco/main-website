@@ -47,12 +47,12 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(75, 85, 99, 0.8);
+  background: var(--color-primary, #c94baf);
   border-radius: 4px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(107, 114, 128, 0.9);
+  background: var(--color-secondary, #f472b6);
 }
 
 /* Custom Select Styles */
@@ -89,4 +89,18 @@ select {
     opacity: 1;
     transform: translate(-50%, 0);
   }
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
 }

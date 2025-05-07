@@ -28,6 +28,13 @@ import Partnerships from './pages/Partnerships';
 import Settings from './pages/Settings';
 import NewSettings from './pages/NewSettings';
 import NotFound from './pages/NotFound';
+import Tools from './pages/Tools';
+import JSONDebugger from './pages/JSONDebugger';
+import ColorPaletteGenerator from './pages/ColorPaletteGenerator';
+import DiscordEmbedBuilder from './pages/DiscordEmbedBuilder';
+import TextCaseConverter from './pages/TextCaseConverter';
+import CSSGenerator from './pages/CSSGenerator';
+import MarkdownEditor from './pages/MarkdownEditor';
 import BotBuilder from './pages/BotBuilder';
 import BotBuilderEditor from './pages/BotBuilderEditor';
 import BotBuilderImport from './pages/BotBuilderImport';
@@ -47,128 +54,156 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: 'about',
+        path: '/about',
         element: <About />,
       },
       {
-        path: 'partnerships',
+        path: '/partnerships',
         element: <Partnerships />,
       },
       {
-        path: 'terms',
+        path: '/terms',
         element: <Terms />,
       },
       {
-        path: 'cookie-policy',
+        path: '/cookie-policy',
         element: <CookiePolicy />,
       },
       {
-        path: 'utility',
+        path: '/utility',
         element: <Utility />,
       },
       {
-        path: 'moderation',
+        path: '/moderation',
         element: <ModerationOverview />,
       },
       {
-        path: 'roles',
+        path: '/roles',
         element: <RolesOverview />,
       },
       {
-        path: 'server',
+        path: '/server',
         element: <ServerOverview />,
       },
       {
-        path: 'channels',
+        path: '/channels',
         element: <ChannelsOverview />,
       },
       {
-        path: 'users',
+        path: '/users',
         element: <UsersOverview />,
       },
       {
-        path: 'fun',
+        path: '/fun',
         element: <FunOverview />,
       },
       {
-        path: 'tickets',
+        path: '/tickets',
         element: <TicketsOverview />,
       },
       {
-        path: 'utility/tickets',
+        path: '/utility/tickets',
         element: <Tickets />,
       },
       {
-        path: 'utility/reaction-roles',
+        path: '/utility/reaction-roles',
         element: <ReactionRoles />,
       },
       {
-        path: 'utility/welcomer',
+        path: '/utility/welcomer',
         element: <Welcomer />,
       },
       {
-        path: 'utility/gemini',
+        path: '/utility/gemini',
         element: <Gemini />,
       },
       {
-        path: 'utility/dictionary',
+        path: '/utility/dictionary',
         element: <Dictionary />,
       },
       {
-        path: 'utility/image-gen',
+        path: '/utility/image-gen',
         element: <ImageGen />,
       },
       {
-        path: 'moderation/tools',
+        path: '/moderation/tools',
         element: <Moderation />,
       },
       {
-        path: 'roles/commands',
+        path: '/roles/commands',
         element: <RoleCommands />,
       },
       {
-        path: 'server/commands',
+        path: '/server/commands',
         element: <ServerCommands />,
       },
       {
-        path: 'channels/commands',
+        path: '/channels/commands',
         element: <ChannelCommands />,
       },
       {
-        path: 'users/commands',
+        path: '/users/commands',
         element: <UserCommands />,
       },
       {
-        path: 'fun/commands',
+        path: '/fun/commands',
         element: <FunCommands />,
       },
       {
-        path: 'bot-builder',
+        path: '/bot-builder',
         element: <BotBuilder />,
       },
       {
-        path: 'bot-builder/editor',
+        path: '/bot-builder/editor',
         element: <BotBuilderEditor />,
       },
       {
-        path: 'bot-builder/import',
+        path: '/bot-builder/import',
         element: <BotBuilderImport />,
       },
       {
-        path: 'website-builder',
+        path: '/website-builder',
         element: <WebsiteBuilder />,
       },
       {
-        path: 'website-builder/editor',
+        path: '/website-builder/editor',
         element: <WebsiteBuilderEditor />,
       },
       {
-        path: 'settings',
+        path: '/settings',
         element: <NewSettings />,
       },
       {
-        path: 'old-settings',
+        path: '/old-settings',
         element: <Settings />,
+      },
+      {
+        path: '/tools',
+        element: <Tools />,
+      },
+      {
+        path: '/tools/json-debugger',
+        element: <JSONDebugger />,
+      },
+      {
+        path: '/tools/color-palette-generator',
+        element: <ColorPaletteGenerator />,
+      },
+      {
+        path: '/tools/discord-embed-builder',
+        element: <DiscordEmbedBuilder />,
+      },
+      {
+        path: '/tools/text-case-converter',
+        element: <TextCaseConverter />,
+      },
+      {
+        path: '/tools/css-generator',
+        element: <CSSGenerator />,
+      },
+      {
+        path: '/tools/markdown-editor',
+        element: <MarkdownEditor />,
       },
       {
         path: '*',
