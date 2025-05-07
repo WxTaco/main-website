@@ -1933,22 +1933,22 @@ const APITester = () => {
       <div className="w-full max-w-6xl mb-10">
         <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20">
           <h2 className="text-2xl font-saira text-theme-primary font-semibold mb-4">API Testing Tips</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-gray-900/70 rounded-lg p-4 border border-gray-700">
               <h3 className="text-lg font-medium text-theme-primary mb-2">Getting Started</h3>
               <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                <li>Use <strong>GET</strong> requests to retrieve data without modifying resources</li>
-                <li>Use <strong>POST</strong> requests to create new resources</li>
-                <li>Use <strong>PUT</strong> requests to update existing resources</li>
-                <li>Use <strong>DELETE</strong> requests to remove resources</li>
-                <li>Add appropriate headers like <code className="bg-gray-800 px-1 rounded">Content-Type: application/json</code> for JSON requests</li>
+                <li className="truncate"><span className="inline-block"><strong>GET</strong>: retrieve data without modifying resources</span></li>
+                <li className="truncate"><span className="inline-block"><strong>POST</strong>: create new resources</span></li>
+                <li className="truncate"><span className="inline-block"><strong>PUT</strong>: update existing resources</span></li>
+                <li className="truncate"><span className="inline-block"><strong>DELETE</strong>: remove resources</span></li>
+                <li className="truncate"><span className="inline-block">Add <code className="bg-gray-800 px-1 rounded">Content-Type: application/json</code></span></li>
               </ul>
               <div className="mt-3 bg-gray-800 p-2 rounded border border-gray-700">
                 <p className="text-xs text-theme-primary font-medium mb-1">Try these CORS-friendly APIs:</p>
                 <ul className="list-disc list-inside text-gray-400 text-xs space-y-1">
-                  <li><code className="bg-gray-700 px-1 rounded">https://jsonplaceholder.typicode.com/todos/1</code></li>
-                  <li><code className="bg-gray-700 px-1 rounded">https://api.publicapis.org/entries</code></li>
-                  <li><code className="bg-gray-700 px-1 rounded">https://catfact.ninja/fact</code></li>
+                  <li className="truncate"><code className="bg-gray-700 px-1 rounded overflow-x-auto max-w-full inline-block align-bottom">jsonplaceholder.typicode.com/todos/1</code></li>
+                  <li className="truncate"><code className="bg-gray-700 px-1 rounded overflow-x-auto max-w-full inline-block align-bottom">api.publicapis.org/entries</code></li>
+                  <li className="truncate"><code className="bg-gray-700 px-1 rounded overflow-x-auto max-w-full inline-block align-bottom">catfact.ninja/fact</code></li>
                 </ul>
               </div>
             </div>
@@ -1956,52 +1956,52 @@ const APITester = () => {
             <div className="bg-gray-900/70 rounded-lg p-4 border border-gray-700">
               <h3 className="text-lg font-medium text-theme-primary mb-2">Test Modes</h3>
               <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                <li><strong>Single Request</strong>: Standard API testing for individual endpoints</li>
-                <li><strong>Repeated Requests</strong>: Stress test endpoints with multiple identical requests</li>
-                <li><strong>Sequence Testing</strong>: Chain multiple requests together with data extraction</li>
-                <li><strong>Transform Testing</strong>: Test with automatically modified parameters</li>
-                <li>Use the test results visualization to identify performance bottlenecks</li>
+                <li className="truncate"><span className="inline-block"><strong>Single</strong>: Test individual endpoints</span></li>
+                <li className="truncate"><span className="inline-block"><strong>Repeated</strong>: Stress test with multiple requests</span></li>
+                <li className="truncate"><span className="inline-block"><strong>Sequence</strong>: Chain requests with data extraction</span></li>
+                <li className="truncate"><span className="inline-block"><strong>Transform</strong>: Test with modified parameters</span></li>
+                <li className="truncate"><span className="inline-block">Visualize results to identify bottlenecks</span></li>
               </ul>
             </div>
 
             <div className="bg-gray-900/70 rounded-lg p-4 border border-gray-700">
               <h3 className="text-lg font-medium text-theme-primary mb-2">Advanced Usage</h3>
               <ul className="list-disc list-inside text-gray-300 text-sm space-y-1">
-                <li>Save frequently used requests for quick access</li>
-                <li>Check response headers for useful information like rate limits</li>
-                <li>Use the Format JSON button to prettify your request body</li>
-                <li>For authentication, add an <code className="bg-gray-800 px-1 rounded">Authorization</code> header with your token</li>
-                <li>Test your APIs with different parameters to ensure robust error handling</li>
+                <li className="truncate"><span className="inline-block">Save requests for quick access</span></li>
+                <li className="truncate"><span className="inline-block">Check headers for rate limits</span></li>
+                <li className="truncate"><span className="inline-block">Format JSON for readability</span></li>
+                <li className="truncate"><span className="inline-block">Add <code className="bg-gray-800 px-1 rounded">Authorization</code> header for auth</span></li>
+                <li className="truncate"><span className="inline-block">Test with different parameters</span></li>
               </ul>
             </div>
 
             <div className="bg-gray-900/70 rounded-lg p-4 border border-gray-700">
               <h3 className="text-lg font-medium text-theme-primary mb-2">Keyboard Shortcuts</h3>
               <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300 text-sm">Send Request</span>
-                  <div className="flex space-x-1">
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
-                    <span className="text-gray-500">+</span>
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Enter</kbd>
+                <div className="grid grid-cols-2 gap-x-2 items-center">
+                  <span className="text-gray-300 text-sm truncate">Send Request:</span>
+                  <div className="flex items-center space-x-1 justify-end">
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
+                    <span className="text-gray-500 text-xs">+</span>
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Enter</kbd>
                   </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300 text-sm">Switch Tabs</span>
-                  <div className="flex space-x-1">
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
-                    <span className="text-gray-500">+</span>
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Tab</kbd>
+                <div className="grid grid-cols-2 gap-x-2 items-center">
+                  <span className="text-gray-300 text-sm truncate">Switch Tabs:</span>
+                  <div className="flex items-center space-x-1 justify-end">
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
+                    <span className="text-gray-500 text-xs">+</span>
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Tab</kbd>
                   </div>
                 </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-gray-300 text-sm">Format JSON</span>
-                  <div className="flex space-x-1">
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
-                    <span className="text-gray-500">+</span>
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Shift</kbd>
-                    <span className="text-gray-500">+</span>
-                    <kbd className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">F</kbd>
+                <div className="grid grid-cols-2 gap-x-2 items-center">
+                  <span className="text-gray-300 text-sm truncate">Format JSON:</span>
+                  <div className="flex items-center space-x-1 justify-end flex-wrap">
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Ctrl</kbd>
+                    <span className="text-gray-500 text-xs">+</span>
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">Shift</kbd>
+                    <span className="text-gray-500 text-xs">+</span>
+                    <kbd className="px-1.5 py-0.5 bg-gray-800 text-gray-300 text-xs rounded border border-gray-600">F</kbd>
                   </div>
                 </div>
               </div>
