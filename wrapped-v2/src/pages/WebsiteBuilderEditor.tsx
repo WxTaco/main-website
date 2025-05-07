@@ -11,20 +11,20 @@ import DraggableGridItem from '../components/website-builder/DraggableGridItem';
 import DeploymentDialog from '../components/website-builder/DeploymentDialog';
 import DeploymentHistoryDialog from '../components/website-builder/DeploymentHistoryDialog';
 
-// Declare global window interface
+
 declare global {
   interface Window {
     updateComponentProps?: (id: string, props: any) => void;
   }
 }
 
-// Define the component item for drag and drop
+
 interface ComponentItem {
   type: string;
   name: string;
 }
 
-// Define the component data structure
+
 export interface Component {
   id: string;
   type: string;
@@ -32,13 +32,13 @@ export interface Component {
   children?: Component[];
 }
 
-// Helper function to find a component by ID in a nested structure
+
 const findComponentById = (components: Component[], id: string): Component | null => {
-  // First check in the main components array
+ 
   const component = components.find(comp => comp.id === id);
   if (component) return component;
 
-  // If not found, recursively check in children
+ 
   for (const comp of components) {
     if (comp.children && comp.children.length > 0) {
       const found = findComponentById(comp.children, id);
@@ -49,7 +49,7 @@ const findComponentById = (components: Component[], id: string): Component | nul
   return null;
 };
 
-// Get default props based on component type
+
 const getDefaultProps = (type: string) => {
   switch (type) {
     case 'container':
@@ -66,7 +66,7 @@ const getDefaultProps = (type: string) => {
         borderColor: 'rgba(75, 85, 99, 0.5)',
         borderStyle: 'solid',
         boxShadow: 'none',
-        gridColumnSpan: 12, // Default to full width
+        gridColumnSpan: 12,
         gridRowSpan: 1,
       };
     case 'text':
@@ -118,7 +118,7 @@ const getDefaultProps = (type: string) => {
   }
 };
 
-// Draggable component for the sidebar
+
 const DraggableComponent = ({ type, name, icon }: { type: string; name: string; icon: React.ReactNode }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: 'component',
@@ -141,7 +141,7 @@ const DraggableComponent = ({ type, name, icon }: { type: string; name: string; 
   );
 };
 
-// Droppable component for containers
+
 interface DroppableContainerProps {
   id: string;
   children: React.ReactNode;
@@ -166,14 +166,14 @@ const DroppableContainer = ({
         return;
       }
 
-      // Add the new component to this container
+     
       const newComponent: Component = {
         id: uuidv4(),
         type: item.type,
         props: getDefaultProps(item.type),
       };
 
-      // Update the components tree by adding the new component to the container
+     
       setComponents((prev) => {
         return prev.map((component) => {
           if (component.id === id) {
@@ -201,7 +201,7 @@ const DroppableContainer = ({
   );
 };
 
-// Droppable area for the preview
+
 interface DroppablePreviewProps {
   components: Component[];
   setComponents: React.Dispatch<React.SetStateAction<Component[]>>;
@@ -217,23 +217,23 @@ const DroppablePreview = ({
   setSelectedComponent,
   onAddChildToContainer,
 }: DroppablePreviewProps) => {
-  // Set up drop functionality for the main content area
+ 
   const [{ isOver, canDrop }, drop] = useDrop({
     accept: 'component',
     drop: (item: ComponentItem, monitor) => {
-      // Prevent drop if already handled by a child
+     
       if (monitor.didDrop()) {
         return;
       }
 
-      // Add the new component to the main content area
+     
       const newComponent: Component = {
         id: uuidv4(),
         type: item.type,
         props: getDefaultProps(item.type),
       };
 
-      // Add the new component to the components array
+     
       setComponents(prev => [...prev, newComponent]);
     },
     collect: (monitor) => ({
@@ -242,7 +242,7 @@ const DroppablePreview = ({
     }),
   });
 
-  // Helper function to recursively find a component by ID
+ 
   const findComponentById = (components: Component[], id: string): Component | null => {
     for (const component of components) {
       if (component.id === id) {
@@ -260,17 +260,17 @@ const DroppablePreview = ({
     return null;
   };
 
-  // Helper function to recursively delete a component by ID
+ 
   const deleteComponentById = (components: Component[], id: string): Component[] => {
-    // First check if the component is at this level
+   
     const filteredComponents = components.filter(comp => comp.id !== id);
 
-    // If we removed something, return the filtered array
+   
     if (filteredComponents.length < components.length) {
       return filteredComponents;
     }
 
-    // Otherwise, check children
+   
     return filteredComponents.map(comp => {
       if (comp.children && comp.children.length > 0) {
         return {
@@ -282,21 +282,21 @@ const DroppablePreview = ({
     });
   };
 
-  // Handle component selection
+ 
   const handleSelectComponent = (id: string) => {
     setSelectedComponent(id);
   };
 
-  // Handle component deletion
+ 
   const handleDeleteComponent = (id: string) => {
-    // Check if the component is a navbar or footer (which shouldn't be deleted)
+   
     const component = findComponentById(components, id);
     if (component && (component.type === 'navbar' || component.type === 'footer')) {
       alert('The navbar and footer cannot be removed from the website.');
       return;
     }
 
-    // Update the components state
+   
     setComponents(prev => deleteComponentById(prev, id));
 
     if (selectedComponent === id) {
@@ -304,16 +304,16 @@ const DroppablePreview = ({
     }
   };
 
-  // Render a component and its children recursively
+ 
   const renderComponentWithChildren = (component: Component) => {
-    // Special handling for container components with children
+   
     if (component.type === 'container') {
-      // Ensure container props include gridColumnSpan and gridRowSpan
+     
       const containerProps = {
         ...component.props,
         childComponents: component.children || [],
         onAddChild: onAddChildToContainer,
-        // Ensure these properties exist with default values if not set
+       
         gridColumnSpan: component.props?.gridColumnSpan || 12,
         gridRowSpan: component.props?.gridRowSpan || 1,
         width: '100%',
@@ -332,7 +332,7 @@ const DroppablePreview = ({
       );
     }
 
-    // For other components
+   
     return renderComponent(
       component,
       handleSelectComponent,
@@ -341,7 +341,7 @@ const DroppablePreview = ({
     );
   };
 
-  // Separate navbar, content, and footer components
+ 
   const navbarComponent = components.find(comp => comp.type === 'navbar');
   const footerComponent = components.find(comp => comp.type === 'footer');
   const contentComponents = components.filter(
@@ -375,17 +375,17 @@ const DroppablePreview = ({
           ) : (
             <div className="grid grid-cols-12 gap-4 w-full">
               {contentComponents.map(component => {
-                // Determine the grid column span for containers
+               
                 const colSpanClass = component.type === 'container' && component.props && component.props.gridColumnSpan
                   ? `col-span-${Math.max(1, Math.min(component.props.gridColumnSpan, 12))}`
                   : "col-span-12 md:col-span-6 lg:col-span-4 xl:col-span-3";
 
-                // Determine the grid row span for containers
+               
                 const rowSpanClass = component.type === 'container' && component.props && component.props.gridRowSpan
                   ? `row-span-${Math.max(1, Math.min(component.props.gridRowSpan, 6))}`
                   : "";
 
-                // For containers, ensure they take up the full width of their grid cells
+               
                 const widthClass = component.type === 'container' ? 'w-full' : '';
 
                 return (
@@ -422,7 +422,7 @@ const DroppablePreview = ({
   );
 };
 
-// Main editor component
+
 const WebsiteBuilderEditor = () => {
   const [activeTab, setActiveTab] = useState('editor');
   const [components, setComponents] = useState<Component[]>([]);
@@ -437,7 +437,7 @@ const WebsiteBuilderEditor = () => {
   const [showDeploymentHistoryDialog, setShowDeploymentHistoryDialog] = useState(false);
   const [isDesktop, setIsDesktop] = useState(true);
 
-  // Initialize with default navbar and footer
+ 
   useEffect(() => {
     if (components.length === 0) {
       const defaultNavbar: Component = {
@@ -452,9 +452,9 @@ const WebsiteBuilderEditor = () => {
             { text: 'Contact', url: '#contact' },
           ],
           fixed: true,
-          backgroundColor: 'rgb(17, 24, 39)', // bg-gray-900
-          textColor: 'rgb(229, 231, 235)', // text-gray-200
-          accentColor: 'var(--theme-primary)', // theme-primary
+          backgroundColor: 'rgb(17, 24, 39)',
+          textColor: 'rgb(229, 231, 235)',
+          accentColor: 'var(--theme-primary)',
         },
       };
 
@@ -474,9 +474,9 @@ const WebsiteBuilderEditor = () => {
             { platform: 'instagram', url: 'https://instagram.com' },
             { platform: 'linkedin', url: 'https://linkedin.com' },
           ],
-          backgroundColor: 'rgb(17, 24, 39)', // bg-gray-900
-          textColor: 'rgb(229, 231, 235)', // text-gray-200
-          accentColor: 'var(--theme-primary)', // theme-primary
+          backgroundColor: 'rgb(17, 24, 39)',
+          textColor: 'rgb(229, 231, 235)',
+          accentColor: 'var(--theme-primary)',
         },
       };
 
@@ -484,7 +484,7 @@ const WebsiteBuilderEditor = () => {
     }
   }, []);
 
-  // Update selectedComponentData when selectedComponent changes
+ 
   useEffect(() => {
     if (selectedComponent) {
       const component = findComponentById(components, selectedComponent);
@@ -496,16 +496,16 @@ const WebsiteBuilderEditor = () => {
     }
   }, [selectedComponent, components]);
 
-  // Handle updating component properties
+ 
   const handleUpdateComponent = useCallback((id: string, props: any) => {
-    // Helper function to update a component in a nested structure
+   
     const updateComponentProps = (components: Component[], id: string, props: any): Component[] => {
       return components.map(component => {
         if (component.id === id) {
           return { ...component, props };
         }
 
-        // If this component has children, recursively update them
+       
         if (component.children && component.children.length > 0) {
           return {
             ...component,
@@ -520,31 +520,31 @@ const WebsiteBuilderEditor = () => {
     setComponents(prevComponents => updateComponentProps(prevComponents, id, props));
   }, []);
 
-  // Add updateComponentProps to window for container resizing
+ 
   useEffect(() => {
-    // Add the updateComponentProps function to the window object
+   
     window.updateComponentProps = (id: string, props: any) => {
       console.log('Window updateComponentProps called:', id, props);
       handleUpdateComponent(id, props);
     };
 
-    // Log to confirm the function is attached
+   
     console.log('Added updateComponentProps to window');
 
-    // Clean up when component unmounts
+   
     return () => {
       delete window.updateComponentProps;
       console.log('Removed updateComponentProps from window');
     };
   }, [handleUpdateComponent]);
 
-  // Handle saving the website
+ 
   const handleSave = useCallback(() => {
     if (!websiteName.trim()) {
       return;
     }
 
-    // Save the website to localStorage
+   
     const savedWebsites = JSON.parse(localStorage.getItem('savedWebsites') || '{}');
     savedWebsites[websiteName] = {
       components,
@@ -552,15 +552,15 @@ const WebsiteBuilderEditor = () => {
     };
     localStorage.setItem('savedWebsites', JSON.stringify(savedWebsites));
 
-    // Close the dialog and show success message
+   
     setShowSaveDialog(false);
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 3000);
   }, [websiteName, components]);
 
-  // Handle adding a child component to a container
+ 
   const handleAddChildToContainer = useCallback((containerId: string, childComponent: Component) => {
-    // Helper function to add a child to a container in a nested structure
+   
     const addChildToContainer = (components: Component[], containerId: string, childComponent: Component): Component[] => {
       return components.map(component => {
         if (component.id === containerId) {
@@ -570,7 +570,7 @@ const WebsiteBuilderEditor = () => {
           };
         }
 
-        // If this component has children, recursively check them
+       
         if (component.children && component.children.length > 0) {
           return {
             ...component,
@@ -585,9 +585,9 @@ const WebsiteBuilderEditor = () => {
     setComponents(prevComponents => addChildToContainer(prevComponents, containerId, childComponent));
   }, []);
 
-  // Handle clearing the editor
+ 
   const handleClear = useCallback(() => {
-    // Create default navbar and footer
+   
     const defaultNavbar: Component = {
       id: uuidv4(),
       type: 'navbar',
@@ -600,9 +600,9 @@ const WebsiteBuilderEditor = () => {
           { text: 'Contact', url: '#contact' },
         ],
         fixed: true,
-        backgroundColor: 'rgb(17, 24, 39)', // bg-gray-900
-        textColor: 'rgb(229, 231, 235)', // text-gray-200
-        accentColor: 'var(--theme-primary)', // theme-primary
+        backgroundColor: 'rgb(17, 24, 39)',
+        textColor: 'rgb(229, 231, 235)',
+        accentColor: 'var(--theme-primary)',
       },
     };
 
@@ -622,13 +622,13 @@ const WebsiteBuilderEditor = () => {
           { platform: 'instagram', url: 'https://instagram.com' },
           { platform: 'linkedin', url: 'https://linkedin.com' },
         ],
-        backgroundColor: 'rgb(17, 24, 39)', // bg-gray-900
-        textColor: 'rgb(229, 231, 235)', // text-gray-200
-        accentColor: 'var(--theme-primary)', // theme-primary
+        backgroundColor: 'rgb(17, 24, 39)',
+        textColor: 'rgb(229, 231, 235)',
+        accentColor: 'var(--theme-primary)',
       },
     };
 
-    // Reset to only navbar and footer
+   
     setComponents([defaultNavbar, defaultFooter]);
     setSelectedComponent(null);
     setSelectedComponentData(null);

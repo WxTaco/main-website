@@ -35,6 +35,7 @@ import DiscordEmbedBuilder from './pages/DiscordEmbedBuilder';
 import TextCaseConverter from './pages/TextCaseConverter';
 import CSSGenerator from './pages/CSSGenerator';
 import MarkdownEditor from './pages/MarkdownEditor';
+import ImageOptimizer from './pages/ImageOptimizer';
 import BotBuilder from './pages/BotBuilder';
 import BotBuilderEditor from './pages/BotBuilderEditor';
 import BotBuilderImport from './pages/BotBuilderImport';
@@ -204,6 +205,10 @@ const router = createBrowserRouter([
       {
         path: '/tools/markdown-editor',
         element: <MarkdownEditor />,
+      },
+      {
+        path: '/tools/image-optimizer',
+        element: <ImageOptimizer />,
       },
       {
         path: '*',

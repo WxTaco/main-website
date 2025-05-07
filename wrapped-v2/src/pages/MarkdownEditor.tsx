@@ -149,21 +149,21 @@ const MarkdownEditor = () => {
     }, 3000);
   };
 
-  // Copy markdown or HTML to clipboard
+ 
   const copyToClipboard = (format: 'markdown' | 'html') => {
     const content = format === 'markdown' ? markdownText : htmlPreview;
     navigator.clipboard.writeText(content);
     showNotification(`${format === 'markdown' ? 'Markdown' : 'HTML'} copied to clipboard!`, content);
   };
 
-  // Export the content in the selected format
+ 
   const exportContent = () => {
     const format = exportFormats.find(f => f.id === selectedExportFormat);
     if (!format) return;
 
     let content = markdownText;
     if (format.id === 'html') {
-      // Create a full HTML document
+     
       content = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -220,7 +220,7 @@ const MarkdownEditor = () => {
 </html>`;
     }
 
-    // Create a blob and download it
+   
     const blob = new Blob([content], { type: format.mimeType });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -234,7 +234,7 @@ const MarkdownEditor = () => {
     showNotification(`Exported as ${format.name}!`, `File saved as document${format.extension}`);
   };
 
-  // Insert Discord markdown formatting
+ 
   const insertFormatting = (type: string) => {
     let textToInsert = '';
 
@@ -285,11 +285,11 @@ const MarkdownEditor = () => {
         return;
     }
 
-    // Insert at cursor position or append to end
+   
     setMarkdownText(prev => prev + '\n' + textToInsert);
   };
 
-  // Clean up notification timer on unmount
+ 
   useEffect(() => {
     return () => {
       if (notificationTimerRef.current) {
@@ -677,7 +677,7 @@ const MarkdownEditor = () => {
                 // Also run on DOMContentLoaded
                 document.addEventListener('DOMContentLoaded', setupSpoilers);
 
-                // Setup observer to handle dynamic content changes
+               
                 setTimeout(() => {
                   const previewContainer = document.querySelector('.markdown-preview');
                   if (previewContainer) {

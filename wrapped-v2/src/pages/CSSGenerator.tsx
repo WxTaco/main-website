@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { CopyNotification } from './ColorPaletteGenerator';
 
-// Define TypeScript interfaces
+
 interface CSSProperty {
   name: string;
   value: string;
@@ -26,7 +26,7 @@ const CSSGeneratorTool = () => {
   });
   const notificationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Button Generator State
+ 
   const [buttonText, setButtonText] = useState<string>('Button');
   const [buttonColor, setButtonColor] = useState<string>('#c94baf');
   const [buttonTextColor, setButtonTextColor] = useState<string>('#ffffff');
@@ -36,7 +36,7 @@ const CSSGeneratorTool = () => {
   const [buttonHoverEffect, setButtonHoverEffect] = useState<boolean>(true);
   const [buttonShadow, setButtonShadow] = useState<boolean>(false);
 
-  // Box Shadow Generator State
+ 
   const [shadowColor, setShadowColor] = useState<string>('rgba(0, 0, 0, 0.2)');
   const [shadowOffsetX, setShadowOffsetX] = useState<number>(0);
   const [shadowOffsetY, setShadowOffsetY] = useState<number>(4);
@@ -44,7 +44,7 @@ const CSSGeneratorTool = () => {
   const [shadowSpread, setShadowSpread] = useState<number>(0);
   const [shadowInset, setShadowInset] = useState<boolean>(false);
 
-  // Gradient Generator State
+ 
   const [gradientType, setGradientType] = useState<'linear' | 'radial'>('linear');
   const [gradientDirection, setGradientDirection] = useState<string>('to right');
   const [gradientColor1, setGradientColor1] = useState<string>('#c94baf');
@@ -52,7 +52,7 @@ const CSSGeneratorTool = () => {
   const [gradientStop1, setGradientStop1] = useState<number>(0);
   const [gradientStop2, setGradientStop2] = useState<number>(100);
 
-  // Border Generator State
+ 
   const [borderWidth, setBorderWidth] = useState<number>(1);
   const [borderStyle, setBorderStyle] = useState<string>('solid');
   const [borderColor, setBorderColor] = useState<string>('#c94baf');
@@ -61,7 +61,7 @@ const CSSGeneratorTool = () => {
   const [borderRadiusBL, setBorderRadiusBL] = useState<number>(4);
   const [borderRadiusBR, setBorderRadiusBR] = useState<number>(4);
 
-  // Define CSS generators
+ 
   const generators: { [key: string]: CSSGenerator } = {
     button: {
       id: 'button',
@@ -424,56 +424,56 @@ const CSSGeneratorTool = () => {
     }
   };
 
-  // Helper function to adjust color brightness
+ 
   const adjustColor = (color: string, amount: number): string => {
-    // Remove # if present
+   
     color = color.replace('#', '');
 
-    // Parse the hex values
+   
     const r = parseInt(color.substring(0, 2), 16);
     const g = parseInt(color.substring(2, 4), 16);
     const b = parseInt(color.substring(4, 6), 16);
 
-    // Adjust brightness
+   
     const newR = Math.max(0, Math.min(255, r + amount));
     const newG = Math.max(0, Math.min(255, g + amount));
     const newB = Math.max(0, Math.min(255, b + amount));
 
-    // Convert back to hex
+   
     return '#' +
       newR.toString(16).padStart(2, '0') +
       newG.toString(16).padStart(2, '0') +
       newB.toString(16).padStart(2, '0');
   };
 
-  // Show notification
+ 
   const showNotification = (message: string, content: string) => {
-    // Clear any existing timer
+   
     if (notificationTimerRef.current) {
       clearTimeout(notificationTimerRef.current);
     }
 
-    // Show the notification
+   
     setNotification({
       message,
       content,
       isVisible: true
     });
 
-    // Hide after 3 seconds
+   
     notificationTimerRef.current = setTimeout(() => {
       setNotification(prev => ({ ...prev, isVisible: false }));
     }, 3000);
   };
 
-  // Copy CSS to clipboard
+ 
   const copyToClipboard = () => {
     const css = generators[selectedGenerator].generateCSS();
     navigator.clipboard.writeText(css);
     showNotification('CSS copied to clipboard!', css);
   };
 
-  // Clean up notification timer on unmount
+ 
   useEffect(() => {
     return () => {
       if (notificationTimerRef.current) {

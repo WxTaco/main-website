@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 
-// No need for global window property
-
 const JSONDebugger = () => {
   const [jsonInput, setJsonInput] = useState<string>('');
   const [formattedJson, setFormattedJson] = useState<string>('');
@@ -16,7 +14,7 @@ const JSONDebugger = () => {
   const [fixChanges, setFixChanges] = useState<string[]>([]);
   const [keepMinified, setKeepMinified] = useState<boolean>(false);
 
-  // Example JSON with intentional errors for users to fix
+ 
   const exampleJson = `{
   'name': "Wrapped JSON Debugger",
   version: "1.0.0",
@@ -44,7 +42,7 @@ const JSONDebugger = () => {
   // This is a comment that will cause an error
 }`;
 
-  // Validate and format JSON
+ 
   const validateAndFormatJson = (input: string) => {
     if (!input.trim()) {
       setFormattedJson('');
@@ -57,19 +55,19 @@ const JSONDebugger = () => {
     const missingColonMatch = input.match(missingColonPattern);
 
     if (missingColonMatch) {
-      // Find the position of the missing colon
+     
       const match = missingColonMatch[0];
       const position = input.indexOf(match) + match.length - 1;
 
-      // Calculate line and column numbers
+     
       const lines = input.substring(0, position).split('\n');
       const lineNumber = lines.length;
       const columnNumber = lines[lines.length - 1].length + 1;
 
-      // Create a helpful error message
+     
       const enhancedError = `Missing colon between property name and value\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
 
-      // Get the problematic line and surrounding context
+     
       const allLines = input.split('\n');
       const startLine = Math.max(0, lineNumber - 2);
       const endLine = Math.min(allLines.length, lineNumber + 2);
@@ -86,24 +84,24 @@ const JSONDebugger = () => {
       return;
     }
 
-    // Check for missing commas between array elements
+   
     const missingArrayCommaPattern = /(\[|\,)\s*(?:"[^"]*"|\d+|true|false|null)\s+(?:"[^"]*"|\d+|true|false|null)/g;
     const missingArrayCommaMatch = input.match(missingArrayCommaPattern);
 
     if (missingArrayCommaMatch) {
-      // Find the position of the missing comma
+     
       const match = missingArrayCommaMatch[0];
       const position = input.indexOf(match) + match.length - 1;
 
-      // Calculate line and column numbers
+     
       const lines = input.substring(0, position).split('\n');
       const lineNumber = lines.length;
       const columnNumber = lines[lines.length - 1].length + 1;
 
-      // Create a helpful error message
+     
       const enhancedError = `Missing comma between array elements\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
 
-      // Get the problematic line and surrounding context
+     
       const allLines = input.split('\n');
       const startLine = Math.max(0, lineNumber - 2);
       const endLine = Math.min(allLines.length, lineNumber + 2);
@@ -120,24 +118,21 @@ const JSONDebugger = () => {
       return;
     }
 
-    // Check for missing commas between properties
     const missingCommaPattern = /"[^"]*"\s*:\s*(?:"[^"]*"|[\d.]+|true|false|null|\[[^\]]*\]|\{[^}]*\})\s*\n\s*"/g;
     const missingCommaMatch = input.match(missingCommaPattern);
 
     if (missingCommaMatch) {
-      // Find the position of the missing comma
+     
       const match = missingCommaMatch[0];
       const position = input.indexOf(match) + match.length - 1;
 
-      // Calculate line and column numbers
       const lines = input.substring(0, position).split('\n');
       const lineNumber = lines.length;
       const columnNumber = lines[lines.length - 1].length + 1;
 
-      // Create a helpful error message
       const enhancedError = `Missing comma between properties\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
 
-      // Get the problematic line and surrounding context
+     
       const allLines = input.split('\n');
       const startLine = Math.max(0, lineNumber - 2);
       const endLine = Math.min(allLines.length, lineNumber + 2);
@@ -154,25 +149,20 @@ const JSONDebugger = () => {
       return;
     }
 
-    // Check for invalid property names (starting with $ or containing special characters)
-    // More precise pattern that only matches actual property names
     const invalidPropertyPattern = /(?:^|\{|\,)\s*(\$"[^"]*"|"\$[^"]*"|"[^"]*\$[^"]*"|"[^a-zA-Z0-9_\-\s][^"]*")\s*:/g;
     const invalidPropertyMatch = input.match(invalidPropertyPattern);
 
     if (invalidPropertyMatch) {
-      // Find the position of the invalid property
+     
       const match = invalidPropertyMatch[0];
       const position = input.indexOf(match);
 
-      // Calculate line and column numbers
       const lines = input.substring(0, position).split('\n');
       const lineNumber = lines.length;
       const columnNumber = lines[lines.length - 1].length + 1;
 
-      // Create a helpful error message
       const enhancedError = `Invalid property name: Property names cannot start with $ or contain special characters\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
 
-      // Get the problematic line and surrounding context
       const allLines = input.split('\n');
       const startLine = Math.max(0, lineNumber - 2);
       const endLine = Math.min(allLines.length, lineNumber + 2);
@@ -190,10 +180,10 @@ const JSONDebugger = () => {
     }
 
     try {
-      // Parse the JSON to validate it
+     
       const parsedJson = JSON.parse(input);
 
-      // If keepMinified is true, don't format with indentation
+     
       const formatted = keepMinified
         ? JSON.stringify(parsedJson)
         : JSON.stringify(parsedJson, null, indentSize);
@@ -204,21 +194,21 @@ const JSONDebugger = () => {
     } catch (err) {
       const errorMessage = (err as Error).message;
 
-      // Extract position information from error message if available
+     
       const positionMatch = errorMessage.match(/position (\d+)/);
 
       if (positionMatch) {
         const position = parseInt(positionMatch[1]);
 
-        // Calculate line and column numbers
+       
         const lines = input.substring(0, position).split('\n');
         const lineNumber = lines.length;
         const columnNumber = lines[lines.length - 1].length + 1;
 
-        // Create a more helpful error message
+       
         let enhancedError = `${errorMessage}\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
 
-        // Add specific error hints based on the error message and context
+       
         if (errorMessage.includes('Expected') && errorMessage.includes('after property value')) {
           enhancedError = `Missing comma between properties\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
         } else if (errorMessage.includes('Unexpected token')) {
@@ -238,7 +228,7 @@ const JSONDebugger = () => {
           enhancedError = `Unexpected number. Numbers should be part of a property value or array element.\n\nError at line ${lineNumber}, column ${columnNumber}:\n`;
         }
 
-        // Get the problematic line and surrounding context
+       
         const allLines = input.split('\n');
         const startLine = Math.max(0, lineNumber - 2);
         const endLine = Math.min(allLines.length, lineNumber + 2);
@@ -259,44 +249,34 @@ const JSONDebugger = () => {
     }
   };
 
-  // Handle input changes
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setJsonInput(e.target.value);
   };
-
-  // Minify the JSON
   const handleMinify = () => {
     if (!jsonInput.trim()) return;
 
     try {
-      // Parse the JSON to validate it
+     
       const parsedJson = JSON.parse(jsonInput);
-
-      // Stringify without indentation (minified)
+ 
       const minified = JSON.stringify(parsedJson);
-
-      // Update both input and output
+ 
       setJsonInput(minified);
       setFormattedJson(minified);
       setError(null);
-      setIsValid(true);
-
-      // Set flag to keep the JSON minified
+      setIsValid(true); 
       setKeepMinified(true);
-    } catch (err) {
-      // If there's an error, just run the normal validation
+    } catch (err) { 
       validateAndFormatJson(jsonInput);
     }
   };
 
-  // Load example JSON
   const handleLoadExample = () => {
     setKeepMinified(false);
     setJsonInput(exampleJson);
     validateAndFormatJson(exampleJson);
   };
 
-  // Clear the input and output
   const handleClear = () => {
     setJsonInput('');
     setFormattedJson('');
@@ -305,7 +285,6 @@ const JSONDebugger = () => {
     setKeepMinified(false);
   };
 
-  // Copy formatted JSON to clipboard
   const handleCopy = () => {
     if (formattedJson) {
       navigator.clipboard.writeText(formattedJson);
@@ -314,23 +293,23 @@ const JSONDebugger = () => {
     }
   };
 
-  // Change indentation size
+ 
   const handleIndentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIndentSize(Number(e.target.value));
   };
 
-  // Close the fix details popup
+ 
   const handleCloseFixDetails = () => {
     setShowFixDetails(false);
   };
 
-  // Apply the fixed JSON to the input
+ 
   const handleApplyFix = () => {
     setJsonInput(fixedJson);
     setShowFixDetails(false);
   };
 
-  // Attempt to fix common JSON errors
+ 
   const handleFixJson = () => {
     setFixAttempted(true);
     setFixSuccess(false);
@@ -341,48 +320,44 @@ const JSONDebugger = () => {
     try {
       const changes: string[] = [];
 
-      // First, let's try a simple approach for common errors
+     
       let tempFixedJson = jsonInput;
 
-      // Replace single quotes with double quotes, but only when they're used for strings
-      // This avoids replacing apostrophes in text
+     
+     
       tempFixedJson = tempFixedJson.replace(/'([^']*)'(?!\w)/g, '"$1"');
 
-      // Remove comments (both // and /* */ style)
+     
       tempFixedJson = tempFixedJson.replace(/\/\/.*$/gm, '');
       tempFixedJson = tempFixedJson.replace(/\/\*[\s\S]*?\*\//g, '');
 
-      // Add quotes around unquoted keys - improved to avoid replacing inside strings
-      // First, handle property names at the beginning of lines or after commas
+     
+     
       tempFixedJson = tempFixedJson.replace(/(?<!")(?<=\{|\,|\[|\s)(\s*)(\w+)(\s*):/g, '$1"$2"$3:');
 
-      // Also handle property names at the beginning of the JSON object
+     
       tempFixedJson = tempFixedJson.replace(/^\s*(\w+)(\s*):/gm, '"$1"$2:');
 
-      // Fix invalid property names (starting with $ or containing special characters)
-      // Handle both $"property" and "$property" formats
+     
+     
       tempFixedJson = tempFixedJson.replace(/\$"([^"]*)"/g, '"$1"');
       tempFixedJson = tempFixedJson.replace(/"(\$[^"]*)"/g, '"$1"');
 
-      // Also handle property names with $ in the middle
+     
       tempFixedJson = tempFixedJson.replace(/"([^"]*\$[^"]*)"/g, (_, p1) => {
-        // Replace $ with _ to make it valid JSON
+       
         return `"${p1.replace(/\$/g, '_')}"`;
       });
 
-      // Add missing colons between property names and values - improved pattern
+     
       tempFixedJson = tempFixedJson.replace(/(?<!"[^"]*)"([^"]*)"\s+(?!"[^"]*"[^:]*:)(?:"[^"]*"|\d+(?:\.\d+)?|true|false|null|\[|\{)/g, '"$1": ');
-
-      // Also handle property names followed by unquoted values
+     
       tempFixedJson = tempFixedJson.replace(/(?<!"[^"]*)"([^"]*)"\s+(?!"[^"]*"[^:]*:)(?!true|false|null|\d+(?:\.\d+)?|\[|\{|\")(\w+)/g, '"$1": "$2"');
-
-      // Add missing commas between properties - improved to handle more cases
+     
       tempFixedJson = tempFixedJson.replace(/("(?:\\.|[^"\\])*")\s*:\s*("(?:\\.|[^"\\])*"|[\d.]+|true|false|null|\[[^\]]*\]|\{[^}]*\})\s*(?=\n\s*"[^"]*"\s*:)/g, '$1: $2,');
-
-      // Also handle properties followed by nested objects or arrays without commas
+     
       tempFixedJson = tempFixedJson.replace(/("(?:\\.|[^"\\])*")\s*:\s*("(?:\\.|[^"\\])*"|[\d.]+|true|false|null)\s*(?=\n\s*"[^"]*"\s*:\s*(?:\{|\[))/g, '$1: $2,');
 
-      // Fix missing commas between array elements
       tempFixedJson = tempFixedJson.replace(/(\[|\,)(\s*"[^"]*"|\s*\d+|\s*true|\s*false|\s*null|\s*\{[^{}]*\}|\s*\[[^\[\]]*\])\s+(?=\s*"[^"]*"|\s*\d+|\s*true|\s*false|\s*null|\s*\{|\s*\[)/g, '$1$2,');
 
       try {
@@ -450,7 +425,7 @@ const JSONDebugger = () => {
       const topLevelProps: Record<string, string> = {};
       const nameMatch1 = jsonInput.match(/['"]name['"]:\s*['"]([^'"]*)['"]|'name':\s*['"]([^'"]*)['"]|"name":\s*['"]([^'"]*)['"]/);
       if (nameMatch1) {
-        // Check which capturing group has the value
+       
         const nameValue = nameMatch1[1] || nameMatch1[2] || nameMatch1[3];
         if (nameValue) {
           topLevelProps["name"] = nameValue;
@@ -507,7 +482,7 @@ const JSONDebugger = () => {
           const path = parentPath ? `${parentPath}.${name}` : name;
 
           if (value.startsWith('{')) {
-            // Nested object - improved extraction with better boundary detection
+           
             const objStart = input.indexOf('{', propMatch.index + propMatch[0].indexOf(value));
             if (objStart !== -1) {
               let objDepth = 1;
@@ -525,7 +500,7 @@ const JSONDebugger = () => {
               }
             }
           } else if (value.startsWith('[')) {
-            // Array - improved extraction with better item detection
+           
             const arrStart = input.indexOf('[', propMatch.index + propMatch[0].indexOf(value));
             if (arrStart !== -1) {
               let arrDepth = 1;
@@ -540,20 +515,18 @@ const JSONDebugger = () => {
               if (arrDepth === 0) {
                 const arrContent = input.substring(arrStart + 1, arrEnd - 1);
 
-                // Extract array items with improved regex that handles nested objects and arrays
                 const items: any[] = [];
 
-                // Handle simple values first
                 const simpleItemRegex = /(?:"([^"]+)")|(?:(\d+(?:\.\d+)?))|(true|false|null)/g;
                 let itemMatch;
                 let lastIndex = 0;
 
                 while ((itemMatch = simpleItemRegex.exec(arrContent)) !== null) {
-                  // Check if this match is inside a nested object or array
+                 
                   const matchStart = arrContent.indexOf(itemMatch[0], lastIndex);
                   const matchEnd = matchStart + itemMatch[0].length;
 
-                  // Check if we're inside a nested structure
+                 
                   let isNested = false;
                   let nestLevel = 0;
 
@@ -565,15 +538,15 @@ const JSONDebugger = () => {
                   isNested = nestLevel > 0;
 
                   if (!isNested) {
-                    // Add the item based on its type
+                   
                     if (itemMatch[1] !== undefined) {
-                      // String
+                     
                       items.push(`"${itemMatch[1]}"`);
                     } else if (itemMatch[2] !== undefined) {
-                      // Number
+                     
                       items.push(Number(itemMatch[2]));
                     } else if (itemMatch[3] !== undefined) {
-                      // Boolean or null
+                     
                       if (itemMatch[3] === 'true') items.push(true);
                       else if (itemMatch[3] === 'false') items.push(false);
                       else items.push(null);
@@ -583,11 +556,11 @@ const JSONDebugger = () => {
                   lastIndex = matchEnd;
                 }
 
-                // Now handle nested objects and arrays
+               
                 let nestedIndex = 0;
                 while (nestedIndex < arrContent.length) {
                   if (arrContent[nestedIndex] === '{') {
-                    // Found a nested object
+                   
                     let objDepth = 1;
                     let objStart = nestedIndex;
                     let objEnd = objStart + 1;
@@ -606,7 +579,7 @@ const JSONDebugger = () => {
                       nestedIndex++;
                     }
                   } else if (arrContent[nestedIndex] === '[') {
-                    // Found a nested array
+                   
                     let arrDepth = 1;
                     let arrStart = nestedIndex;
                     let arrEnd = arrStart + 1;
@@ -618,7 +591,7 @@ const JSONDebugger = () => {
                     }
 
                     if (arrDepth === 0) {
-                      // For simplicity, just add a placeholder for nested arrays
+                     
                       items.push([]);
                       nestedIndex = arrEnd;
                     } else {
@@ -633,15 +606,15 @@ const JSONDebugger = () => {
               }
             }
           } else {
-            // Simple value - improved to handle different types
+           
             if (value.match(/^".*"$/)) {
-              // String value
+             
               properties[name] = value.substring(1, value.length - 1);
             } else if (value.match(/^\d+$/)) {
-              // Integer value
+             
               properties[name] = parseInt(value);
             } else if (value.match(/^\d+\.\d+$/)) {
-              // Float value
+             
               properties[name] = parseFloat(value);
             } else if (value === 'true') {
               properties[name] = true;
@@ -650,7 +623,7 @@ const JSONDebugger = () => {
             } else if (value === 'null') {
               properties[name] = null;
             } else {
-              // Default to string if type can't be determined
+             
               properties[name] = value;
             }
           }
@@ -659,15 +632,15 @@ const JSONDebugger = () => {
         return properties;
       };
 
-      // Extract properties from the JSON
+     
       const extractedProps = extractProperties(tempFixedJson);
 
-      // Now, try to reconstruct the intended structure
+     
       const reconstructStructure = (input: string) => {
-        // Look for patterns that suggest the intended structure
+       
         const structureHints: Record<string, string[]> = {};
 
-        // Find property names that appear after other property names
+       
         const propSequenceRegex = /"([^"]+)"[^"]*"([^"]+)"/g;
         let seqMatch;
 
@@ -684,7 +657,7 @@ const JSONDebugger = () => {
           }
         }
 
-        // Find property names that appear inside brackets
+       
         const bracketRegex = /\[\s*([^[\]]*)\]/g;
         let bracketMatch;
 
@@ -700,7 +673,7 @@ const JSONDebugger = () => {
           }
 
           if (propNamesInBracket.length > 0) {
-            // These properties should be in an array
+           
             for (const prop of propNamesInBracket) {
               structureHints[prop] = ['_isArrayItem'];
             }
@@ -712,17 +685,17 @@ const JSONDebugger = () => {
 
       const structureHints = reconstructStructure(tempFixedJson);
 
-      // Use the structure hints to build a better JSON
+     
       const buildStructuredJSON = (props: Record<string, any>, hints: Record<string, string[]>) => {
         const result: Record<string, any> = {};
 
-        // Group properties by their parent
+       
         const groupedProps: Record<string, string[]> = {};
 
         for (const prop in props) {
           let assigned = false;
 
-          // Check if this property belongs in an array
+         
           if (hints[prop] && hints[prop].includes('_isArrayItem')) {
             if (!result['items']) {
               result['items'] = [];
@@ -737,7 +710,7 @@ const JSONDebugger = () => {
             assigned = true;
           }
 
-          // Check if this property is a child of another property
+         
           for (const parent in hints) {
             if (hints[parent].includes(prop)) {
               if (!groupedProps[parent]) {
@@ -750,13 +723,13 @@ const JSONDebugger = () => {
             }
           }
 
-          // If not assigned to a group, add directly to result
+         
           if (!assigned) {
             result[prop] = props[prop];
           }
         }
 
-        // Process grouped properties
+       
         for (const parent in groupedProps) {
           if (!result[parent]) {
             result[parent] = {};
@@ -770,18 +743,18 @@ const JSONDebugger = () => {
         return result;
       };
 
-      // Build the structured JSON
+     
       const structuredJSON = buildStructuredJSON(extractedProps, structureHints);
 
-      // Convert to string with proper formatting
+     
       const fixedJson = JSON.stringify(structuredJSON, null, 2);
 
-      // Try to parse the result to verify it's valid JSON
+     
       try {
-        // Parse the JSON to check if it's valid
+       
         const parsedJson = JSON.parse(fixedJson);
 
-        // Check if we need to add the name and version properties
+       
         if (topLevelProps["name"] && !parsedJson.name) {
           parsedJson.name = topLevelProps["name"];
           changes.push('Restored missing "name" property');
@@ -792,33 +765,33 @@ const JSONDebugger = () => {
           changes.push('Restored missing "version" property');
         }
 
-        // Convert back to string with proper formatting
+       
         const updatedFixedJson = JSON.stringify(parsedJson, null, 2);
 
         setFixSuccess(true);
         setTimeout(() => setFixSuccess(false), 3000);
 
-        // Format the fixed JSON for display
+       
         setFormattedJson(updatedFixedJson);
         setFixedJson(updatedFixedJson);
 
         changes.push('Reconstructed JSON with improved structure');
         setFixChanges(changes);
 
-        // Show the fix details popup
+       
         setShowFixDetails(true);
       } catch (parseErr) {
-        // If our reconstruction failed, fall back to a simpler approach
+       
         const simpleResult: Record<string, any> = {};
 
-        // Just extract all property names and set them to empty values
+       
         const nameRegex = /"([^"]+)"/g;
         let nameMatch;
 
         while ((nameMatch = nameRegex.exec(jsonInput)) !== null) {
           const name = nameMatch[1];
 
-          // Try to find a value
+         
           const valueRegex = new RegExp(`"${name}"\\s*:?\\s*([^,\\n\\]\\}]+)`, 'g');
           const valueMatch = valueRegex.exec(jsonInput);
 
@@ -836,14 +809,14 @@ const JSONDebugger = () => {
             } else if (value.startsWith('"') && value.endsWith('"')) {
               simpleResult[name] = value.substring(1, value.length - 1);
             } else {
-              simpleResult[name] = 0; // Default to 0 for unrecognized values
+              simpleResult[name] = 0;
             }
           } else {
             simpleResult[name] = "";
           }
         }
 
-        // Add the name and version properties if they were found
+       
         if (topLevelProps["name"] && !simpleResult.name) {
           simpleResult.name = topLevelProps["name"];
           changes.push('Restored missing "name" property');
@@ -861,11 +834,11 @@ const JSONDebugger = () => {
         setFixedJson(simpleJson);
         setFormattedJson(simpleJson);
 
-        // Show the fix details popup
+       
         setShowFixDetails(true);
       }
     } catch (err) {
-      // If all else fails, return a minimal valid JSON
+     
       const minimalJson = '{\n  "error": "Could not process JSON"\n}';
 
       setFixChanges(['Created minimal valid JSON as fallback']);
@@ -875,7 +848,7 @@ const JSONDebugger = () => {
     }
   };
 
-  // Auto-validate when input changes (with debounce)
+ 
   useEffect(() => {
     const timer = setTimeout(() => {
       validateAndFormatJson(jsonInput);

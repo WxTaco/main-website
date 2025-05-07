@@ -6,7 +6,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -36,7 +35,6 @@
   animation: fade-in 0.7s both;
 }
 
-/* Custom Scrollbar Styles */
 .custom-scrollbar::-webkit-scrollbar {
   width: 8px;
 }
@@ -55,7 +53,6 @@
   background: var(--color-secondary, #f472b6);
 }
 
-/* Custom Select Styles */
 select {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -67,7 +64,6 @@ select {
   padding-right: 2.5rem;
 }
 
-/* Modal Animation */
 @keyframes modalFadeIn {
   from {
     opacity: 0;
@@ -79,7 +75,6 @@ select {
   }
 }
 
-/* Cookie Consent Animation */
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -91,7 +86,6 @@ select {
   }
 }
 
-/* Bounce Animation */
 @keyframes bounce {
   0%, 100% {
     transform: translateY(0);

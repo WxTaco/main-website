@@ -29,7 +29,7 @@ const Settings: React.FC = () => {
   const [activeTab, setActiveTab] = useState<SettingsTab>('themes');
   const [activeCategory, setActiveCategory] = useState<ThemeCategory>('primary');
 
-  // Custom theme state
+ 
   const [customThemes, setCustomThemes] = useState<Record<string, CustomTheme>>({});
   const [activeCustomTheme, setActiveCustomTheme] = useState<string>('');
   const [showNewThemeForm, setShowNewThemeForm] = useState(false);
@@ -41,11 +41,11 @@ const Settings: React.FC = () => {
   const [newSecondaryColor, setNewSecondaryColor] = useState('#f472b6');
   const [newAccentColor, setNewAccentColor] = useState('#FFD700');
 
-  // Filtering and sorting
+ 
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<'name' | 'newest' | 'favorites'>('name');
 
-  // Accessibility
+ 
   const [highContrastMode, setHighContrastMode] = useState(() => {
     const saved = localStorage.getItem('highContrastMode');
     return saved ? JSON.parse(saved) : false;
@@ -67,7 +67,7 @@ const Settings: React.FC = () => {
     return saved || 'en';
   });
 
-  // Load custom themes from localStorage
+ 
   useEffect(() => {
     const savedCustomThemes = localStorage.getItem('customThemes');
     if (savedCustomThemes) {
@@ -85,25 +85,25 @@ const Settings: React.FC = () => {
     }
   }, []);
 
-  // Save custom themes to localStorage when they change
+ 
   useEffect(() => {
     if (Object.keys(customThemes).length > 0) {
       localStorage.setItem('customThemes', JSON.stringify(customThemes));
     }
   }, [customThemes]);
 
-  // Save active custom theme to localStorage when it changes
+ 
   useEffect(() => {
     if (activeCustomTheme) {
       localStorage.setItem('activeCustomTheme', activeCustomTheme);
     }
   }, [activeCustomTheme]);
 
-  // Save and apply accessibility settings
+ 
   useEffect(() => {
     localStorage.setItem('highContrastMode', JSON.stringify(highContrastMode));
 
-    // Apply high contrast mode
+   
     if (highContrastMode) {
       document.documentElement.classList.add('high-contrast');
     } else {
@@ -114,10 +114,10 @@ const Settings: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('colorBlindnessSimulation', colorBlindnessSimulation);
 
-    // Remove any existing color blindness filters
+   
     document.documentElement.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
 
-    // Apply the selected color blindness simulation
+   
     if (colorBlindnessSimulation !== 'none') {
       document.documentElement.classList.add(colorBlindnessSimulation);
     }
@@ -126,17 +126,17 @@ const Settings: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('fontSize', fontSize);
 
-    // Remove any existing font size classes
+   
     document.documentElement.classList.remove('text-size-small', 'text-size-medium', 'text-size-large', 'text-size-xl');
 
-    // Apply the selected font size
+   
     document.documentElement.classList.add(`text-size-${fontSize}`);
   }, [fontSize]);
 
   useEffect(() => {
     localStorage.setItem('reduceMotion', JSON.stringify(reduceMotion));
 
-    // Apply reduced motion setting
+   
     if (reduceMotion) {
       document.documentElement.classList.add('reduce-motion');
     } else {
@@ -147,20 +147,20 @@ const Settings: React.FC = () => {
   useEffect(() => {
     localStorage.setItem('language', language);
 
-    // Set the lang attribute on the html element
+   
     document.documentElement.setAttribute('lang', language);
   }, [language]);
 
-  // Apply the active custom theme
+ 
   const applyCustomThemeByName = (themeName: string) => {
     const selectedTheme = customThemes[themeName];
     if (selectedTheme) {
-      // Create a new history entry if it doesn't exist
+     
       if (!selectedTheme.history) {
         selectedTheme.history = [];
       }
 
-      // Add current state to history if it's different from the last entry
+     
       const lastHistoryEntry = selectedTheme.history[0];
       if (!lastHistoryEntry ||
           lastHistoryEntry.primaryColor !== selectedTheme.primaryColor ||
@@ -175,7 +175,7 @@ const Settings: React.FC = () => {
           timestamp: Date.now()
         };
 
-        // Update the theme with the new history entry
+       
         setCustomThemes(prev => ({
           ...prev,
           [themeName]: {
@@ -194,7 +194,7 @@ const Settings: React.FC = () => {
     }
   };
 
-  // Create a new custom theme
+ 
   const createNewTheme = () => {
     if (!newThemeName.trim()) {
       alert('Please enter a theme name');
@@ -206,7 +206,7 @@ const Settings: React.FC = () => {
       return;
     }
 
-    // Create a version history entry
+   
     const historyEntry: CustomThemeVersion = {
       primaryColor: newPrimaryColor,
       secondaryColor: newSecondaryColor,
@@ -230,23 +230,23 @@ const Settings: React.FC = () => {
       [newThemeName]: newTheme
     }));
 
-    // Apply the new theme
+   
     applyCustomTheme(newPrimaryColor, newSecondaryColor, newAccentColor);
     setActiveCustomTheme(newThemeName);
 
-    // Reset form
+   
     setNewThemeName('');
     setShowNewThemeForm(false);
   };
 
-  // Delete a custom theme
+ 
   const deleteCustomTheme = (themeName: string) => {
     if (window.confirm(`Are you sure you want to delete the theme "${themeName}"?`)) {
       const updatedThemes = { ...customThemes };
       delete updatedThemes[themeName];
       setCustomThemes(updatedThemes);
 
-      // If the deleted theme was active, switch to the default theme
+     
       if (activeCustomTheme === themeName) {
         setColorScheme('pink');
         setActiveCustomTheme('');
@@ -255,7 +255,7 @@ const Settings: React.FC = () => {
     }
   };
 
-  // Export custom themes
+ 
   const exportCustomThemes = () => {
     const dataStr = JSON.stringify(customThemes, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -268,7 +268,7 @@ const Settings: React.FC = () => {
     linkElement.click();
   };
 
-  // Import custom themes
+ 
   const importCustomThemes = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -279,7 +279,7 @@ const Settings: React.FC = () => {
         const content = e.target?.result as string;
         const importedThemes = JSON.parse(content);
 
-        // Validate the imported data
+       
         let isValid = true;
         Object.values(importedThemes).forEach((theme: any) => {
           if (!theme.name || !theme.primaryColor || !theme.secondaryColor || !theme.accentColor) {
@@ -292,7 +292,7 @@ const Settings: React.FC = () => {
           return;
         }
 
-        // Merge with existing themes
+       
         setCustomThemes(prev => ({
           ...prev,
           ...importedThemes
@@ -307,9 +307,9 @@ const Settings: React.FC = () => {
     reader.readAsText(file);
   };
 
-  // Generate random colors for the custom theme
+ 
   const generateRandomColors = () => {
-    // Helper function to generate a random hex color
+   
     const randomColor = () => {
       const letters = '0123456789ABCDEF';
       let color = '#';
@@ -324,10 +324,10 @@ const Settings: React.FC = () => {
     setNewAccentColor(randomColor());
   };
 
-  // Toggle favorite status for a theme
+ 
   const toggleFavorite = (themeName: string) => {
     if (themeName in customThemes) {
-      // Toggle favorite for custom theme
+     
       setCustomThemes(prev => ({
         ...prev,
         [themeName]: {
@@ -336,15 +336,15 @@ const Settings: React.FC = () => {
         }
       }));
     } else {
-      // For built-in themes, we need to create a custom theme based on it
+     
       const themeInfo = colorSchemeInfo[themeName as ColorScheme];
       if (!themeInfo) return;
 
       const newFavorite: CustomTheme = {
         name: `${themeInfo.name} (Favorite)`,
         primaryColor: themeInfo.primaryColor,
-        secondaryColor: themeInfo.primaryColor, // Use primary as secondary for built-in themes
-        accentColor: themeInfo.primaryColor,    // Use primary as accent for built-in themes
+        secondaryColor: themeInfo.primaryColor,
+        accentColor: themeInfo.primaryColor,   
         category: themeInfo.category,
         isFavorite: true
       };
@@ -356,14 +356,14 @@ const Settings: React.FC = () => {
     }
   };
 
-  // Check if a theme is favorited
+ 
   const isFavorite = (themeName: string): boolean => {
-    // Check if there's a custom theme with this name that's marked as favorite
+   
     if (themeName in customThemes && customThemes[themeName].isFavorite) {
       return true;
     }
 
-    // Check if there's a favorited version of this theme
+   
     if (`${themeName}_favorite` in customThemes) {
       return true;
     }
@@ -371,19 +371,19 @@ const Settings: React.FC = () => {
     return false;
   };
 
-  // Suggest complementary colors based on primary color
+ 
   const suggestComplementaryColors = (baseColor: string) => {
-    // Convert hex to HSL
+   
     const hexToHSL = (hex: string): [number, number, number] => {
-      // Remove the # if present
+     
       hex = hex.replace(/^#/, '');
 
-      // Parse the hex values
+     
       let r = parseInt(hex.substring(0, 2), 16) / 255;
       let g = parseInt(hex.substring(2, 4), 16) / 255;
       let b = parseInt(hex.substring(4, 6), 16) / 255;
 
-      // Find the min and max values to calculate the lightness
+     
       const max = Math.max(r, g, b);
       const min = Math.min(r, g, b);
       let h = 0, s = 0, l = (max + min) / 2;
@@ -404,7 +404,7 @@ const Settings: React.FC = () => {
       return [h * 360, s * 100, l * 100];
     };
 
-    // Convert HSL to hex
+   
     const hslToHex = (h: number, s: number, l: number): string => {
       h /= 360;
       s /= 100;
@@ -440,25 +440,25 @@ const Settings: React.FC = () => {
       return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     };
 
-    // Get the HSL values of the base color
+   
     const [h, s, l] = hexToHSL(baseColor);
 
-    // Generate complementary color (opposite on the color wheel)
+   
     const complementaryH = (h + 180) % 360;
     const complementaryColor = hslToHex(complementaryH, s, l);
 
-    // Generate analogous color (30 degrees away on the color wheel)
+   
     const analogousH = (h + 30) % 360;
     const analogousColor = hslToHex(analogousH, s, l);
 
-    // Set the colors
+   
     setNewSecondaryColor(complementaryColor);
     setNewAccentColor(analogousColor);
   };
 
-  // Share a theme
+ 
   const shareTheme = (name: string, theme: CustomTheme) => {
-    // Generate a shorter shareable code by only including essential properties
+   
     const minimalTheme = {
       name: theme.name,
       primaryColor: theme.primaryColor,
@@ -470,18 +470,18 @@ const Settings: React.FC = () => {
     const themeData = JSON.stringify({ [name]: minimalTheme });
     const encodedData = btoa(themeData);
 
-    // Copy to clipboard
+   
     navigator.clipboard.writeText(`${window.location.origin}/settings?t=${encodedData}`);
     alert('Theme share link copied to clipboard!');
   };
 
-  // Show theme history
+ 
   const showThemeHistory = (themeName: string) => {
     setSelectedThemeForHistory(themeName);
     setShowThemeHistoryModal(true);
   };
 
-  // Revert to a previous version of a theme
+ 
   const revertToVersion = (themeName: string, version: number) => {
     const theme = customThemes[themeName];
     if (!theme || !theme.history) return;
@@ -489,7 +489,7 @@ const Settings: React.FC = () => {
     const versionToRevert = theme.history.find(v => v.version === version);
     if (!versionToRevert) return;
 
-    // Create a new history entry with the current state
+   
     const newHistoryEntry: CustomThemeVersion = {
       primaryColor: theme.primaryColor,
       secondaryColor: theme.secondaryColor,
@@ -498,7 +498,7 @@ const Settings: React.FC = () => {
       timestamp: Date.now()
     };
 
-    // Update the theme with the reverted version
+   
     setCustomThemes(prev => ({
       ...prev,
       [themeName]: {
@@ -510,7 +510,7 @@ const Settings: React.FC = () => {
       }
     }));
 
-    // If this is the active theme, apply the changes
+   
     if (activeCustomTheme === themeName) {
       applyCustomTheme(
         versionToRevert.primaryColor,
@@ -520,7 +520,7 @@ const Settings: React.FC = () => {
     }
   };
 
-  // Theme information
+ 
   const colorSchemeInfo: Partial<Record<ColorScheme, {
     name: string;
     description: string;
@@ -762,13 +762,13 @@ const Settings: React.FC = () => {
     custom: {
       name: 'Custom',
       description: 'Your personalized theme',
-      primaryColor: '#FF69B4', // Default value, will be overridden
+      primaryColor: '#FF69B4',
       previewClass: 'bg-custom',
       category: 'primary'
     }
   };
 
-  // Group themes by category
+ 
   const themesByCategory: Record<ThemeCategory, ColorScheme[]> = {
     primary: ['pink', 'custom'],
     cool: ['blue', 'purple', 'teal', 'indigo', 'sky', 'silver', 'sapphire', 'aquamarine', 'lavender', 'cyan', 'violet', 'electricblue'],
@@ -777,7 +777,7 @@ const Settings: React.FC = () => {
     vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst']
   };
 
-  // Category labels
+ 
   const categoryLabels: Record<ThemeCategory, string> = {
     primary: 'Primary',
     cool: 'Cool Tones',
@@ -1218,10 +1218,10 @@ const Settings: React.FC = () => {
 
               {themesByCategory[activeCategory]
                 .filter(scheme => {
-                  // Filter out 'custom' scheme
+                 
                   if (scheme === 'custom') return false;
 
-                  // Apply search filter
+                 
                   const themeInfo = colorSchemeInfo[scheme];
                   if (!themeInfo) return false;
 
@@ -1242,7 +1242,7 @@ const Settings: React.FC = () => {
 
                   if (!themeInfoA || !themeInfoB) return 0;
 
-                  // Sort by favorites
+                 
                   if (sortOrder === 'favorites') {
                     const aFavorite = isFavorite(a);
                     const bFavorite = isFavorite(b);
@@ -1250,12 +1250,12 @@ const Settings: React.FC = () => {
                     if (!aFavorite && bFavorite) return 1;
                   }
 
-                  // Sort by name
+                 
                   if (sortOrder === 'name') {
                     return themeInfoA.name.localeCompare(themeInfoB.name);
                   }
 
-                  // Sort by newest (default to alphabetical since we don't track creation time for built-in themes)
+                 
                   return themeInfoA.name.localeCompare(themeInfoB.name);
                 })
                 .map((scheme) => {
@@ -1380,7 +1380,7 @@ const Settings: React.FC = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       {Object.entries(customThemes)
                         .filter(([name, theme]) => {
-                          // Apply search filter
+                         
                           if (searchQuery) {
                             const query = searchQuery.toLowerCase();
                             return (
@@ -1392,7 +1392,7 @@ const Settings: React.FC = () => {
                           return true;
                         })
                       .sort(([, themeA], [, themeB]) => {
-                        // Sort by favorites
+                       
                         if (sortOrder === 'favorites') {
                           const aFavorite = !!themeA.isFavorite;
                           const bFavorite = !!themeB.isFavorite;
@@ -1400,16 +1400,16 @@ const Settings: React.FC = () => {
                           if (!aFavorite && bFavorite) return 1;
                         }
 
-                        // Sort by name
+                       
                         if (sortOrder === 'name') {
                           return themeA.name.localeCompare(themeB.name);
                         }
 
-                        // Sort by newest (using the timestamp of the first history entry)
+                       
                         if (sortOrder === 'newest') {
                           const aTimestamp = themeA.history?.[0]?.timestamp || 0;
                           const bTimestamp = themeB.history?.[0]?.timestamp || 0;
-                          return bTimestamp - aTimestamp; // Newest first
+                          return bTimestamp - aTimestamp;
                         }
 
                         return 0;

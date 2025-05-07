@@ -6,7 +6,7 @@ import { CopyNotification } from './ColorPaletteGenerator';
 const defaultEmbed: EmbedData = {
   title: 'Example Embed Title',
   description: 'This is an example embed description. You can edit this to create your own Discord embed.',
-  color: '#c94baf', // Default to wrapped-pink
+  color: '#c94baf',
   author: {
     name: 'Author Name',
     iconURL: '',
@@ -33,7 +33,7 @@ const defaultEmbed: EmbedData = {
   timestamp: true,
 };
 
-// Generate Discord.js code for the embed
+
 const generateDiscordJsCode = (embedData: EmbedData): string => {
   let code = 'const { EmbedBuilder } = require(\'discord.js\');\n\n';
   code += 'const embed = new EmbedBuilder()\n';
@@ -99,7 +99,7 @@ const generateDiscordJsCode = (embedData: EmbedData): string => {
   }
 
   code += ';\n\n';
-  code += '// Send the embed\n';
+  code += 
   code += 'await interaction.reply({ embeds: [embed] });';
 
   return code;
@@ -114,7 +114,7 @@ const DiscordEmbedBuilder = () => {
     isVisible: false
   });
 
-  // Show notification
+ 
   const showNotification = (message: string, content: string) => {
     setNotification({
       message,
@@ -127,7 +127,7 @@ const DiscordEmbedBuilder = () => {
     }, 3000);
   };
 
-  // Copy to clipboard
+ 
   const copyToClipboard = () => {
     let content = '';
 

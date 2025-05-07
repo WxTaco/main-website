@@ -6,7 +6,6 @@ const CookiePolicy: React.FC = () => {
   const { cookiesAccepted, acceptCookies, declineCookies, resetCookieConsent } = useCookies();
   const [notification, setNotification] = useState<{ message: string; type: 'success' | 'info' | 'warning' } | null>(null);
 
-  // Wrapper functions to show notifications when cookie preferences change
   const handleAcceptCookies = () => {
     acceptCookies();
     setNotification({

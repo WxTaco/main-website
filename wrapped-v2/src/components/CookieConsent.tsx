@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 interface CookieConsentProps {
   onAccept: () => void;
   onDecline: () => void;
+  position?: "above" | "bottom";
 }
 
-const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onDecline }) => {
+const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onDecline, position = "bottom" }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -36,52 +37,48 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onDecline }) =>
 
   return (
     <div
-      className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-md"
-      style={{
-        animation: 'slideUp 0.3s ease-out forwards',
-      }}
+      className={`fixed ${position === "above" ? "bottom-20" : "bottom-4"} right-4 max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden z-50 animate-slide-up`}
     >
-      <div className="bg-gray-900 border border-gray-700 rounded-lg shadow-lg p-4 mx-4">
-        <div className="flex items-start mb-3">
+      <div className="p-4">
+        <div className="flex items-start">
           <div className="flex-shrink-0 mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-theme-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-theme-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
           <div>
-            <h3 className="text-sm font-medium text-white mb-1">Cookie Consent</h3>
-            <p className="text-xs text-gray-300">
+            <div className="flex items-center mb-1">
+              <h3 className="text-sm font-medium text-white">Cookie Consent</h3>
+            </div>
+            <p className="text-xs text-gray-300 mb-2">
               We use cookies to enhance your experience and save your preferences.
-              By clicking "Accept", you consent to the use of all cookies.
-              You can manage your preferences by clicking "Decline".
             </p>
           </div>
+          <button
+            onClick={handleDecline}
+            className="ml-auto text-white hover:text-gray-200 focus:outline-none"
+            aria-label="Decline cookies"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-        <div className="flex justify-end space-x-2">
-          <div className="flex space-x-2">
-            <Link
-              to="/cookie-policy"
-              className="text-xs text-theme-primary hover:underline"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Cookie Policy
-            </Link>
-          </div>
+        <div className="flex items-center justify-end mt-2 space-x-2">
+          <Link
+            to="/cookie-policy"
+            className="text-xs text-theme-primary hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Cookie Policy
+          </Link>
           <div className="flex-grow"></div>
-          <div className="flex space-x-2">
-            <button
-              onClick={handleDecline}
-              className="px-3 py-1.5 bg-gray-700 text-white text-xs rounded hover:bg-gray-600 transition-colors"
-            >
-              Decline
-            </button>
-            <button
-              onClick={handleAccept}
-              className="px-3 py-1.5 bg-theme-primary text-white text-xs rounded hover:bg-opacity-90 transition-colors"
-            >
-              Accept
-            </button>
-          </div>
+          <button
+            onClick={handleAccept}
+            className="px-3 py-1 bg-theme-primary text-white text-xs rounded hover:bg-opacity-90 transition-colors"
+          >
+            Accept All
+          </button>
         </div>
       </div>
     </div>

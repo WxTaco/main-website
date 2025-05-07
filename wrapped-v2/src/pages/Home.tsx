@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// Define TypeScript interfaces
+
 interface Feature {
   name: string;
   link?: string;

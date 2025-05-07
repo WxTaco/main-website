@@ -41,7 +41,7 @@ const Layout = () => {
           <div className="p-4">
             <div className="flex items-center mb-2">
               <span className="bg-yellow-400 text-gray-900 text-xs font-bold px-2 py-1 rounded-md mr-2">EXPERIMENTAL</span>
-              <h3 className="font-bold">New Feature!</h3>
+              <h3 className="font-bold">Developer Tools</h3>
               <button
                 onClick={handleCloseToast}
                 className="ml-auto text-white hover:text-gray-200 focus:outline-none"
@@ -52,14 +52,21 @@ const Layout = () => {
                 </svg>
               </button>
             </div>
-            <p className="mb-3">Try our new Discord Bot Builder! It's currently in development and may not function as intended.</p>
+            <p className="mb-3">We're now focusing on experimental developer tools! Try our suite of utilities designed to make your development workflow easier.</p>
             <div className="flex justify-end">
               <Link
                 to="/bot-builder"
+                className="bg-white text-indigo-600 hover:bg-gray-100 font-semibold py-1 px-3 rounded-md text-sm transition-colors duration-200 mr-2"
+                onClick={handleCloseToast}
+              >
+                Bot Builder
+              </Link>
+              <Link
+                to="/css-generator"
                 className="bg-white text-indigo-600 hover:bg-gray-100 font-semibold py-1 px-3 rounded-md text-sm transition-colors duration-200"
                 onClick={handleCloseToast}
               >
-                Try it out
+                CSS Generator
               </Link>
             </div>
           </div>
@@ -71,6 +78,7 @@ const Layout = () => {
         <CookieConsent
           onAccept={acceptCookies}
           onDecline={declineCookies}
+          position={showToast ? "above" : "bottom"}
         />
       )}
     </div>

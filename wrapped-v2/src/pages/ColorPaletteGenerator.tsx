@@ -1,6 +1,6 @@
+
 import { useState, useEffect, useRef } from 'react';
 
-// Define TypeScript interfaces
 interface Color {
   hex: string;
   rgb: string;
@@ -18,12 +18,9 @@ interface NotificationProps {
   isVisible: boolean;
 }
 
-// Helper functions for color conversions
 const hexToRgb = (hex: string): string => {
-  // Remove # if present
   hex = hex.replace('#', '');
 
-  // Parse the hex values
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
@@ -32,10 +29,8 @@ const hexToRgb = (hex: string): string => {
 };
 
 const hexToHsl = (hex: string): string => {
-  // Remove # if present
   hex = hex.replace('#', '');
 
-  // Parse the hex values
   let r = parseInt(hex.substring(0, 2), 16) / 255;
   let g = parseInt(hex.substring(2, 4), 16) / 255;
   let b = parseInt(hex.substring(4, 6), 16) / 255;
@@ -57,7 +52,6 @@ const hexToHsl = (hex: string): string => {
     h /= 6;
   }
 
-  // Convert to degrees, percentage, percentage
   h = Math.round(h * 360);
   s = Math.round(s * 100);
   l = Math.round(l * 100);
@@ -65,7 +59,6 @@ const hexToHsl = (hex: string): string => {
   return `hsl(${h}, ${s}%, ${l}%)`;
 };
 
-// Generate a random hex color
 const randomColor = (): string => {
   const letters = '0123456789ABCDEF';
   let color = '#';
@@ -75,7 +68,6 @@ const randomColor = (): string => {
   return color;
 };
 
-// Create a color object with all formats
 const createColorObject = (hex: string): Color => {
   return {
     hex,
@@ -84,7 +76,6 @@ const createColorObject = (hex: string): Color => {
   };
 };
 
-// Generate a random palette with 5 colors
 const generateRandomPalette = (): Palette => {
   const colors: Color[] = [];
   for (let i = 0; i < 5; i++) {
@@ -97,29 +88,21 @@ const generateRandomPalette = (): Palette => {
   };
 };
 
-// Generate a monochromatic palette based on a base color
-const generateMonochromaticPalette = (baseHex: string): Palette => {
-  // Remove # if present
+const generateMonochromaticPalette = (baseHex: string): Palette => { 
   baseHex = baseHex.replace('#', '');
 
-  // Parse the hex values
   let r = parseInt(baseHex.substring(0, 2), 16);
   let g = parseInt(baseHex.substring(2, 4), 16);
   let b = parseInt(baseHex.substring(4, 6), 16);
 
   const colors: Color[] = [];
-
-  // Create 5 shades by adjusting lightness
-  for (let i = 0; i < 5; i++) {
-    // Adjust the brightness factor from 0.5 to 1.5
+ 
+  for (let i = 0; i < 5; i++) {   
     const factor = 0.5 + (i * 0.25);
 
-    // Apply the factor and ensure values are between 0-255
     const newR = Math.min(255, Math.max(0, Math.round(r * factor)));
     const newG = Math.min(255, Math.max(0, Math.round(g * factor)));
-    const newB = Math.min(255, Math.max(0, Math.round(b * factor)));
-
-    // Convert back to hex
+    const newB = Math.min(255, Math.max(0, Math.round(b * factor)));   
     const hex = '#' +
       newR.toString(16).padStart(2, '0') +
       newG.toString(16).padStart(2, '0') +
@@ -134,27 +117,21 @@ const generateMonochromaticPalette = (baseHex: string): Palette => {
   };
 };
 
-// Generate a complementary palette based on a base color
 const generateComplementaryPalette = (baseHex: string): Palette => {
-  // Remove # if present
   baseHex = baseHex.replace('#', '');
 
-  // Parse the hex values
   let r = parseInt(baseHex.substring(0, 2), 16);
   let g = parseInt(baseHex.substring(2, 4), 16);
   let b = parseInt(baseHex.substring(4, 6), 16);
 
-  // Create complementary color (opposite on the color wheel)
   const compR = 255 - r;
   const compG = 255 - g;
   const compB = 255 - b;
 
   const colors: Color[] = [];
 
-  // Add the base color
   colors.push(createColorObject('#' + baseHex));
 
-  // Add 3 intermediate colors
   for (let i = 1; i < 4; i++) {
     const ratio = i / 4;
     const newR = Math.round(r * (1 - ratio) + compR * ratio);
@@ -169,7 +146,6 @@ const generateComplementaryPalette = (baseHex: string): Palette => {
     colors.push(createColorObject(hex));
   }
 
-  // Add the complementary color
   colors.push(createColorObject('#' +
     compR.toString(16).padStart(2, '0') +
     compG.toString(16).padStart(2, '0') +
@@ -182,9 +158,7 @@ const generateComplementaryPalette = (baseHex: string): Palette => {
   };
 };
 
-// Generate an analogous palette based on a base color
 const generateAnalogousPalette = (baseHex: string): Palette => {
-  // Convert hex to HSL for easier hue manipulation
   const hsl = hexToHsl(baseHex);
   const match = hsl.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/);
 
@@ -196,22 +170,17 @@ const generateAnalogousPalette = (baseHex: string): Palette => {
 
   const colors: Color[] = [];
 
-  // Create 5 colors with hues spaced 30 degrees apart
   for (let i = 0; i < 5; i++) {
-    // Calculate new hue (wrap around 360 degrees)
     const newH = (h + (i - 2) * 30 + 360) % 360;
 
-    // Convert HSL back to hex
     const hslString = `hsl(${newH}, ${s}%, ${l}%)`;
 
-    // For simplicity, we'll use a temporary element to convert HSL to hex
     const tempEl = document.createElement('div');
     tempEl.style.color = hslString;
     document.body.appendChild(tempEl);
     const rgbString = window.getComputedStyle(tempEl).color;
     document.body.removeChild(tempEl);
 
-    // Parse RGB values
     const rgbMatch = rgbString.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
     if (!rgbMatch) continue;
 
@@ -219,7 +188,6 @@ const generateAnalogousPalette = (baseHex: string): Palette => {
     const g = parseInt(rgbMatch[2]);
     const b = parseInt(rgbMatch[3]);
 
-    // Convert to hex
     const hex = '#' +
       r.toString(16).padStart(2, '0') +
       g.toString(16).padStart(2, '0') +
@@ -234,7 +202,6 @@ const generateAnalogousPalette = (baseHex: string): Palette => {
   };
 };
 
-// Notification component for copy feedback
 export const CopyNotification: React.FC<NotificationProps> = ({ message, content, isVisible }) => {
   return (
     <div
@@ -259,11 +226,11 @@ export const CopyNotification: React.FC<NotificationProps> = ({ message, content
 
 const ColorPaletteGenerator = () => {
   const [palette, setPalette] = useState<Palette>(generateRandomPalette());
-  const [baseColor, setBaseColor] = useState<string>('#c94baf'); // Default to wrapped-pink
+  const [baseColor, setBaseColor] = useState<string>('#c94baf');
   const [paletteType, setPaletteType] = useState<string>('random');
   const [copied, setCopied] = useState<string | null>(null);
   const [exportFormat, setExportFormat] = useState<'hex' | 'rgb' | 'hsl' | 'css'>('hex');
-  const [selectedColorIndex, setSelectedColorIndex] = useState<number>(-1); // -1 means no color is selected
+  const [selectedColorIndex, setSelectedColorIndex] = useState<number>(-1);
   const [notification, setNotification] = useState<{ message: string; content: string; isVisible: boolean }>({
     message: '',
     content: '',
@@ -271,7 +238,6 @@ const ColorPaletteGenerator = () => {
   });
   const notificationTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Generate a new palette based on the selected type
   const generatePalette = () => {
     switch (paletteType) {
       case 'monochromatic':
@@ -290,37 +256,30 @@ const ColorPaletteGenerator = () => {
     }
   };
 
-  // Show notification
   const showNotification = (message: string, content: string) => {
-    // Clear any existing timer
     if (notificationTimerRef.current) {
       clearTimeout(notificationTimerRef.current);
     }
 
-    // Show the notification
     setNotification({
       message,
       content,
       isVisible: true
     });
 
-    // Hide after 3 seconds
     notificationTimerRef.current = setTimeout(() => {
       setNotification(prev => ({ ...prev, isVisible: false }));
     }, 3000);
   };
 
-  // Copy a color value to clipboard
   const copyToClipboard = (value: string, index: number) => {
     navigator.clipboard.writeText(value);
     setCopied(`${index}-${value}`);
     setTimeout(() => setCopied(null), 2000);
 
-    // Show notification
     showNotification('Color copied to clipboard!', value);
   };
 
-  // Export the palette in the selected format
   const exportPalette = () => {
     let content = '';
     let formatName = '';
@@ -348,7 +307,6 @@ const ColorPaletteGenerator = () => {
     showNotification(`Palette copied as ${formatName}!`, content);
   };
 
-  // Clean up notification timer on unmount
   useEffect(() => {
     return () => {
       if (notificationTimerRef.current) {
@@ -357,7 +315,6 @@ const ColorPaletteGenerator = () => {
     };
   }, []);
 
-  // Generate a new palette when the component mounts
   useEffect(() => {
     generatePalette();
   }, []);
@@ -549,7 +506,6 @@ const ColorPaletteGenerator = () => {
                   <pre
                     className="text-gray-300 text-sm font-mono overflow-auto h-[180px] custom-scrollbar w-full"
                     style={{
-                      // Override the default custom-scrollbar styles with theme-specific colors
                       scrollbarWidth: 'thin',
                       scrollbarColor: 'var(--theme-primary, #c94baf) #2d3748',
                     }}
