@@ -14,7 +14,7 @@ const Tools = () => {
   const tools: Tool[] = [
     {
       title: "Discord Bot Builder",
-      description: "Create your own Discord bot with our visual block-based builder! No coding experience required - just drag, drop, and connect blocks to build your perfect bot.",
+      description: "Create your own Discord bot with our visual block-based builder! No coding experience required - just drag, drop, and connect blocks to build your perfect bot. (Currently in development and not fully functional)",
       link: "/bot-builder",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -26,7 +26,7 @@ const Tools = () => {
     },
     {
       title: "Website Builder",
-      description: "Create your own website with our visual block-based builder! Drag and drop components to design beautiful, responsive websites without writing a single line of code.",
+      description: "Create your own website with our visual block-based builder! Drag and drop components to design beautiful, responsive websites without writing a single line of code. (Currently in development and not fully functional)",
       link: "/website-builder",
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
