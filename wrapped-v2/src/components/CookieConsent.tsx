@@ -37,7 +37,7 @@ const CookieConsent: React.FC<CookieConsentProps> = ({ onAccept, onDecline, posi
 
   return (
     <div
-      className={`fixed ${position === "above" ? "bottom-20" : "bottom-4"} right-4 max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden z-50 animate-slide-up`}
+      className={`fixed ${position === "above" ? "bottom-10" : "bottom-4"} right-4 max-w-sm w-full bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden z-50 animate-slide-up`}
     >
       <div className="p-4">
         <div className="flex items-start">

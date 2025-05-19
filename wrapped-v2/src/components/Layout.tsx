@@ -35,7 +35,9 @@ const Layout = () => {
       </main>
       <Footer />
 
+
       {/* Toast Notification */}
+{/*
       {showToast && (
         <div className="fixed bottom-4 right-4 max-w-sm w-full bg-gradient-to-r from-indigo-600 to-wrapped-pink text-white rounded-lg shadow-lg overflow-hidden z-50 animate-slide-up">
           <div className="p-4">
@@ -72,6 +74,7 @@ const Layout = () => {
           </div>
         </div>
       )}
+*/}
 
       {/* Cookie Consent Toast - only show if user hasn't made a decision yet */}
       {cookiesAccepted === null && (
