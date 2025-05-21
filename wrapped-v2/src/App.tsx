@@ -38,11 +38,6 @@ import CSSGenerator from './pages/CSSGenerator';
 import MarkdownEditor from './pages/MarkdownEditor';
 import ImageOptimizer from './pages/ImageOptimizer';
 import APITester from './pages/APITester';
-import BotBuilder from './pages/BotBuilder';
-import BotBuilderEditor from './pages/BotBuilderEditor';
-import BotBuilderImport from './pages/BotBuilderImport';
-import WebsiteBuilder from './pages/WebsiteBuilder';
-import WebsiteBuilderEditor from './pages/WebsiteBuilderEditor';
 
 // Import accessibility styles
 import './styles/accessibility.css';
@@ -155,26 +150,6 @@ const router = createBrowserRouter([
       {
         path: '/fun/commands',
         element: <FunCommands />,
-      },
-      {
-        path: '/bot-builder',
-        element: <BotBuilder />,
-      },
-      {
-        path: '/bot-builder/editor',
-        element: <BotBuilderEditor />,
-      },
-      {
-        path: '/bot-builder/import',
-        element: <BotBuilderImport />,
-      },
-      {
-        path: '/website-builder',
-        element: <WebsiteBuilder />,
-      },
-      {
-        path: '/website-builder/editor',
-        element: <WebsiteBuilderEditor />,
       },
       {
         path: '/settings',
