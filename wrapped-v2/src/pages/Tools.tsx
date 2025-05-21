@@ -13,30 +13,6 @@ interface Tool {
 const Tools = () => {
   const tools: Tool[] = [
     {
-      title: "Discord Bot Builder",
-      description: "Create your own Discord bot with our visual block-based builder! No coding experience required - just drag, drop, and connect blocks to build your perfect bot. (Currently in development and not fully functional)",
-      link: "/bot-builder",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
-      ),
-      status: 'available',
-      beta: true
-    },
-    {
-      title: "Website Builder",
-      description: "Create your own website with our visual block-based builder! Drag and drop components to design beautiful, responsive websites without writing a single line of code. (Currently in development and not fully functional)",
-      link: "/website-builder",
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-        </svg>
-      ),
-      status: 'available',
-      beta: true
-    },
-    {
       title: "JSON Debugger",
       description: "Validate, format, and debug your JSON data with our powerful JSON debugging tool. Easily identify errors and fix issues in your JSON structures.",
       link: "/tools/json-debugger",
@@ -172,11 +148,11 @@ const Tools = () => {
       {/* Main Heading */}
       <div className="w-full max-w-3xl bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-8 border border-theme-border/30 mb-8 dark:bg-black/80 dark:border-white/20">
         <h1 className="text-5xl md:text-6xl font-extrabold font-saira text-theme-primary drop-shadow-lg mb-4 text-center">
-          Development Tools
+          Wrapped V2 Tools
         </h1>
         <section className="text-center">
           <p className="text-xl max-w-3xl mx-auto text-gray-100 font-medium shadow-sm mb-4">
-            Explore our growing collection of powerful development tools designed to make your workflow easier and more efficient. From building Discord bots to creating websites, optimizing images, and designing database schemas, we're building a comprehensive toolkit for developers!
+            Discover the power of <span className="text-wrapped-yellow font-bold">Wrapped V2</span> — your all-in-one Discord bot and a growing suite of development utilities. Explore tools to help you manage your server, debug data, generate content, and more!
           </p>
         </section>
       </div>

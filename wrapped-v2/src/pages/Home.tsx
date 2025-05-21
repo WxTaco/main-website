@@ -150,21 +150,21 @@ const Home = () => {
       {/* Development Focus Card */}
       <div className="w-full max-w-5xl mb-10">
         <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20 flex flex-col">
-          <h2 className="text-3xl font-saira text-theme-primary mb-4 font-semibold drop-shadow text-center">Our New Direction</h2>
+          <h2 className="text-3xl font-saira text-theme-primary mb-4 font-semibold drop-shadow text-center">Why Wrapped V2?</h2>
           <p className="text-gray-100 mb-6">
-            We're shifting our focus to provide more comprehensive web services and development tools. While our Discord bot remains an important part of what we do, we're expanding to offer a wider range of utilities to help developers and creators build amazing projects.
+            Wrapped V2 is your all-in-one Discord bot, packed with powerful features for server management, moderation, fun, and utility. Alongside the bot, we offer a growing suite of development tools to help you build, debug, and optimize your projects. Whether you're running a community or developing new ideas, Wrapped V2 is here to make your workflow easier and more efficient.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div className="bg-gray-900/90 rounded-lg p-4 border border-theme-primary/30">
-              <h3 className="text-xl font-saira text-wrapped-blue mb-2">Web Services</h3>
+              <h3 className="text-xl font-saira text-wrapped-blue mb-2">Discord Bot Features</h3>
               <p className="text-gray-200">
-                From website builders to API testing tools, we're creating services that make web development more accessible and efficient.
+                Manage your server with advanced moderation, ticketing, role management, and fun commands. Wrapped V2 is designed to be your server's best friend.
               </p>
             </div>
             <div className="bg-gray-900/90 rounded-lg p-4 border border-theme-primary/30">
               <h3 className="text-xl font-saira text-wrapped-green mb-2">Development Tools</h3>
               <p className="text-gray-200">
-                Our growing collection of development utilities helps streamline your workflow and solve common challenges.
+                Explore utilities like JSON debugging, embed building, image optimization, and more—created to streamline your development process.
               </p>
             </div>
           </div>
