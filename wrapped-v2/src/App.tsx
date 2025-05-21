@@ -61,6 +61,10 @@ const router = createBrowserRouter([
         element: <About />,
       },
       {
+        path: '/privacy',
+        element: <Privacy />,
+      },
+      {
         path: '/partnerships',
         element: <Partnerships />,
       },
