@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Privacy from './pages/Privacy';
 import Layout from './components/Layout';
 import Home from './pages/Home';
 import Terms from './pages/Terms';
