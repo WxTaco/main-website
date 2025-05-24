@@ -37,6 +37,7 @@ import CSSGenerator from './pages/CSSGenerator';
 import MarkdownEditor from './pages/MarkdownEditor';
 import ImageOptimizer from './pages/ImageOptimizer';
 import APITester from './pages/APITester';
+import BotDocs from './pages/BotDocs';
 
 // Import accessibility styles
 import './styles/accessibility.css';
@@ -189,6 +190,10 @@ const router = createBrowserRouter([
       {
         path: '/tools/api-tester',
         element: <APITester />,
+      },
+      {
+        path: '/docs',
+        element: <BotDocs />,
       },
       {
         path: '*',
