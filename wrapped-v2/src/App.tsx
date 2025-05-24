@@ -26,7 +26,6 @@ import FunCommands from './pages/FunCommands';
 import TicketsOverview from './pages/TicketsOverview';
 import About from './pages/About';
 import Partnerships from './pages/Partnerships';
-import Settings from './pages/Settings';
 import NewSettings from './pages/NewSettings';
 import NotFound from './pages/NotFound';
 import Tools from './pages/Tools';
@@ -154,10 +153,6 @@ const router = createBrowserRouter([
       {
         path: '/settings',
         element: <NewSettings />,
-      },
-      {
-        path: '/old-settings',
-        element: <Settings />,
       },
       {
         path: '/tools',

@@ -35,11 +35,11 @@ const NewSettings: React.FC = () => {
   const { cookiesAccepted } = useCookies();
   const location = useLocation();
 
- 
+
   const [activeTab, setActiveTab] = useState<SettingsTab>('themes');
   const [activeCategory, setActiveCategory] = useState<ThemeCategory>('primary');
 
- 
+
   const [customThemes, setCustomThemes] = useState<Record<string, CustomTheme>>({});
   const [activeCustomTheme, setActiveCustomTheme] = useState<string>('');
   const [showNewThemeForm, setShowNewThemeForm] = useState(false);
@@ -48,7 +48,7 @@ const NewSettings: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [favoritedPremadeThemes, setFavoritedPremadeThemes] = useState<string[]>([]);
 
- 
+
   const [alertDialog, setAlertDialog] = useState({ isOpen: false, title: '', message: '' });
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
@@ -58,18 +58,18 @@ const NewSettings: React.FC = () => {
     isDangerous: false
   });
 
- 
+
   const [newThemeName, setNewThemeName] = useState('');
   const [newThemeCategory, setNewThemeCategory] = useState<ThemeCategory>('primary');
   const [newPrimaryColor, setNewPrimaryColor] = useState('#FF69B4');
   const [newSecondaryColor, setNewSecondaryColor] = useState('#f472b6');
   const [newAccentColor, setNewAccentColor] = useState('#FFD700');
 
- 
+
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOrder, setSortOrder] = useState<'name' | 'newest' | 'favorites'>('name');
 
- 
+
   const [highContrastMode, setHighContrastMode] = useState(() => {
     const saved = localStorage.getItem('highContrastMode');
     return saved ? JSON.parse(saved) : false;
@@ -95,21 +95,21 @@ const NewSettings: React.FC = () => {
     return saved || 'en';
   });
 
- 
+
   const isInitialMount = React.useRef(true);
   const skipEffectRef = React.useRef(false);
 
- 
+
   useEffect(() => {
     setIsLoading(true);
 
-   
+
     let parsedThemes: Record<string, CustomTheme> = {};
     let favoritedThemes: string[] = [];
 
-   
+
     if (cookiesAccepted === true) {
-     
+
       const savedCustomThemes = localStorage.getItem('customThemes');
 
       if (savedCustomThemes) {
@@ -126,7 +126,7 @@ const NewSettings: React.FC = () => {
         }
       }
 
-     
+
       const savedFavoritedThemes = localStorage.getItem('favoritedPremadeThemes');
       if (savedFavoritedThemes) {
         try {
@@ -137,25 +137,25 @@ const NewSettings: React.FC = () => {
         }
       }
 
-     
+
       const savedActiveTheme = localStorage.getItem('activeCustomTheme');
       if (savedActiveTheme && parsedThemes[savedActiveTheme]) {
         setActiveCustomTheme(savedActiveTheme);
       }
     }
 
-   
+
     setTimeout(() => setIsLoading(false), 300);
 
-   
+
     const params = new URLSearchParams(location.search);
     const sharedThemeData = params.get('t');
 
     if (sharedThemeData && cookiesAccepted === true) {
-     
+
       setTimeout(() => {
         try {
-         
+
           const decodedData = atob(sharedThemeData);
           const sharedTheme = JSON.parse(decodedData);
 
@@ -163,7 +163,7 @@ const NewSettings: React.FC = () => {
             const themeName = Object.keys(sharedTheme)[0];
             const themeData = sharedTheme[themeName];
 
-           
+
             const historyEntry: CustomThemeVersion = {
               primaryColor: themeData.primaryColor,
               secondaryColor: themeData.secondaryColor,
@@ -172,7 +172,7 @@ const NewSettings: React.FC = () => {
               timestamp: Date.now()
             };
 
-           
+
             const importedTheme: CustomTheme = {
               ...themeData,
               name: `${themeData.name} (Imported)`,
@@ -180,22 +180,22 @@ const NewSettings: React.FC = () => {
               isFavorite: false
             };
 
-           
+
             const newThemeKey = `${themeName}_imported_${Date.now()}`;
 
-           
+
             const updatedThemes = {
               ...parsedThemes,
               [newThemeKey]: importedTheme
             };
 
-           
+
             setCustomThemes(updatedThemes);
             localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
             setActiveCustomTheme(newThemeKey);
             localStorage.setItem('activeCustomTheme', newThemeKey);
 
-           
+
             skipEffectRef.current = true;
             applyCustomTheme(
               importedTheme.primaryColor,
@@ -203,14 +203,14 @@ const NewSettings: React.FC = () => {
               importedTheme.accentColor
             );
 
-           
+
             setAlertDialog({
               isOpen: true,
               title: 'Theme Imported',
               message: 'Theme has been imported successfully and applied!'
             });
 
-           
+
             const newUrl = window.location.pathname;
             window.history.replaceState({}, document.title, newUrl);
           }
@@ -222,54 +222,54 @@ const NewSettings: React.FC = () => {
             message: 'Failed to import the shared theme. The link may be invalid or corrupted.'
           });
 
-         
+
           const newUrl = window.location.pathname;
           window.history.replaceState({}, document.title, newUrl);
         }
       }, 500);
     }
 
-   
-   
+
+
   }, [cookiesAccepted, location.search, applyCustomTheme]);
 
- 
+
   useEffect(() => {
-   
+
     if (isInitialMount.current) {
       isInitialMount.current = false;
       return;
     }
 
-   
+
     if (cookiesAccepted === true && Object.keys(customThemes).length > 0) {
       localStorage.setItem('customThemes', JSON.stringify(customThemes));
     }
   }, [customThemes, cookiesAccepted]);
 
- 
+
   useEffect(() => {
-   
+
     if (isInitialMount.current) return;
 
-   
+
     if (cookiesAccepted === true && activeCustomTheme) {
       localStorage.setItem('activeCustomTheme', activeCustomTheme);
     }
   }, [activeCustomTheme, cookiesAccepted]);
 
- 
+
   useEffect(() => {
-   
+
     if (isInitialMount.current) return;
 
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('favoritedPremadeThemes', JSON.stringify(favoritedPremadeThemes));
     }
   }, [favoritedPremadeThemes, cookiesAccepted]);
 
- 
+
   useEffect(() => {
     if (isInitialMount.current || skipEffectRef.current) {
       skipEffectRef.current = false;
@@ -286,14 +286,14 @@ const NewSettings: React.FC = () => {
     }
   }, [activeCustomTheme, customThemes, applyCustomTheme]);
 
- 
+
   useEffect(() => {
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('highContrastMode', JSON.stringify(highContrastMode));
     }
 
-   
+
     if (highContrastMode) {
       document.documentElement.classList.add('high-contrast');
     } else {
@@ -302,40 +302,40 @@ const NewSettings: React.FC = () => {
   }, [highContrastMode, cookiesAccepted]);
 
   useEffect(() => {
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('colorBlindnessSimulation', colorBlindnessSimulation);
     }
 
-   
+
     document.documentElement.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
 
-   
+
     if (colorBlindnessSimulation !== 'none') {
       document.documentElement.classList.add(colorBlindnessSimulation);
     }
   }, [colorBlindnessSimulation, cookiesAccepted]);
 
   useEffect(() => {
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('fontSize', fontSize);
     }
 
-   
+
     document.documentElement.classList.remove('text-size-small', 'text-size-medium', 'text-size-large', 'text-size-xl');
 
-   
+
     document.documentElement.classList.add(`text-size-${fontSize}`);
   }, [fontSize, cookiesAccepted]);
 
   useEffect(() => {
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('reduceMotion', JSON.stringify(reduceMotion));
     }
 
-   
+
     if (reduceMotion) {
       document.documentElement.classList.add('reduce-motion');
     } else {
@@ -344,33 +344,33 @@ const NewSettings: React.FC = () => {
   }, [reduceMotion, cookiesAccepted]);
 
   useEffect(() => {
-   
+
     if (cookiesAccepted === true) {
       localStorage.setItem('language', language);
     }
 
-   
+
     document.documentElement.setAttribute('lang', language);
   }, [language, cookiesAccepted]);
 
- 
+
   const applyCustomThemeByName = (themeName: string) => {
     const selectedTheme = customThemes[themeName];
     if (selectedTheme) {
-     
+
       const updatedTheme = { ...selectedTheme };
       if (!updatedTheme.history) {
         updatedTheme.history = [];
       }
 
-     
+
       const lastHistoryEntry = updatedTheme.history[0];
       const shouldAddHistory = !lastHistoryEntry ||
         lastHistoryEntry.primaryColor !== updatedTheme.primaryColor ||
         lastHistoryEntry.secondaryColor !== updatedTheme.secondaryColor ||
         lastHistoryEntry.accentColor !== updatedTheme.accentColor;
 
-     
+
       if (shouldAddHistory) {
         const newHistoryEntry: CustomThemeVersion = {
           primaryColor: updatedTheme.primaryColor,
@@ -380,7 +380,7 @@ const NewSettings: React.FC = () => {
           timestamp: Date.now()
         };
 
-       
+
         setCustomThemes(prev => ({
           ...prev,
           [themeName]: {
@@ -390,13 +390,13 @@ const NewSettings: React.FC = () => {
         }));
       }
 
-     
+
       skipEffectRef.current = true;
 
-     
+
       setActiveCustomTheme(themeName);
 
-     
+
       applyCustomTheme(
         updatedTheme.primaryColor,
         updatedTheme.secondaryColor,
@@ -405,9 +405,9 @@ const NewSettings: React.FC = () => {
     }
   };
 
- 
+
   const createNewTheme = () => {
-   
+
     if (!newThemeName.trim()) {
       setAlertDialog({
         isOpen: true,
@@ -417,7 +417,7 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     if (newThemeName.trim().length > 30) {
       setAlertDialog({
         isOpen: true,
@@ -427,7 +427,7 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     if (!newPrimaryColor || !newSecondaryColor || !newAccentColor) {
       setAlertDialog({
         isOpen: true,
@@ -437,7 +437,7 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     const colorRegex = /^#[0-9A-Fa-f]{6}$/;
     if (!colorRegex.test(newPrimaryColor) || !colorRegex.test(newSecondaryColor) || !colorRegex.test(newAccentColor)) {
       setAlertDialog({
@@ -448,11 +448,11 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     const isEditing = activeCustomTheme && customThemes[activeCustomTheme] &&
                       newThemeName === customThemes[activeCustomTheme].name;
 
-   
+
     if (!isEditing && customThemes[newThemeName]) {
       setAlertDialog({
         isOpen: true,
@@ -462,16 +462,16 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     if (isEditing) {
       const currentTheme = customThemes[activeCustomTheme];
 
-     
+
       if (currentTheme.primaryColor !== newPrimaryColor ||
           currentTheme.secondaryColor !== newSecondaryColor ||
           currentTheme.accentColor !== newAccentColor) {
 
-       
+
         const newHistoryEntry: CustomThemeVersion = {
           primaryColor: currentTheme.primaryColor,
           secondaryColor: currentTheme.secondaryColor,
@@ -480,7 +480,7 @@ const NewSettings: React.FC = () => {
           timestamp: Date.now()
         };
 
-       
+
         setCustomThemes(prev => ({
           ...prev,
           [activeCustomTheme]: {
@@ -503,15 +503,15 @@ const NewSettings: React.FC = () => {
           }
         }));
 
-       
+
         skipEffectRef.current = true;
 
-       
+
         applyCustomTheme(newPrimaryColor, newSecondaryColor, newAccentColor);
       }
     } else {
-     
-     
+
+
       const historyEntry: CustomThemeVersion = {
         primaryColor: newPrimaryColor,
         secondaryColor: newSecondaryColor,
@@ -535,26 +535,26 @@ const NewSettings: React.FC = () => {
         [newThemeName]: newTheme
       }));
 
-     
+
       skipEffectRef.current = true;
 
-     
+
       setActiveCustomTheme(newThemeName);
 
-     
+
       applyCustomTheme(newPrimaryColor, newSecondaryColor, newAccentColor);
     }
 
-   
+
     setNewThemeName('');
     setShowNewThemeForm(false);
   };
 
- 
 
- 
+
+
   const generateRandomColors = () => {
-   
+
     const randomColor = () => {
       const letters = '0123456789ABCDEF';
       let color = '#';
@@ -569,10 +569,10 @@ const NewSettings: React.FC = () => {
     setNewAccentColor(randomColor());
   };
 
- 
+
   const toggleFavorite = (themeName: string) => {
     if (themeName in customThemes) {
-     
+
       setCustomThemes(prev => ({
         ...prev,
         [themeName]: {
@@ -581,18 +581,18 @@ const NewSettings: React.FC = () => {
         }
       }));
     } else {
-     
+
       setFavoritedPremadeThemes(prev => {
         if (prev.includes(themeName)) {
-         
+
           return prev.filter(theme => theme !== themeName);
         } else {
-         
+
           return [...prev, themeName];
         }
       });
 
-     
+
       const favoriteKey = `${themeName}_favorite`;
       if (favoriteKey in customThemes) {
         const updatedThemes = { ...customThemes };
@@ -602,19 +602,19 @@ const NewSettings: React.FC = () => {
     }
   };
 
- 
+
   const isFavorite = (themeName: string): boolean => {
-   
+
     if (themeName in customThemes && customThemes[themeName].isFavorite) {
       return true;
     }
 
-   
+
     if (favoritedPremadeThemes.includes(themeName)) {
       return true;
     }
 
-   
+
     if (`${themeName}_favorite` in customThemes) {
       return true;
     }
@@ -622,19 +622,19 @@ const NewSettings: React.FC = () => {
     return false;
   };
 
- 
+
   const suggestComplementaryColors = (baseColor: string) => {
-   
+
     const hexToHSL = (hex: string): [number, number, number] => {
-     
+
       hex = hex.replace(/^#/, '');
 
-     
+
       let r = parseInt(hex.substring(0, 2), 16) / 255;
       let g = parseInt(hex.substring(2, 4), 16) / 255;
       let b = parseInt(hex.substring(4, 6), 16) / 255;
 
-     
+
       const max = Math.max(r, g, b);
       const min = Math.min(r, g, b);
       let h = 0, s = 0, l = (max + min) / 2;
@@ -655,7 +655,7 @@ const NewSettings: React.FC = () => {
       return [h * 360, s * 100, l * 100];
     };
 
-   
+
     const hslToHex = (h: number, s: number, l: number): string => {
       h /= 360;
       s /= 100;
@@ -691,25 +691,25 @@ const NewSettings: React.FC = () => {
       return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
     };
 
-   
+
     const [h, s, l] = hexToHSL(baseColor);
 
-   
+
     const complementaryH = (h + 180) % 360;
     const complementaryColor = hslToHex(complementaryH, s, l);
 
-   
+
     const analogousH = (h + 30) % 360;
     const analogousColor = hslToHex(analogousH, s, l);
 
-   
+
     setNewSecondaryColor(complementaryColor);
     setNewAccentColor(analogousColor);
   };
 
- 
+
   const shareTheme = (name: string, theme: CustomTheme) => {
-   
+
     const minimalTheme = {
       name: theme.name,
       primaryColor: theme.primaryColor,
@@ -721,7 +721,7 @@ const NewSettings: React.FC = () => {
     const themeData = JSON.stringify({ [name]: minimalTheme });
     const encodedData = btoa(themeData);
 
-   
+
     navigator.clipboard.writeText(`${window.location.origin}/settings?t=${encodedData}`)
       .then(() => {
         setAlertDialog({
@@ -740,11 +740,11 @@ const NewSettings: React.FC = () => {
       });
   };
 
- 
+
   const exportTheme = (_themeName: string, theme: CustomTheme) => {
     if (!theme) return;
 
-   
+
     const exportData = {
       name: theme.name,
       primaryColor: theme.primaryColor,
@@ -755,28 +755,28 @@ const NewSettings: React.FC = () => {
       version: '1.0'
     };
 
-   
+
     const jsonString = JSON.stringify(exportData, null, 2);
 
-   
+
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
-   
+
     const a = document.createElement('a');
     a.href = url;
     a.download = `${theme.name.replace(/\s+/g, '_').toLowerCase()}_theme.json`;
     document.body.appendChild(a);
     a.click();
 
-   
+
     setTimeout(() => {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }, 100);
   };
 
- 
+
   const importTheme = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -787,19 +787,19 @@ const NewSettings: React.FC = () => {
         const content = e.target?.result as string;
         const importedData = JSON.parse(content);
 
-       
+
         if (!importedData.name || !importedData.primaryColor ||
             !importedData.secondaryColor || !importedData.accentColor) {
           throw new Error('Invalid theme file format');
         }
 
-       
+
         let themeName = importedData.name;
         if (customThemes[themeName]) {
           themeName = `${themeName}_imported_${Date.now()}`;
         }
 
-       
+
         const historyEntry: CustomThemeVersion = {
           primaryColor: importedData.primaryColor,
           secondaryColor: importedData.secondaryColor,
@@ -808,7 +808,7 @@ const NewSettings: React.FC = () => {
           timestamp: Date.now()
         };
 
-       
+
         const newTheme: CustomTheme = {
           name: themeName,
           primaryColor: importedData.primaryColor,
@@ -819,13 +819,13 @@ const NewSettings: React.FC = () => {
           history: [historyEntry]
         };
 
-       
+
         setCustomThemes(prev => ({
           ...prev,
           [themeName]: newTheme
         }));
 
-       
+
         skipEffectRef.current = true;
         setActiveCustomTheme(themeName);
         applyCustomTheme(
@@ -848,14 +848,14 @@ const NewSettings: React.FC = () => {
         });
       }
 
-     
+
       event.target.value = '';
     };
 
     reader.readAsText(file);
   };
 
- 
+
   const exportCustomThemes = () => {
     if (Object.keys(customThemes).length === 0) {
       setAlertDialog({
@@ -866,35 +866,35 @@ const NewSettings: React.FC = () => {
       return;
     }
 
-   
+
     const exportData = {
       themes: customThemes,
       exportedAt: new Date().toISOString(),
       version: '1.0'
     };
 
-   
+
     const jsonString = JSON.stringify(exportData, null, 2);
 
-   
+
     const blob = new Blob([jsonString], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
 
-   
+
     const a = document.createElement('a');
     a.href = url;
     a.download = `wrapped_custom_themes_${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(a);
     a.click();
 
-   
+
     setTimeout(() => {
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     }, 100);
   };
 
- 
+
   const importCustomThemes = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
@@ -905,24 +905,24 @@ const NewSettings: React.FC = () => {
         const content = e.target?.result as string;
         const importedData = JSON.parse(content);
 
-       
+
         const updatedThemes = { ...customThemes };
         let importCount = 0;
         let skipCount = 0;
 
-       
+
         if (importedData.name && importedData.primaryColor &&
             importedData.secondaryColor && importedData.accentColor) {
-         
+
           const themeData = importedData;
 
-         
+
           let themeKey = themeData.name.replace(/\s+/g, '_').toLowerCase();
           if (updatedThemes[themeKey]) {
             themeKey = `${themeKey}_imported_${Date.now()}`;
           }
 
-         
+
           if (!themeData.history || !Array.isArray(themeData.history) || themeData.history.length === 0) {
             themeData.history = [{
               primaryColor: themeData.primaryColor,
@@ -933,30 +933,30 @@ const NewSettings: React.FC = () => {
             }];
           }
 
-         
+
           updatedThemes[themeKey] = themeData;
           importCount = 1;
         }
-       
+
         else if (importedData.themes && typeof importedData.themes === 'object') {
           const importedThemes = importedData.themes;
 
-         
+
           Object.entries(importedThemes).forEach(([key, themeData]: [string, any]) => {
-           
+
             if (!themeData.name || !themeData.primaryColor ||
                 !themeData.secondaryColor || !themeData.accentColor) {
               skipCount++;
               return;
             }
 
-           
+
             let themeKey = key;
             if (updatedThemes[themeKey]) {
               themeKey = `${themeKey}_imported_${Date.now()}`;
             }
 
-           
+
             if (!themeData.history || !Array.isArray(themeData.history) || themeData.history.length === 0) {
               themeData.history = [{
                 primaryColor: themeData.primaryColor,
@@ -967,29 +967,29 @@ const NewSettings: React.FC = () => {
               }];
             }
 
-           
+
             updatedThemes[themeKey] = themeData;
             importCount++;
           });
         }
-       
+
         else if (typeof importedData === 'object') {
-         
+
           Object.entries(importedData).forEach(([key, themeData]: [string, any]) => {
-           
+
             if (!themeData.name || !themeData.primaryColor ||
                 !themeData.secondaryColor || !themeData.accentColor) {
               skipCount++;
               return;
             }
 
-           
+
             let themeKey = key;
             if (updatedThemes[themeKey]) {
               themeKey = `${themeKey}_imported_${Date.now()}`;
             }
 
-           
+
             if (!themeData.history || !Array.isArray(themeData.history) || themeData.history.length === 0) {
               themeData.history = [{
                 primaryColor: themeData.primaryColor,
@@ -1000,18 +1000,18 @@ const NewSettings: React.FC = () => {
               }];
             }
 
-           
+
             updatedThemes[themeKey] = themeData;
             importCount++;
           });
         }
 
         if (importCount > 0) {
-         
+
           setCustomThemes(updatedThemes);
           localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
 
-         
+
           setAlertDialog({
             isOpen: true,
             title: 'Themes Imported',
@@ -1033,14 +1033,14 @@ const NewSettings: React.FC = () => {
         });
       }
 
-     
+
       event.target.value = '';
     };
 
     reader.readAsText(file);
   };
 
- 
+
   const deleteCustomTheme = (themeName: string) => {
     setConfirmDialog({
       isOpen: true,
@@ -1049,17 +1049,17 @@ const NewSettings: React.FC = () => {
       isDangerous: true,
       onConfirm: () => {
         try {
-         
+
           const updatedThemes = { ...customThemes };
           delete updatedThemes[themeName];
 
-         
+
           setCustomThemes(updatedThemes);
           if (cookiesAccepted === true) {
             localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
           }
 
-         
+
           if (activeCustomTheme === themeName) {
             setActiveCustomTheme('');
             if (cookiesAccepted === true) {
@@ -1068,7 +1068,7 @@ const NewSettings: React.FC = () => {
             setColorScheme('purple');
           }
 
-         
+
           setAlertDialog({
             isOpen: true,
             title: 'Theme Deleted',
@@ -1086,13 +1086,13 @@ const NewSettings: React.FC = () => {
     });
   };
 
- 
+
   const showThemeHistory = (themeName: string) => {
     setSelectedThemeForHistory(themeName);
     setShowThemeHistoryModal(true);
   };
 
- 
+
   const revertToVersion = (themeName: string, version: number) => {
     const theme = customThemes[themeName];
     if (!theme || !theme.history) return;
@@ -1100,10 +1100,10 @@ const NewSettings: React.FC = () => {
     const versionToRevert = theme.history.find(v => v.version === version);
     if (!versionToRevert) return;
 
-   
+
     if (theme.history[0]?.version === version) return;
 
-   
+
     const newHistoryEntry: CustomThemeVersion = {
       primaryColor: theme.primaryColor,
       secondaryColor: theme.secondaryColor,
@@ -1112,7 +1112,7 @@ const NewSettings: React.FC = () => {
       timestamp: Date.now()
     };
 
-   
+
     setCustomThemes(prev => {
       const updatedTheme = {
         ...prev[themeName],
@@ -1120,13 +1120,13 @@ const NewSettings: React.FC = () => {
         secondaryColor: versionToRevert.secondaryColor,
         accentColor: versionToRevert.accentColor,
         history: [
-         
+
           {
             ...versionToRevert,
             version: newHistoryEntry.version,
             timestamp: newHistoryEntry.timestamp
           },
-         
+
           ...(prev[themeName].history || [])
         ]
       };
@@ -1137,9 +1137,9 @@ const NewSettings: React.FC = () => {
       };
     });
 
-   
+
     if (activeCustomTheme === themeName) {
-     
+
       skipEffectRef.current = true;
 
       applyCustomTheme(
@@ -1150,7 +1150,7 @@ const NewSettings: React.FC = () => {
     }
   };
 
- 
+
   const colorSchemeInfo: Partial<Record<ColorScheme, {
     name: string;
     description: string;
@@ -1389,6 +1389,13 @@ const NewSettings: React.FC = () => {
       previewClass: 'bg-blue-600',
       category: 'cool'
     },
+    sunset: {
+      name: 'Sunset',
+      description: 'Warm orange and cool blue, inspired by sunsets',
+      primaryColor: '#f35d1d',
+      previewClass: 'bg-gradient-to-r from-[#f35d1d] to-[#4691b1]',
+      category: 'vibrant'
+    },
     custom: {
       name: 'Custom',
       description: 'Your personalized theme',
@@ -1398,16 +1405,16 @@ const NewSettings: React.FC = () => {
     }
   };
 
- 
+
   const themesByCategory: Record<ThemeCategory, ColorScheme[]> = {
     primary: ['pink', 'custom'],
     cool: ['blue', 'purple', 'teal', 'indigo', 'sky', 'silver', 'sapphire', 'aquamarine', 'lavender', 'cyan', 'violet', 'electricblue'],
     warm: ['red', 'orange', 'rose', 'amber', 'peach', 'topaz', 'coral'],
     nature: ['green', 'lime', 'brown', 'mint', 'emerald', 'peridot'],
-    vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst']
+    vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst', 'sunset']
   };
 
- 
+
   const categoryLabels: Record<ThemeCategory, string> = {
     primary: 'Primary',
     cool: 'Cool Tones',
@@ -1968,10 +1975,10 @@ const NewSettings: React.FC = () => {
                   {/* Built-in Theme Cards */}
                   {themesByCategory[activeCategory]
                     .filter(scheme => {
-                     
+
                       if (scheme === 'custom') return false;
 
-                     
+
                       const themeInfo = colorSchemeInfo[scheme];
                       if (!themeInfo) return false;
 
@@ -1992,7 +1999,7 @@ const NewSettings: React.FC = () => {
 
                       if (!themeInfoA || !themeInfoB) return 0;
 
-                     
+
                       if (sortOrder === 'favorites') {
                         const aFavorite = isFavorite(a);
                         const bFavorite = isFavorite(b);
@@ -2000,12 +2007,12 @@ const NewSettings: React.FC = () => {
                         if (!aFavorite && bFavorite) return 1;
                       }
 
-                     
+
                       if (sortOrder === 'name') {
                         return themeInfoA.name.localeCompare(themeInfoB.name);
                       }
 
-                     
+
                       return themeInfoA.name.localeCompare(themeInfoB.name);
                     })
                     .map((scheme) => {
@@ -2025,7 +2032,7 @@ const NewSettings: React.FC = () => {
                             opacity: theme.colorScheme === scheme ? 1 : 0.8
                           }}
                           onClick={() => {
-                           
+
                             setActiveCustomTheme('');
                             localStorage.removeItem('activeCustomTheme');
                             setColorScheme(scheme);
@@ -2036,7 +2043,7 @@ const NewSettings: React.FC = () => {
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
                               e.preventDefault();
-                             
+
                               setActiveCustomTheme('');
                               localStorage.removeItem('activeCustomTheme');
                               setColorScheme(scheme);
@@ -2068,18 +2075,37 @@ const NewSettings: React.FC = () => {
 
                           {/* Color Preview */}
                           <div className="grid grid-cols-3 gap-2 mb-3">
-                            <div className="flex flex-col items-center">
-                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                              <span className="text-xs text-gray-400 mt-1">Primary</span>
-                            </div>
-                            <div className="flex flex-col items-center">
-                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
-                              <span className="text-xs text-gray-400 mt-1">Secondary</span>
-                            </div>
-                            <div className="flex flex-col items-center">
-                              <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
-                              <span className="text-xs text-gray-400 mt-1">Accent</span>
-                            </div>
+                            {scheme === 'sunset' ? (
+                              <>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Primary</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: '#fbbf24' }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: '#4691b1' }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Accent</span>
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Primary</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                                </div>
+                                <div className="flex flex-col items-center">
+                                  <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
+                                  <span className="text-xs text-gray-400 mt-1">Accent</span>
+                                </div>
+                              </>
+                            )}
                           </div>
                         </div>
                       );
@@ -2123,12 +2149,12 @@ const NewSettings: React.FC = () => {
 
                         if (!themeInfoA || !themeInfoB) return 0;
 
-                       
+
                         if (sortOrder === 'name') {
                           return themeInfoA.name.localeCompare(themeInfoB.name);
                         }
 
-                       
+
                         return themeInfoA.name.localeCompare(themeInfoB.name);
                       })
                       .map((scheme) => {
@@ -2148,7 +2174,7 @@ const NewSettings: React.FC = () => {
                               opacity: theme.colorScheme === scheme ? 1 : 0.8
                             }}
                             onClick={() => {
-                             
+
                               setActiveCustomTheme('');
                               localStorage.removeItem('activeCustomTheme');
                               setColorScheme(scheme as ColorScheme);
@@ -2159,7 +2185,7 @@ const NewSettings: React.FC = () => {
                             onKeyDown={(e) => {
                               if (e.key === 'Enter' || e.key === ' ') {
                                 e.preventDefault();
-                               
+
                                 setActiveCustomTheme('');
                                 localStorage.removeItem('activeCustomTheme');
                                 setColorScheme(scheme as ColorScheme);
@@ -2191,18 +2217,37 @@ const NewSettings: React.FC = () => {
 
                             {/* Color Preview */}
                             <div className="grid grid-cols-3 gap-2 mb-3">
-                              <div className="flex flex-col items-center">
-                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                                <span className="text-xs text-gray-400 mt-1">Primary</span>
-                              </div>
-                              <div className="flex flex-col items-center">
-                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
-                                <span className="text-xs text-gray-400 mt-1">Secondary</span>
-                              </div>
-                              <div className="flex flex-col items-center">
-                                <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
-                                <span className="text-xs text-gray-400 mt-1">Accent</span>
-                              </div>
+                              {scheme === 'sunset' ? (
+                                <>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Primary</span>
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: '#fbbf24' }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: '#4691b1' }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Accent</span>
+                                  </div>
+                                </>
+                              ) : (
+                                <>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Primary</span>
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.8 }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Secondary</span>
+                                  </div>
+                                  <div className="flex flex-col items-center">
+                                    <div className="w-full h-6 rounded-md" style={{ backgroundColor: themeInfo.primaryColor, opacity: 0.6 }}></div>
+                                    <span className="text-xs text-gray-400 mt-1">Accent</span>
+                                  </div>
+                                </>
+                              )}
                             </div>
                           </div>
                         );
@@ -2212,12 +2257,12 @@ const NewSettings: React.FC = () => {
                     {Object.entries(customThemes)
                       .filter(([_, theme]) => theme.isFavorite)
                       .sort(([, themeA], [, themeB]) => {
-                       
+
                         if (sortOrder === 'name') {
                           return themeA.name.localeCompare(themeB.name);
                         }
 
-                       
+
                         if (sortOrder === 'newest') {
                           const aTimestamp = themeA.history?.[0]?.timestamp || 0;
                           const bTimestamp = themeB.history?.[0]?.timestamp || 0;
@@ -2820,7 +2865,7 @@ const NewSettings: React.FC = () => {
                         <button
                           className="w-full bg-gradient-to-r from-theme-primary to-theme-primary/80 hover:from-theme-primary/90 hover:to-theme-primary/70 text-white px-4 py-2 rounded-md text-sm flex items-center justify-center shadow-md hover:shadow-lg transition-all duration-200"
                           onClick={() => {
-                           
+
                             setNewThemeName(customThemes[activeCustomTheme].name);
                             setNewPrimaryColor(customThemes[activeCustomTheme].primaryColor);
                             setNewSecondaryColor(customThemes[activeCustomTheme].secondaryColor);
@@ -2845,15 +2890,15 @@ const NewSettings: React.FC = () => {
                               message: `Are you sure you want to delete the "${customThemes[activeCustomTheme].name}" theme? This action cannot be undone.`,
                               isDangerous: true,
                               onConfirm: () => {
-                               
+
                                 const updatedThemes = { ...customThemes };
                                 delete updatedThemes[activeCustomTheme];
 
-                               
+
                                 setCustomThemes(updatedThemes);
                                 localStorage.setItem('customThemes', JSON.stringify(updatedThemes));
 
-                               
+
                                 if (activeCustomTheme) {
                                   setActiveCustomTheme('');
                                   localStorage.removeItem('activeCustomTheme');
