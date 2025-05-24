@@ -5,7 +5,7 @@ const Privacy = () => {
     <div className="min-h-screen w-full bg-gradient-to-br from-theme-gradient-start via-theme-gradient-middle to-theme-gradient-end flex flex-col items-center justify-start py-12 px-4 transition-colors duration-300">
       <div className="max-w-4xl w-full bg-gray-800/90 backdrop-blur-md rounded-2xl shadow-lg p-8 border border-theme-border/30 dark:bg-black/80 dark:border-white/20">
         <h1 className="text-3xl font-saira mb-2 text-theme-primary">Privacy Policy</h1>
-        <p className="text-gray-300 mb-8">Last updated: December 19, 2024</p>
+        <p className="text-gray-300 mb-8">Last updated: May 24, 2025</p>
         <div className="prose prose-invert max-w-none text-gray-100">
           <section>
             <h2>1. Information We Collect</h2>
