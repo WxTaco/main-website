@@ -34,6 +34,7 @@ export type ColorScheme =
   | 'peridot'
   | 'amethyst'
   | 'electricblue'
+  | 'sunset'
   | 'custom';
 
 export type ThemeCategory = 'primary' | 'cool' | 'warm' | 'nature' | 'vibrant';

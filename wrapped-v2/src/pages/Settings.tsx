@@ -759,6 +759,13 @@ const Settings: React.FC = () => {
       previewClass: 'bg-blue-600',
       category: 'cool'
     },
+    sunset: {
+      name: 'Sunset',
+      description: 'Warm orange and cool blue, inspired by sunsets',
+      primaryColor: '#f35d1d',
+      previewClass: 'bg-gradient-to-r from-[#f35d1d] to-[#4691b1]',
+      category: 'vibrant'
+    },
     custom: {
       name: 'Custom',
       description: 'Your personalized theme',
@@ -774,7 +781,7 @@ const Settings: React.FC = () => {
     cool: ['blue', 'purple', 'teal', 'indigo', 'sky', 'silver', 'sapphire', 'aquamarine', 'lavender', 'cyan', 'violet', 'electricblue'],
     warm: ['red', 'orange', 'rose', 'amber', 'peach', 'topaz', 'coral'],
     nature: ['green', 'lime', 'brown', 'mint', 'emerald', 'peridot'],
-    vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst']
+    vibrant: ['cyberpunk', 'fuchsia', 'gold', 'ruby', 'magenta', 'yellow', 'amethyst', 'sunset']
   };
 
  
@@ -1289,7 +1296,9 @@ const Settings: React.FC = () => {
                         <div className="flex items-center">
                           <div
                             className="w-8 h-8 rounded-full mr-3 shadow-md"
-                            style={{ backgroundColor: themeInfo.primaryColor }}
+                            style={scheme === 'sunset'
+                              ? { background: 'linear-gradient(90deg, #f35d1d 0%, #4691b1 100%)' }
+                              : { backgroundColor: themeInfo.primaryColor }}
                           ></div>
                           <h3 className="text-lg font-semibold text-white">{themeInfo.name}</h3>
                         </div>
@@ -1310,9 +1319,19 @@ const Settings: React.FC = () => {
 
                       {/* Preview Bar */}
                       <div className="mt-3 flex space-x-2">
-                        <div className={`h-2 flex-grow rounded-full opacity-100`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                        <div className={`h-2 flex-grow rounded-full opacity-75`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
-                        <div className={`h-2 flex-grow rounded-full opacity-50`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                        {scheme === 'sunset' ? (
+                          <>
+                            <div className="h-2 flex-grow rounded-full" style={{ background: 'linear-gradient(90deg, #f35d1d 0%, #4691b1 100%)' }}></div>
+                            <div className="h-2 flex-grow rounded-full opacity-80" style={{ backgroundColor: '#fbbf24' }}></div>
+                            <div className="h-2 flex-grow rounded-full opacity-60" style={{ backgroundColor: '#4691b1' }}></div>
+                          </>
+                        ) : (
+                          <>
+                            <div className={`h-2 flex-grow rounded-full opacity-100`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                            <div className={`h-2 flex-grow rounded-full opacity-75`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                            <div className={`h-2 flex-grow rounded-full opacity-50`} style={{ backgroundColor: themeInfo.primaryColor }}></div>
+                          </>
+                        )}
                       </div>
                     </div>
                   );
@@ -1582,6 +1601,7 @@ const Settings: React.FC = () => {
                 />
                 <label htmlFor="reduce-motion" className="text-sm text-gray-300">
                   Reduce Motion
+
                 </label>
               </div>
 

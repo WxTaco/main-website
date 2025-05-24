@@ -444,6 +444,18 @@ export default {
           '--gradient-middle': 'var(--custom-secondary)',
           '--gradient-end': 'var(--custom-accent)',
         },
+        '[data-color-scheme="sunset"]': {
+          '--color-primary': '#f35d1d',
+          '--color-secondary': '#4691b1',
+          '--color-accent': '#fbbf24', // You can adjust this accent if you want
+          '--color-muted': '#9ca3af',
+          '--color-background': '#f3f4f6',
+          '--color-card': '#ffffff',
+          '--color-border': '#e5e7eb',
+          '--gradient-start': '#f35d1d',
+          '--gradient-middle': '#4691b1',
+          '--gradient-end': '#fbbf24',
+        },
       });
     },
   ],
