@@ -147,6 +147,50 @@ const Home = () => {
         </section>
       </div>
 
+      {/* Important Announcement from Switchy */}
+      <div className="w-full max-w-5xl mb-8">
+        <div className="bg-red-900/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-red-500/50 dark:bg-red-950/80 dark:border-red-400/30">
+          <div className="flex items-center mb-4">
+            <div className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-bold mr-3">
+              IMPORTANT
+            </div>
+            <h2 className="text-2xl font-saira text-red-300 font-semibold">Message from Switchy - Our Artist & Long-Time Friend</h2>
+          </div>
+
+          <div className="text-gray-100 space-y-4">
+            <p>
+              Switchy, our talented artist and long-time friend, is going through an incredibly difficult time. She has been struggling with serious health issues for a very long time, and her situation has recently become critical as she has become homeless with no means of support.
+            </p>
+
+            <p>
+              Her health has been declining at an alarming rate, and she can no longer face this alone. We're reaching out to our community to ask for your help. If you're able to contribute to her GoFundMe, any amount would make a meaningful difference. More details about her situation can be found on the fundraising page.
+            </p>
+
+            <div className="bg-red-800/50 rounded-lg p-4 border border-red-400/30">
+              <a
+                href="https://gofund.me/15e7cea8"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center bg-red-600 hover:bg-red-500 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-200 shadow-lg"
+              >
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                  <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+                Support Switchy's GoFundMe
+              </a>
+            </div>
+
+            <p className="text-sm text-gray-300">
+              Switchy has contributed so much to Wrapped and her projects over the last year, and now she's looking to that community for help. Any amount would mean the world.
+            </p>
+
+            <p className="text-right text-red-300 font-medium italic">
+              ~ The Wrapped Team
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Development Focus Card */}
       <div className="w-full max-w-5xl mb-10">
         <div className="bg-gray-800/90 backdrop-blur-md rounded-lg shadow-lg p-6 border border-theme-border/30 dark:bg-black/80 dark:border-white/20 flex flex-col">

@@ -138,6 +138,59 @@ const Partnerships = () => {
           </div>
         </div>
 
+        {/* Chrono Clicker Partnership */}
+        <div className="bg-black p-6 rounded-lg border border-orange-500/50 mb-8 backdrop-blur-sm shadow-lg">
+          <div className="flex flex-col md:flex-row items-center mb-6">
+            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-orange-500 mb-4 md:mb-0 md:mr-6 flex-shrink-0 shadow-md bg-gradient-to-br from-orange-500 to-orange-600 flex items-center justify-center">
+              <div className="text-white text-4xl font-bold">CC</div>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-orange-500 mb-1">Chrono Clicker</h2>
+              <p className="text-white mb-2 font-medium">A Game of Time and Uncertainty</p>
+              <div className="flex space-x-3 mb-3">
+                <a
+                  href="https://discord.gg/wrappedbot"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-orange-500 hover:bg-orange-500/80 text-white px-3 py-1 rounded-md text-sm flex items-center transition-colors shadow-sm"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clipRule="evenodd"></path>
+                  </svg>
+                  Support Server
+                </a>
+                <a
+                  href="https://chronoclicker.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-blue-500 hover:bg-blue-500/80 text-white px-3 py-1 rounded-md text-sm flex items-center transition-colors shadow-sm"
+                >
+                  <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+                  </svg>
+                  Play Game
+                </a>
+              </div>
+              <p className="text-gray-300">
+                An experimental social clicking game where a countdown ticks down, and only collective clicks can keep it alive. No one knows what happens when it reaches zero.
+              </p>
+            </div>
+          </div>
+
+          <div className="border-t border-orange-500/40 pt-6">
+            <h3 className="text-xl font-bold text-orange-500 mb-4">Project Collaboration</h3>
+            <p className="text-gray-300 mb-4">
+              Chrono Clicker is a Discord bot that represents one of many innovative projects we assist with specialized development support.
+              For this experimental clicking game, we provided web development services and built the leaderboard systems that track player statistics and rankings.
+            </p>
+            <p className="text-gray-300">
+              <strong className="text-orange-500">Have a project idea?</strong> Join our support server to discuss potential collaborations.
+              We're always interested in working with creative developers and helping bring unique Discord bot concepts to life.
+            </p>
+          </div>
+        </div>
+
         <div className="text-center">
           <p className="text-gray-300 mb-6">
             Interested in partnering with Wrapped? We're always looking for innovative collaborations that enhance the Discord experience.
