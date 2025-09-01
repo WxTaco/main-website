@@ -43,8 +43,7 @@ jobs:
           # Ensure main-web directory exists
           mkdir -p ./wrapped/main-web
 
-          # Remove existing content (except protected directories)
-          # Use a safer approach that doesn't conflict with -delete and -prune
+          # Remove existing content in main-web (except protected directories)
           cd ./wrapped/main-web
 
           # Remove files first, excluding protected directories
@@ -57,13 +56,15 @@ jobs:
             fi
           done
 
-          # Go back to original directory
-          cd - > /dev/null
+          # Go back to root directory
+          cd ../../
 
-          # Sync files excluding problematic directories and files
+          # Sync files from main-website repo (current directory) to monorepo
+          # Explicitly exclude the wrapped directory we just checked out
           rsync -av \
             --exclude='.git/' \
             --exclude='.github/workflows/sync-to-monorepo.yml' \
+            --exclude='wrapped/' \
             --exclude='node_modules/' \
             --exclude='dist/' \
             --exclude='build/' \
