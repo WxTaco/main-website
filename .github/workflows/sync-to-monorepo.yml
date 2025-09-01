@@ -33,8 +33,26 @@ jobs:
           mkdir -p ./wrapped/main-web
           rsync -av --delete \
             --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='wrapped/' \
             ./ ./wrapped/main-web/
 
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MONOREPO_TOKEN }}
+          path: wrapped
+          branch: sync/main-website-to-monorepo
+          commit-message: "Sync main-website changes into monorepo (main-web/)"
+          title: "Sync main-website changes into monorepo"
+          body: |
+            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
+
+            - Source repo: WxTaco/main-website
+            - Target folder: `main-web/`
+
+            Triggered automatically by GitHub Actions.
+          labels: sync, automated
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
