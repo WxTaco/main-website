@@ -1,37 +1,93 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Basic Meta -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wrapped - Discord Bot & Developer Tools</title>
-    <meta name="description" content="Discord bot and developer tools serving 10,000+ users. Analytics and automation platform for complete community control." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Wrapped V2 – Free All-in-One Discord Bot</title>
+    <meta
+      name="description"
+      content="Wrapped V2 is a powerful, free, all-in-one Discord bot with moderation, tickets, utilities, analytics, and developer tools to enhance your Discord server."
+    />
+    <meta name="theme-color" content="#FF69B4" />
 
-    <!-- Open Graph / Facebook -->
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdn.wrappedbot.com/Favicon" type="image/png" />
+    <link rel="apple-touch-icon" href="https://cdn.wrappedbot.com/wrappedlink.png" />
+
+    <!-- Open Graph / Discord Embed -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://wrapped.site/" />
-    <meta property="og:title" content="Wrapped - Discord Bot & Developer Tools" />
-    <meta property="og:description" content="Discord bot and developer tools serving 10,000+ users. Analytics and automation platform for complete community control." />
-    <meta property="og:image" content="https://wrapped.site/og-image.png" />
+    <meta property="og:url" content="https://wrappedbot.com/" />
+    <meta property="og:site_name" content="Wrapped Bot" />
+    <meta property="og:title" content="Wrapped V2 – Free All-in-One Discord Bot" />
+    <meta
+      property="og:description"
+      content="Manage moderation, tickets, utilities, analytics, and more with Wrapped V2. 100% free and built to help communities grow."
+    />
+    <meta property="og:image" content="https://cdn.wrappedbot.com/wrappedlink.png" />
 
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://wrapped.site/" />
-    <meta property="twitter:title" content="Wrapped - Discord Bot & Developer Tools" />
-    <meta property="twitter:description" content="Discord bot and developer tools serving 10,000+ users. Analytics and automation platform for complete community control." />
-    <meta property="twitter:image" content="https://wrapped.site/og-image.png" />
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://wrappedbot.com/" />
+    <meta name="twitter:title" content="Wrapped V2 – Free All-in-One Discord Bot" />
+    <meta
+      name="twitter:description"
+      content="Wrapped V2 is your all-in-one Discord bot with moderation, tickets, utilities, analytics, and developer tools. Free forever."
+    />
+    <meta name="twitter:image" content="https://cdn.wrappedbot.com/wrappedlink.png" />
 
-    <!-- Additional Meta Tags -->
-    <meta name="keywords" content="discord bot, developer tools, analytics, automation, community management, server management" />
-    <meta name="author" content="Wrapped" />
-    <meta name="robots" content="index, follow" />
-    <meta name="theme-color" content="#ec4899" />
+    <!-- Extra SEO -->
+    <meta
+      name="keywords"
+      content="Discord bot, moderation, tickets, utilities, analytics, developer tools, free bot, Wrapped V2"
+    />
+    <meta name="author" content="Wrapped Bot Team" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Manifest for PWA -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Preconnect / Performance -->
+    <link rel="preconnect" href="https://cdn.wrappedbot.com" crossorigin />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Wrapped V2",
+      "operatingSystem": "Web, Discord",
+      "applicationCategory": "UtilitiesApplication",
+      "applicationSubCategory": "Discord Bot",
+      "url": "https://wrappedbot.com/",
+      "image": "https://cdn.wrappedbot.com/wrappedlink.png",
+      "description": "Wrapped V2 is a powerful, free, all-in-one Discord bot with moderation, tickets, utilities, analytics, and developer tools to enhance your Discord server.",
+      "author": {
+        "@type": "Organization",
+        "name": "Wrapped Bot Team",
+        "url": "https://wrappedbot.com/"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "category": "FreeSoftware"
+      },
+      "softwareVersion": "2.0",
+      "sameAs": [
+        "https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=82147577024&scope=bot%20applications.commands",
+        "https://github.com/WxTaco"
+      ]
+    }
+    </script>
   </head>
   <body>
+    <noscript>
+      <div
+        style="background: #ff69b4; color: white; text-align: center; padding: 1em; font-size: 1.2em;"
+      >
+        JavaScript is required to run Wrapped V2's dashboard. Please enable it in your browser.
+      </div>
+    </noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
