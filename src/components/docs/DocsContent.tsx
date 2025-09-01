@@ -65,7 +65,7 @@ const DocsContent = () => {
               Can't find what you're looking for? Join our support server for help from our community and team.
             </p>
             <a
-              href="https://discord.gg/wrapped"
+              href="https://wrappedbot.com/support"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"

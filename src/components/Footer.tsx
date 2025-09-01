@@ -24,7 +24,7 @@ const Footer = () => {
     ],
     resources: [
       { name: 'Dashboard', href: 'https://dash.wrapped.site', external: true },
-      { name: 'Support Server', href: 'https://discord.gg/wrapped', external: true },
+      { name: 'Support Server', href: 'https://wrappedbot.com/support', external: true },
       { name: 'Status Page', href: 'https://status.wrapped.site', external: true },
       { name: 'API Docs', href: '/coming-soon' }
     ]
