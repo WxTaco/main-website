@@ -1,8 +1,9 @@
-name: Sync main-website to monorepo
+name: Sync to Monorepo
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,8 +15,9 @@ concurrency:
 jobs:
   sync-to-monorepo:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout main-website
+      - name: Checkout main-website repo
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -28,13 +30,98 @@ jobs:
           path: wrapped
           fetch-depth: 0
 
-      - name: Configure Git
+      - name: Setup Git
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          cd wrapped
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Sync website into monorepo
+      - name: Sync files to monorepo
         run: |
+          set -euo pipefail
+
+          # Ensure main-web directory exists
+          mkdir -p ./wrapped/main-web
+
+          # Remove existing content (except .git and node_modules)
+          find ./wrapped/main-web -mindepth 1 \
+            -name ".git" -prune -o \
+            -name "node_modules" -prune -o \
+            -name "dist" -prune -o \
+            -type f -delete
+          find ./wrapped/main-web -mindepth 1 \
+            -name ".git" -prune -o \
+            -name "node_modules" -prune -o \
+            -name "dist" -prune -o \
+            -type d -empty -delete
+
+          # Sync files excluding problematic directories and files
+          rsync -av \
+            --exclude='.git/' \
+            --exclude='.github/workflows/sync-to-monorepo.yml' \
+            --exclude='node_modules/' \
+            --exclude='dist/' \
+            --exclude='build/' \
+            --exclude='.env*' \
+            --exclude='*.log' \
+            ./ ./wrapped/main-web/
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          cd wrapped
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "No changes detected"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "Changes detected"
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MONOREPO_TOKEN }}
+          path: wrapped
+          branch: sync/main-website-${{ github.run_number }}
+          commit-message: |
+            sync: main-website -> main-web
+
+            Synced from WxTaco/main-website@${{ github.sha }}
+
+            Source commit: ${{ github.event.head_commit.message }}
+          title: "🔄 Sync main-website to monorepo"
+          body: |
+            ## 🔄 Automatic Sync from main-website
+
+            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder.
+
+            ### 📋 Details
+            - **Source repo**: WxTaco/main-website
+            - **Source commit**: ${{ github.sha }}
+            - **Target folder**: `main-web/`
+            - **Triggered by**: ${{ github.event.head_commit.message }}
+
+            ### 🤖 Automated Process
+            This PR was created automatically by GitHub Actions when changes were pushed to the main branch of the main-website repository.
+
+            **⚠️ Note**: This workflow excludes the sync workflow itself to prevent infinite loops.
+          labels: |
+            sync
+            automated
+            main-website
+          reviewers: WxTaco
+
+      - name: Create summary
+        run: |
+          if [ "${{ steps.check_changes.outputs.changes }}" == "true" ]; then
+            echo "✅ Successfully created PR to sync main-website to wrapped/main-web" >> $GITHUB_STEP_SUMMARY
+            echo "📝 Source commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+            echo "🔗 Monorepo: https://github.com/WxTaco/wrapped" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ No changes to sync - monorepo is up to date" >> $GITHUB_STEP_SUMMARY
+          fi        run: |
           set -euo pipefail
           mkdir -p ./wrapped/main-web
           rsync -a --delete --exclude='.git/' ./ ./wrapped/main-web/
