@@ -48,7 +48,6 @@ jobs:
             git commit -m "Sync main-website changes into monorepo (main-web/)"
           else
             echo "No changes to commit"
-          fi
 
       - name: Push to sync branch
         run: |
@@ -68,89 +67,6 @@ jobs:
 
             - Source repo: WxTaco/main-website
             - Target folder: `main-web/`
-
-            Triggered automatically by GitHub Actions.
-          labels: sync, automated          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # 4️⃣ Sync website into monorepo quietly
-      - name: Sync website into monorepo
-        run: |
-          set -euo pipefail
-          mkdir -p ./wrapped/main-web
-          rsync -a --delete --exclude='.git/' ./ ./wrapped/main-web/ >/dev/null
-
-      # 5️⃣ Commit only if there are changes
-      - name: Commit changes
-        run: |
-          cd wrapped
-          git add -A
-          if ! git diff-index --quiet HEAD; then
-            git commit -m "Sync main-website changes into monorepo (main-web/)"
-          else
-            echo "No changes to commit"
-          fi
-
-      # 6️⃣ Push changes to a sync branch
-      - name: Push to sync branch
-        run: |
-          cd wrapped
-          git push -q origin HEAD:sync/main-website-to-monorepo --force
-
-      # 7️⃣ Create or update Pull Request
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.MONOREPO_TOKEN }}
-          path: wrapped
-          branch: sync/main-website-to-monorepo
-          title: "Sync main-website changes into monorepo"
-          commit-message: "Sync main-website changes into monorepo (main-web/)"
-          body: |
-            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
-
-            - Source repo: WxTaco/main-website
-            - Target folder: `main-web/`
-
-            Triggered automatically by GitHub Actions.
-          labels: sync, automated          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-
-      # 4️⃣ Create a subtree branch from main-website
-      - name: Create subtree branch (log-safe)
-        run: |
-          # Use quiet mode to avoid printing files
-          git subtree split --prefix=. -b main-web-branch -q
-
-      # 5️⃣ Push subtree branch into monorepo branch
-      - name: Push subtree to monorepo
-        run: |
-          cd wrapped
-          git remote add main-website-temp ../
-          git fetch -q main-website-temp main-web-branch
-
-          # Merge into main-web folder quietly
-          git subtree add --prefix=main-web main-website-temp/main-web-branch --squash -q || \
-            git subtree merge --prefix=main-web main-website-temp/main-web-branch --squash -q
-
-          # Push to sync branch in monorepo quietly
-          git push -q origin HEAD:sync/main-website-to-monorepo --force
-
-      # 6️⃣ Create or update Pull Request
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
-        with:
-          token: ${{ secrets.MONOREPO_TOKEN }}
-          path: wrapped
-          branch: sync/main-website-to-monorepo
-          title: "Sync main-website changes into monorepo"
-          commit-message: "Sync main-website changes into monorepo (main-web/)"
-          body: |
-            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
-
-            - Source repo: WxTaco/main-website
-            - Target folder: `main-web/`
-            - Preserves commit history from main-website
 
             Triggered automatically by GitHub Actions.
           labels: sync, automated
