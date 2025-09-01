@@ -4,6 +4,7 @@ on:
   push:
     branches: [ main ]   # run when changes hit main
 
+# Keep least privilege and avoid duplicate runs
 permissions:
   contents: read
 
@@ -23,7 +24,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: WxTaco/wrapped
-          token: ${{ secrets.MONOREPO_TOKEN }}
+          token: ${{ secrets.MONOREPO_TOKEN }}   # PAT with access to wrapped
           path: wrapped
 
       - name: Sync website into monorepo
@@ -35,6 +36,21 @@ jobs:
             ./ ./wrapped/main-web/
 
       - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MONOREPO_TOKEN }}
+          path: wrapped
+          branch: sync/main-website-to-monorepo
+          commit-message: "Sync main-website changes into monorepo (main-web/)"
+          title: "Sync main-website changes into monorepo"
+          body: |
+            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
+
+            - Source repo: WxTaco/main-website
+            - Target folder: `main-web/`
+
+            Triggered automatically by GitHub Actions.
+          labels: sync, automated      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.MONOREPO_TOKEN }}
