@@ -1,0 +1,9 @@
+services:
+  wrapped-web:
+    build: .
+    ports:
+      - "40125:40125"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    container_name: wrapped-web
