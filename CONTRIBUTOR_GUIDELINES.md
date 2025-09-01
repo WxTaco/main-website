@@ -436,7 +436,6 @@ Contributors who follow these guidelines and make significant contributions will
 
 - Featured in our contributor spotlight
 - Invited to exclusive contributor events
-- Eligible for Wrapped merchandise
 - Recognized in release notes
 
 Thank you for helping make Wrapped's website amazing! 🚀
