@@ -116,7 +116,6 @@ jobs:
             sync
             automated
             main-website
-          reviewers: WxTaco
 
       - name: Create summary
         run: |
