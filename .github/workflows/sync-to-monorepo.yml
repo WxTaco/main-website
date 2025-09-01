@@ -20,7 +20,7 @@ jobs:
       - name: Checkout main-website
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Needed for full commit history for subtree
+          fetch-depth: 0
 
       # 2️⃣ Checkout monorepo into separate folder
       - name: Checkout monorepo
@@ -31,10 +31,53 @@ jobs:
           path: wrapped
           fetch-depth: 0
 
-      # 3️⃣ Configure git for automated commits
+      # 3️⃣ Configure Git for automated commits
       - name: Configure Git
         run: |
           git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      # 4️⃣ Sync website into monorepo quietly
+      - name: Sync website into monorepo
+        run: |
+          set -euo pipefail
+          mkdir -p ./wrapped/main-web
+          rsync -a --delete --exclude='.git/' ./ ./wrapped/main-web/ >/dev/null
+
+      # 5️⃣ Commit only if there are changes
+      - name: Commit changes
+        run: |
+          cd wrapped
+          git add -A
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Sync main-website changes into monorepo (main-web/)"
+          else
+            echo "No changes to commit"
+          fi
+
+      # 6️⃣ Push changes to a sync branch
+      - name: Push to sync branch
+        run: |
+          cd wrapped
+          git push -q origin HEAD:sync/main-website-to-monorepo --force
+
+      # 7️⃣ Create or update Pull Request
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.MONOREPO_TOKEN }}
+          path: wrapped
+          branch: sync/main-website-to-monorepo
+          title: "Sync main-website changes into monorepo"
+          commit-message: "Sync main-website changes into monorepo (main-web/)"
+          body: |
+            This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
+
+            - Source repo: WxTaco/main-website
+            - Target folder: `main-web/`
+
+            Triggered automatically by GitHub Actions.
+          labels: sync, automated          git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
       # 4️⃣ Create a subtree branch from main-website
