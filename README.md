@@ -9,6 +9,8 @@ Welcome to Wrapped
 
 The official website for Wrapped - a Discord analytics and automation platform serving 10,000+ users. This modern, responsive website showcases our bot features, developer tools, and provides a comprehensive user experience.
 
+💡 **Frequent and impactful contributors may be considered for invitations to work on the main Wrapped platform:** [Dash.wrapped.site](https://dash.wrapped.site)
+
 ## 🌟 Features
 
 - **Modern Design**: Clean, professional interface with smooth animations
