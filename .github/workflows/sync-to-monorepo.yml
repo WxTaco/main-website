@@ -43,17 +43,22 @@ jobs:
           # Ensure main-web directory exists
           mkdir -p ./wrapped/main-web
 
-          # Remove existing content (except .git and node_modules)
-          find ./wrapped/main-web -mindepth 1 \
-            -name ".git" -prune -o \
-            -name "node_modules" -prune -o \
-            -name "dist" -prune -o \
-            -type f -delete
-          find ./wrapped/main-web -mindepth 1 \
-            -name ".git" -prune -o \
-            -name "node_modules" -prune -o \
-            -name "dist" -prune -o \
-            -type d -empty -delete
+          # Remove existing content (except protected directories)
+          # Use a safer approach that doesn't conflict with -delete and -prune
+          cd ./wrapped/main-web
+
+          # Remove files first, excluding protected directories
+          find . -maxdepth 1 -type f -delete 2>/dev/null || true
+
+          # Remove directories except protected ones
+          for dir in */; do
+            if [ -d "$dir" ] && [ "$dir" != ".git/" ] && [ "$dir" != "node_modules/" ] && [ "$dir" != "dist/" ]; then
+              rm -rf "$dir"
+            fi
+          done
+
+          # Go back to original directory
+          cd - > /dev/null
 
           # Sync files excluding problematic directories and files
           rsync -av \
