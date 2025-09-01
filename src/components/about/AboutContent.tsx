@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { BarChart3, Zap, Shield } from 'lucide-react'
+import { BarChart3, Zap, Shield, Mail, User, HeadphonesIcon } from 'lucide-react'
 
 const AboutContent = () => {
   const values = [
@@ -85,7 +85,7 @@ const AboutContent = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           {values.map((value, index) => (
             <motion.div
               key={value.title}
@@ -103,6 +103,82 @@ const AboutContent = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Contact Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Get in Touch</h2>
+          <p className="text-xl text-gray-300 max-w-2xl mx-auto mb-12">
+            Have questions, feedback, or need support? We're here to help.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="card text-center"
+            >
+              <div className="p-4 bg-wrapped-500/20 rounded-lg w-fit mx-auto mb-4">
+                <User className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Founder</h3>
+              <p className="text-gray-300 mb-4">Questions about the platform or partnerships</p>
+              <a
+                href="mailto:taco@wrapped.site"
+                className="text-wrapped-400 hover:text-wrapped-300 transition-colors font-medium"
+              >
+                taco@wrapped.site
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="card text-center"
+            >
+              <div className="p-4 bg-wrapped-500/20 rounded-lg w-fit mx-auto mb-4">
+                <HeadphonesIcon className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Support</h3>
+              <p className="text-gray-300 mb-4">Technical support and general inquiries</p>
+              <a
+                href="mailto:support@wrapped.site"
+                className="text-wrapped-400 hover:text-wrapped-300 transition-colors font-medium"
+              >
+                support@wrapped.site
+              </a>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+              viewport={{ once: true }}
+              className="card text-center"
+            >
+              <div className="p-4 bg-wrapped-500/20 rounded-lg w-fit mx-auto mb-4">
+                <Mail className="w-8 h-8" />
+              </div>
+              <h3 className="text-xl font-semibold mb-3">Privacy</h3>
+              <p className="text-gray-300 mb-4">Privacy concerns and data requests</p>
+              <a
+                href="mailto:privacy@wrapped.site"
+                className="text-wrapped-400 hover:text-wrapped-300 transition-colors font-medium"
+              >
+                privacy@wrapped.site
+              </a>
+            </motion.div>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
