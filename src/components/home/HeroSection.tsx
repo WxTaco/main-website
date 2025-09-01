@@ -62,7 +62,7 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16"
           >
             <a
-              href="https://discord.com/oauth2/authorize?client_id=905201724539666503&permissions=8&scope=bot%20applications.commands"
+              href="https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=82147577024scope=bot%20applications.commands"
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary text-lg px-10 py-4 text-center min-w-[200px]"

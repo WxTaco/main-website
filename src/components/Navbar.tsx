@@ -126,7 +126,7 @@ const Navbar = () => {
                   Dashboard
                 </a>
                 <a
-                  href="https://discord.com/oauth2/authorize?client_id=905201724539666503&permissions=8&scope=bot%20applications.commands"
+                  href="https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=82147577024scope=bot%20applications.commands"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full btn-primary text-center"
