@@ -4,6 +4,13 @@ on:
   push:
     branches: [ main ]   # run when changes hit main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-to-monorepo-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sync-to-monorepo:
     runs-on: ubuntu-latest
@@ -12,25 +19,34 @@ jobs:
       - name: Checkout website repo
         uses: actions/checkout@v4
 
-      - name: Clone monorepo
+      - name: Checkout monorepo
+        uses: actions/checkout@v4
+        with:
+          repository: WxTaco/wrapped
+          token: ${{ secrets.MONOREPO_TOKEN }}
+          path: wrapped
+
+      - name: Sync website into monorepo
         run: |
-          git clone https://x-access-token:${{ secrets.MONOREPO_TOKEN }}@github.com/WxTaco/wrapped.git ../wrapped
-          rsync -av --delete ./ ../wrapped/main-web/
-        shell: bash
+          set -euo pipefail
+          mkdir -p ./wrapped/main-web
+          rsync -av --delete \
+            --exclude='.git/' \
+            ./ ./wrapped/main-web/
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.MONOREPO_TOKEN }}
-          path: ../wrapped
+          path: wrapped
           branch: sync/main-website-to-monorepo
           commit-message: "Sync main-website changes into monorepo (main-web/)"
           title: "Sync main-website changes into monorepo"
           body: |
             This PR syncs the latest changes from **WxTaco/main-website** into the `main-web/` folder of **WxTaco/wrapped**.
-            
+
             - Source repo: WxTaco/main-website
             - Target folder: `main-web/`
-            
+
             Triggered automatically by GitHub Actions.
           labels: sync, automated
