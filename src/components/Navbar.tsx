@@ -78,7 +78,7 @@ const Navbar = () => {
               Add to Discord
             </a>
             <a
-              href="https://discord.gg/XTPADtMKJS"
+              href={siteConfig.bot.supportServer}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-primary"
@@ -140,6 +140,14 @@ const Navbar = () => {
                   className="block w-full btn-primary text-center"
                 >
                   Add to Discord
+                </a>
+                <a
+                  href="https://wrappedbot.com/support"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full btn-primary text-center"
+                >
+                  Join our Support Server
                 </a>
               </div>
             </div>
