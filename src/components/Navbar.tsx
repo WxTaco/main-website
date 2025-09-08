@@ -134,7 +134,7 @@ const Navbar = () => {
                   Dashboard
                 </a>
                 <a
-                  href="https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=82147577024scope=bot%20applications.commands"
+                  href={siteConfig.bot.inviteUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full btn-primary text-center"
@@ -142,7 +142,7 @@ const Navbar = () => {
                   Add to Discord
                 </a>
                 <a
-                  href="https://wrappedbot.com/support"
+                  href={siteConfig.bot.supportServer}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="block w-full btn-primary text-center"
