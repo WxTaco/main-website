@@ -77,6 +77,14 @@ const Navbar = () => {
             >
               Add to Discord
             </a>
+            <a
+              href="https://discord.gg/XTPADtMKJS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              Join our Support Server
+            </a>
           </div>
 
           {/* Mobile menu button */}
