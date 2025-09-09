@@ -3,7 +3,7 @@ export const siteConfig = {
   bot: {
     name: 'Wrapped',
     icon: '/bot-logo.png?v=1', // Bot icon in public folder
-    inviteUrl: 'https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=82147577024scope=bot%20applications.commands',
+    inviteUrl: 'https://discord.com/oauth2/authorize?client_id=1308803843446014052&permissions=2147577024&scope=bot+applications.commands',
     supportServer: 'https://wrappedbot.com/support'
   },
   
